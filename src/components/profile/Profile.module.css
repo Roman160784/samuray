@@ -1,0 +1,12 @@
+.content {
+    grid-area: c;
+    background-color: lightslategray;
+   }
+
+   .iteam {
+       color: orangered;
+   }
+
+  .posts {
+    color: lime;
+  }
