@@ -1,31 +1,24 @@
 import React from 'react';
 import p from './Profile.module.css'
+import MyPosts from './Posts/MyPosts'
 
-function  Profile(){
-return (
+function Profile() {
+  return (
+    <div>
     <div className={p.content}>
-    <div>
-  <img src='https://media.gettyimages.com/photos/northen-lights-above-winter-mountains-picture-id466331590?s=612x612'/>
-  </div>
-  <div>
-    ava + discr
-  </div>
-  <div>
-    my posts
-    <div>
-      New post
-    </div>
-    <div className={p.posts}>
-      <div className={p.iteam}>
-        post1
+      <div>
+        <img src='https://media.gettyimages.com/photos/northen-lights-above-winter-mountains-picture-id466331590?s=612x612' />
       </div>
-      <div className={p.iteam}>
-        post2
+      <div>
+        ava + discr
       </div>
-    </div>
-  </div>
+      <div>
+        <MyPosts />
+      </div>
 
-  </div>
+    </div>
+
+  </div >
 )
 }
 
