@@ -1,23 +1,26 @@
 import React from 'react';
 import s from './Nav.module.css'
+import {NavLink} from 'react-router-dom'
+
+
 
 function  Nav(){
 return (
 <nav className={s.nav}>
         <div className={s.iteam}>
-          <a>Profile</a>
+          <NavLink className={(navData) => navData.isActive? s.active:""} to="/Profile">Profile</NavLink>
         </div>
-        <div className={`${s.iteam} ${s.active}`}>
-        <a>Messges</a> 
-        </div>
-        <div className={s.iteam}>
-        <a>News</a> 
+      <div className={`${s.iteam} ${s.active}`}>
+        <NavLink className={(navData) => navData.isActive? s.active:""} to="/Dialogs">Messges</NavLink> 
         </div>
         <div className={s.iteam}>
-        <a>Music</a> 
+        <NavLink className={(navData) => navData.isActive? s.active:""} to="/News">News</NavLink> 
         </div>
         <div className={s.iteam}>
-        <a>Settings</a> 
+        <NavLink className={(navData) => navData.isActive? s.active:""} to="/Music">Music</NavLink> 
+        </div>
+        <div className={s.iteam}>
+        <NavLink className={(navData) => navData.isActive? s.active:""} to="/Settings">Settings</NavLink> 
         </div>
       </nav>
 )

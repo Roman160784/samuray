@@ -4,7 +4,7 @@ import h from'./Header.module.css'
 function  Header(){
 return (
 <header className={h.header}>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDx0mgjRjid7lYXGwmLyiRkwb6kNNqtwscqA&usqp=CAU'/>
+        <img src='https://st3.depositphotos.com/5040187/19012/v/600/depositphotos_190129584-stock-illustration-ts-logo-swoosh-ellipse-blue.jpg'/>
       </header>
 )
 }

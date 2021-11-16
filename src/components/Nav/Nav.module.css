@@ -4,8 +4,10 @@
    }
    
    .iteam {
-       color: white;
+       color: #ffffff;
+       text-decoration: none;
    }
-   .active {
-       color: black;
+   .iteam .active {
+       color: gold;
+       text-decoration: none;
    }
