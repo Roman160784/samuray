@@ -5,7 +5,7 @@ import MyPosts from './Posts/MyPosts'
 function Profile() {
   return (
     <div>
-    <div className={p.content}>
+    <div>
       <div>
         <img src='https://media.gettyimages.com/photos/northen-lights-above-winter-mountains-picture-id466331590?s=612x612' />
       </div>

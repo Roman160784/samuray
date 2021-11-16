@@ -4,13 +4,17 @@ import './App.css';
 import Header from './components/header/Header'
 import Nav from './components/Nav/Nav'
 import Profile from './components/profile/Profile'
+import Dialogs from './components/dialogs/Dialogs'
 
 function App() {
   return (
     <div className='app-wrapper'>
       <Header />
       <Nav />
-      <Profile />
+      {/* <Profile /> */}
+      <div className='app-wrapper-content'>
+        <Dialogs />
+      </div>
     </div>
   );
 }
