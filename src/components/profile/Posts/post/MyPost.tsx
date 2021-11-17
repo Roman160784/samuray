@@ -10,7 +10,7 @@ type PropsType = {
 
 function MyPost (props: PropsType) {
   return (
-    <div>
+    <div className={p.postBlock}>
       <div className={p.posts}>
         <div className={p.iteam}>
           <img src="https://cs16planet.ru/steam-avatars/images/avatar3219.jpg" />

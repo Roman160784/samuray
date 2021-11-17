@@ -1,9 +1,11 @@
 .dialogs {
 display: grid;
 grid-template-columns: 2fr 10fr;
+text-decoration: none;
 }
 
 .dialogsItems {
+    
 padding: 10px;
 }
 
@@ -11,12 +13,12 @@ padding: 10px;
  color:blueviolet
 }
 
-.dialogsItems .dialog {
+.dialogsItems .dialogs {
     padding: 10px;
 }
 
 .meaasges{
-
+    padding: 10px;
 }
 
 .meaasges .meaasge{

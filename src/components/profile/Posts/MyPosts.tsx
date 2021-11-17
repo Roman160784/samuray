@@ -4,19 +4,23 @@ import MyPost from './post/MyPost'
 
 
 function MyPosts() {
- 
+
   return (
-      <div>
-        my posts
+    <div>
+      <h3>my posts</h3>
+      <div className={p.posts}>
+        <MyPost message='Hi' likesCount='0' />
+        <MyPost message='Hey' likesCount='23' />
         <div>
-         <MyPost message='Hi'likesCount='0'/>
-         <MyPost  message='Hey' likesCount='23'/>
           <textarea></textarea>
+        </div>
+        <div>
           <button>Add Post</button>
         </div>
-        
-      </div> 
-      
+      </div>
+
+    </div>
+
   )
 }
 
