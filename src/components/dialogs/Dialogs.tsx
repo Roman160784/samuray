@@ -1,28 +1,8 @@
 import React from 'react';
 import s from './Dialogs.module.css'
+import DialogIteam from '../dialogs/DialogIteam/DialogIteam'
+import Message from '../dialogs/Message/Message'
 import { NavLink } from 'react-router-dom'
-
-type PropsTypeDialog = {
-    name: string
-    id: number
-}
-type PropsTypeMessage = {
-    id: number
-    message: string
-}
-
-const DialogIteam = (props: PropsTypeDialog) => {
-    let parth = `${"/Dialogs"} ${props.id}`
-    return (
-        <NavLink to={parth}>{props.name}</NavLink>
-    )
-}
-
-const Message = (props: PropsTypeMessage) => {
-    return (
-        <div className={s.meaasge}>{props.message}</div>
-    )
-}
 
 let dialogs = [
     { id: 1, name: "Roman" },
@@ -58,7 +38,6 @@ const Dialogs = () => {
             <div className={s.dialogsItems}>
                 {dialogsElements}
             </div>
-
             <div className={s.meaasges}>
                 <div>{messageElements}</div>
             </div>
