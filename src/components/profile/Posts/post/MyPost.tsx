@@ -5,7 +5,7 @@ import p from './MyPost.module.css'
 
 type PropsType = {
   message: string
-  likesCount: string
+  likesCount: number
 }
 
 function MyPost (props: PropsType) {
@@ -16,7 +16,7 @@ function MyPost (props: PropsType) {
           <img src="https://cs16planet.ru/steam-avatars/images/avatar3219.jpg" />
           {props.message} 
           <div>
-          <span>Like</span>{props.likesCount}
+          <span>Like:</span>{props.likesCount}
           </div>
         </div>
       </div>
