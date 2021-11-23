@@ -11,6 +11,8 @@ type PropsTypeMessage = {
     message: string
 }
 
+
+
 const DialogIteam = (props: PropsTypeDialog) => {
     let parth = `${"/Dialogs"} ${props.id}`
     return (
@@ -24,7 +26,7 @@ const Message = (props: PropsTypeMessage) => {
     )
 }
 
-let dialogsData = [
+let dialogs = [
     { id: 1, name: "Roman" },
     { id: 2, name: "Akhmed" },
     { id: 3, name: "Jafar" },
@@ -34,7 +36,11 @@ let dialogsData = [
     { id: 7, name: "Zufra" },
 ]
 
-let messagessData = [
+let dialogsElements = dialogs.map(dialog=>
+     <div><DialogIteam name={dialog.name} id={dialog.id} /></div>
+    )
+
+let messages = [
     { id: 1, message: "Hi" },
     { id: 2, message: "Hey" },
     { id: 3, message: "Hey" },
@@ -43,26 +49,21 @@ let messagessData = [
     { id: 6, message: "Yo" },
     { id: 7, message: "Yo" },
 ]
+
+let messageElements = messages.map(mess => 
+    <Message message={mess.message}id={mess.id} />
+    )
+
+
 const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <div> <DialogIteam name={dialogsData[0].name} id={dialogsData[0].id} /></div>
-                <div>  <DialogIteam name={dialogsData[1].name} id={dialogsData[1].id} /></div>
-                <div> <DialogIteam name={dialogsData[2].name} id={dialogsData[2].id} /></div>
-                <div> <DialogIteam name={dialogsData[3].name} id={dialogsData[3].id}/></div>
-                <div>  <DialogIteam name={dialogsData[4].name} id={dialogsData[4].id} /></div>
-                <div> <DialogIteam name={dialogsData[5].name} id={dialogsData[5].id}/></div>
-                <div><DialogIteam name={dialogsData[6].name} id={dialogsData[6].id} /> </div>
-
+             {dialogsElements}
             </div>
 
             <div className={s.meaasges}>
-                <Message message={messagessData[0].message}id={messagessData[0].id} />
-                <Message message={messagessData[1].message}id={messagessData[1].id} />
-                <Message message={messagessData[2].message}id={messagessData[2].id} />
-                <Message message={messagessData[3].message}id={messagessData[3].id} />
-                <Message message={messagessData[4].message}id={messagessData[4].id} />
+                <div>{messageElements}</div>
             </div>
         </div>
 
