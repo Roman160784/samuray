@@ -10,7 +10,7 @@ padding: 10px;
 }
 
 .dialogsItems .active {
- color:blueviolet
+ color:rgb(214, 154, 126)
 }
 
 .dialogsItems .dialogs {
@@ -23,4 +23,5 @@ padding: 10px;
 
 .meaasges .meaasge{
     padding: 10px;
+    color:rgb(204, 228, 203)
 }

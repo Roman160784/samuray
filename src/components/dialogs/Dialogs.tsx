@@ -11,8 +11,6 @@ type PropsTypeMessage = {
     message: string
 }
 
-
-
 const DialogIteam = (props: PropsTypeDialog) => {
     let parth = `${"/Dialogs"} ${props.id}`
     return (
@@ -36,10 +34,6 @@ let dialogs = [
     { id: 7, name: "Zufra" },
 ]
 
-let dialogsElements = dialogs.map(dialog=>
-     <div><DialogIteam name={dialog.name} id={dialog.id} /></div>
-    )
-
 let messages = [
     { id: 1, message: "Hi" },
     { id: 2, message: "Hey" },
@@ -50,23 +44,25 @@ let messages = [
     { id: 7, message: "Yo" },
 ]
 
-let messageElements = messages.map(mess => 
-    <Message message={mess.message}id={mess.id} />
-    )
+let dialogsElements = dialogs.map(dialog =>
+    <div><DialogIteam name={dialog.name} id={dialog.id} /></div>
+)
 
+let messageElements = messages.map(mess =>
+    <Message message={mess.message} id={mess.id} />
+)
 
 const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-             {dialogsElements}
+                {dialogsElements}
             </div>
 
             <div className={s.meaasges}>
                 <div>{messageElements}</div>
             </div>
         </div>
-
     )
 }
 

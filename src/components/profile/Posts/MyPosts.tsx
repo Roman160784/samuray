@@ -5,17 +5,20 @@ import MyPost from './post/MyPost'
 
 function MyPosts() {
 
-  let postsData = [
+  let posts = [
     { id: 1, message: "Hi", likesCount: 0},
     { id: 2, message: "Hey", likesCount: 23},
 ]
+  
+  let myPosts = posts.map(post => 
+    <MyPost message={post.message} likesCount={post.likesCount} />
+    )
 
   return (
     <div>
       <h3>my posts</h3>
       <div className={p.posts}>
-        <MyPost message={postsData[0].message} likesCount={postsData[0].likesCount} />
-        <MyPost message={postsData[1].message} likesCount={postsData[1].likesCount} />
+        {myPosts}
         <div>
           <textarea></textarea>
         </div>
