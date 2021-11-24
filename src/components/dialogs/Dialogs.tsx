@@ -4,37 +4,31 @@ import DialogIteam from '../dialogs/DialogIteam/DialogIteam'
 import Message from '../dialogs/Message/Message'
 import { NavLink } from 'react-router-dom'
 
+export type DialogsType = {
+    id: number
+    name: string
+}
+
+export type messagesType = {
+    id: number
+    message: string
+}
+
+ export type dialogsMainType= {
+    dialogs: Array<DialogsType>
+    messages:Array<messagesType>
+}
 
 
-let dialogs = [
-    { id: 1, name: "Roman" },
-    { id: 2, name: "Akhmed" },
-    { id: 3, name: "Jafar" },
-    { id: 4, name: "Fatima" },
-    { id: 5, name: "Nurik" },
-    { id: 6, name: "Ramzan" },
-    { id: 7, name: "Zufra" },
-]
+const Dialogs = (props:dialogsMainType) => {
+    let dialogsElements  = props.dialogs.map(dialog =>
+        <div><DialogIteam name={dialog.name} id={dialog.id} /></div>
+    )
+    
+    let messageElements = props.messages.map(mess =>
+        <Message message={mess.message} id={mess.id} />
+    )
 
-let messages = [
-    { id: 1, message: "Hi" },
-    { id: 2, message: "Hey" },
-    { id: 3, message: "Hey" },
-    { id: 4, message: "Hey" },
-    { id: 5, message: "Yo" },
-    { id: 6, message: "Yo" },
-    { id: 7, message: "Yo" },
-]
-
-let dialogsElements = dialogs.map(dialog =>
-    <div><DialogIteam name={dialog.name} id={dialog.id} /></div>
-)
-
-let messageElements = messages.map(mess =>
-    <Message message={mess.message} id={mess.id} />
-)
-
-const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
