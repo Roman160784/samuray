@@ -8,16 +8,13 @@ import Dialogs from './components/dialogs/Dialogs'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { postsType } from './components/profile/Posts/MyPosts'
 import { postType } from './components/profile/Posts/MyPosts'
-import { DialogsType } from './components/dialogs/Dialogs'
-import { messagesType } from './components/dialogs/Dialogs'
+import {StateType} from './redux/state'
 
-
-type AppType = {
-  dialogs: Array<DialogsType>
-  messages: Array<messagesType>
-  posts: Array<postType>
+export type AppType = {
+  
+  state: StateType
+  
 }
-
 
 function App(props: AppType) {
 
@@ -28,8 +25,8 @@ function App(props: AppType) {
         <Nav />
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='/Dialogs' element={<Dialogs dialogs={props.dialogs} messages={props.messages} />} />
-            <Route path='/Profile' element={<Profile posts={props.posts} />} />
+          <Route path='/Profile' element={<Profile posts={props.state.profilePage.posts} />} />
+          <Route path='/Dialogs' element={<Dialogs dialogs={props.state.messagePage.dialogs} messages={props.state.messagePage.messages} />} />
           </Routes>
         </div>
       </div>

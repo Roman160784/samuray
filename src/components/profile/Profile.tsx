@@ -1,13 +1,16 @@
 import React from 'react';
 import p from './Profile.module.css'
-import MyPosts from './Posts/MyPosts'
+import MyPosts, { postType } from './Posts/MyPosts'
 import ProfileInfo from '../profile/Posts/ProfileInfo/ProfileInfo'
-import { postsType } from './Posts/MyPosts'
+// import { postsType } from './Posts/MyPosts'
+import { StateType } from '../../redux/state'
+
+type ProfilePropsType = {
+  posts: Array<postType>
+}
 
 
-
-
-function Profile(props: postsType) {
+function Profile(props: ProfilePropsType) {
 
   return (
     <div>

@@ -3,18 +3,19 @@ import s from './Dialogs.module.css'
 import DialogIteam from '../dialogs/DialogIteam/DialogIteam'
 import Message from '../dialogs/Message/Message'
 import { NavLink } from 'react-router-dom'
+import { StateType } from '../../redux/state'
 
-export type DialogsType = {
+ type DialogsType = {
     id: number
     name: string
 }
 
-export type messagesType = {
+ type messagesType = {
     id: number
     message: string
 }
 
- export type dialogsMainType= {
+  type dialogsMainType= {
     dialogs: Array<DialogsType>
     messages:Array<messagesType>
 }
