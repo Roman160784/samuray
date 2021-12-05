@@ -3,12 +3,12 @@ import React from 'react';
 import p from './MyPost.module.css'
 
 
-type PropsType = {
+type AppPropsType = {
   message: string
   likesCount: number
 }
 
-function MyPost (props: PropsType) {
+function MyPost (props: AppPropsType) {
   return (
     <div className={p.postBlock}>
       <div className={p.posts}>

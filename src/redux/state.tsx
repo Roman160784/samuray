@@ -1,7 +1,10 @@
-export type StateType = {
+export type RootStateType ={
     profilePage: ProfilePageType
     messagePage: MessagePageType
+    sideBar: sideBarType
 }
+
+
 
 type ProfilePageType = {
     posts: Array<PostsType>
@@ -25,8 +28,10 @@ export type MessagesType = {
     id: number
     message: string
 }
+ 
+type sideBarType = {}
 
-let state = {
+let state: RootStateType = {
     profilePage: {
         posts: [
             { id: 1, message: "Hi", likesCount: 0 },
@@ -49,9 +54,10 @@ let state = {
             { id: 4, message: "Hey" },
             { id: 5, message: "Yo" },
             { id: 6, message: "Yo" },
-            { id: 7, message: "Yo" },]
-    }
-
+            { id: 7, message: "Yo" },
+        ]
+    },
+    sideBar: {}   
 }
 
 export default state;

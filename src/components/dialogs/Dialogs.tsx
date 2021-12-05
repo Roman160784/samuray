@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import DialogIteam from '../dialogs/DialogIteam/DialogIteam'
 import Message from '../dialogs/Message/Message'
 import { NavLink } from 'react-router-dom'
-import { StateType } from '../../redux/state'
+import state from '../../redux/state'
 
  type DialogsType = {
     id: number

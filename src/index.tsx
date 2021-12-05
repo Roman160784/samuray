@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import state from './redux/state'
-import {AppType} from './App'
+// import {AppType} from './App'
 
 
 
