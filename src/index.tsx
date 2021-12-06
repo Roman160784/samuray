@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state'
+import state, {addPost} from './redux/state'
 // import {AppType} from './App'
 
 
+// addPost('fggf')
 
 
-
-ReactDOM.render(<App state={state} />, document.getElementById('root'));
+ReactDOM.render(<App state={state} addPost={addPost}/>, document.getElementById('root'));
   
 
 // If you want to start measuring performance in your app, pass a function

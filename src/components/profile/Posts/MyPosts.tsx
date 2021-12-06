@@ -1,6 +1,7 @@
 import React from 'react';
 import p from './MyPosts.module.css'
 import MyPost from './post/MyPost'
+import state, {addPost, PostsType, RootStateType} from '../../.././redux/state'
 
 export type postType = {
   id: number
@@ -8,11 +9,12 @@ export type postType = {
   likesCount: number
 }
 
-export type postsType = {
-  posts: Array<postType>
+ type postsType = {
+  posts: Array<PostsType>
+  // state: RootStateType
+  addPost: (postMessage : string) => void
+  
 }
-
-
 
 function MyPosts(props: postsType) {
 
@@ -24,7 +26,9 @@ function MyPosts(props: postsType) {
     
     let addPost = () => {
       let text = newPostElement.current?.value
-      alert(text)
+      if (text) {
+        props.addPost(text)
+        }
     }
 
 
