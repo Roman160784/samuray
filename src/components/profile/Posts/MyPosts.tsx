@@ -1,7 +1,7 @@
 import React from 'react';
 import p from './MyPosts.module.css'
 import MyPost from './post/MyPost'
-import state, {addPost, PostsType, RootStateType} from '../../.././redux/state'
+import state, { addPost, PostsType, updateNewPostText, RootStateType } from '../../.././redux/state'
 
 export type postType = {
   id: number
@@ -9,11 +9,12 @@ export type postType = {
   likesCount: number
 }
 
- type postsType = {
+type postsType = {
   posts: Array<PostsType>
   // state: RootStateType
-  addPost: (postMessage : string) => void
-  
+  addPost: (postMessage: string) => void
+  newPostText: string
+  updateNewPostText: (newText: string) => void
 }
 
 function MyPosts(props: postsType) {
@@ -21,15 +22,22 @@ function MyPosts(props: postsType) {
   let myPosts = props.posts.map(post =>
     <MyPost message={post.message} likesCount={post.likesCount} />
   )
-   
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
-    
-    let addPost = () => {
-      let text = newPostElement.current?.value
-      if (text) {
-        props.addPost(text)
-        }
+
+  let newPostElement = React.createRef<HTMLTextAreaElement>();
+
+  let addPost = () => {
+    let text = newPostElement.current?.value
+    if (text) {
+      props.addPost(text)
     }
+    // props.updateNewPostText("")
+  }
+
+  let onPostChange = () => {
+    if (newPostElement.current) {
+      props.updateNewPostText(newPostElement.current.value)
+    }
+  }
 
 
   return (
@@ -38,10 +46,13 @@ function MyPosts(props: postsType) {
       <div className={p.posts}>
         {myPosts}
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea ref={newPostElement}
+            onChange={onPostChange}
+            value={props.newPostText}
+          />
         </div>
         <div>
-          <button onClick = {addPost}>Add Post</button>
+          <button onClick={addPost}>Add Post</button>
         </div>
       </div>
 

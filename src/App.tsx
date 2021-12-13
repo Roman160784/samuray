@@ -6,17 +6,17 @@ import Nav from './components/Nav/Nav'
 import Profile from './components/profile/Profile'
 import Dialogs from './components/dialogs/Dialogs'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
-import state, { RootStateType, addPost } from './redux/state'
+import { RootStateType } from './redux/state'
 
 
 export type AppType = {
-  addPost: (postMessage : string) => void
+  addPost: (postMessage: string) => void
   state: RootStateType
-  
+  updateNewPostText: (newText: string) => void
 }
 // state = {весь ст'йт}
 
-function App(props:AppType) {
+function App(props: AppType) {
 
   return (
     <BrowserRouter>
@@ -25,8 +25,18 @@ function App(props:AppType) {
         <Nav />
         <div className='app-wrapper-content'>
           <Routes>
-          <Route path='/Profile' element={<Profile posts={props.state.profilePage.posts} addPost={props.addPost} />} /> 
-          <Route path='/Dialogs' element={<Dialogs dialogs={props.state.messagePage.dialogs} messages={props.state.messagePage.messages} />} />
+          <Route path='/Profile' element={<Profile
+              posts={props.state.profilePage.posts}
+              addPost={props.addPost}
+              newPostText={props.state.profilePage.newPostText}
+              updateNewPostText={props.updateNewPostText}
+            />}
+            />
+            <Route path='/Dialogs' element={<Dialogs
+              dialogs={props.state.messagePage.dialogs}
+              messages={props.state.messagePage.messages}
+            />} />
+            
           </Routes>
         </div>
       </div>
