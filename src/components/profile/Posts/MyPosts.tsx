@@ -1,7 +1,7 @@
 import React from 'react';
 import p from './MyPosts.module.css'
 import MyPost from './post/MyPost'
-import state, { addPost, PostsType, updateNewPostText, RootStateType } from '../../.././redux/state'
+import { PostsType } from '../../.././redux/state'
 
 export type postType = {
   id: number

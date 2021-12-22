@@ -6,18 +6,17 @@ import Nav from './components/Nav/Nav'
 import Profile from './components/profile/Profile'
 import Dialogs from './components/dialogs/Dialogs'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
-import { RootStateType } from './redux/state'
+import { RootStateType, StoreType} from './redux/state'
 
 
 export type AppType = {
-  addPost: (postMessage: string) => void
-  state: RootStateType
-  updateNewPostText: (newText: string) => void
+  store: StoreType
 }
 // state = {весь ст'йт}
 
-function App(props: AppType) {
+const App: React.FC<AppType> = (props) => {
 
+  const state = props.store.getState()
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -26,15 +25,15 @@ function App(props: AppType) {
         <div className='app-wrapper-content'>
           <Routes>
           <Route path='/Profile' element={<Profile
-              posts={props.state.profilePage.posts}
-              addPost={props.addPost}
-              newPostText={props.state.profilePage.newPostText}
-              updateNewPostText={props.updateNewPostText}
+              posts={props.store._state.profilePage.posts}
+              addPost={props.store.addPost.bind(props.store)}
+              newPostText={props.store._state.profilePage.newPostText}
+              updateNewPostText={props.store.updateNewPostText.bind(props.store)}
             />}
             />
             <Route path='/Dialogs' element={<Dialogs
-              dialogs={props.state.messagePage.dialogs}
-              messages={props.state.messagePage.messages}
+              dialogs={props.store._state.messagePage.dialogs}
+              messages={props.store._state.messagePage.messages}
             />} />
             
           </Routes>
