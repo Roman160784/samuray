@@ -1,7 +1,7 @@
 import React from 'react';
 import p from './MyPosts.module.css'
 import MyPost from './post/MyPost'
-import { PostsType } from '../../.././redux/state'
+import { ActionsType, addPostAC, changeNewTextAC, PostsType } from '../../.././redux/state'
 
 export type postType = {
   id: number
@@ -11,9 +11,8 @@ export type postType = {
 
 type postsType = {
   posts: Array<PostsType>
-  // state: RootStateType
-  addPost: (postMessage: string) => void
   newPostText: string
+  dispatch: (action: ActionsType) => void
   updateNewPostText: (newText: string) => void
 }
 
@@ -28,14 +27,13 @@ function MyPosts(props: postsType) {
   let addPost = () => {
     let text = newPostElement.current?.value
     if (text) {
-      props.addPost(text)
+      props.dispatch(addPostAC(props.newPostText))
     }
-    // props.updateNewPostText("")
   }
 
   let onPostChange = () => {
     if (newPostElement.current) {
-      props.updateNewPostText(newPostElement.current.value)
+      props.dispatch(changeNewTextAC(newPostElement.current.value))
     }
   }
 
@@ -62,3 +60,4 @@ function MyPosts(props: postsType) {
 }
 
 export default MyPosts;
+

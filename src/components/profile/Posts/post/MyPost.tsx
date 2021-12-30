@@ -13,7 +13,7 @@ function MyPost (props: AppPropsType) {
     <div className={p.postBlock}>
       <div className={p.posts}>
         <div className={p.iteam}>
-          <img src="https://cs16planet.ru/steam-avatars/images/avatar3219.jpg" />
+          <img src="https://ylianova.ru/800/600/https/sun9-35.userapi.com/R1VkhgkHhv9pDpSkCAI7zaJX_x61hf2Z5PdLaw/9CBCdEfc9wo.jpg" />
           {props.message} 
           <div>
           <span>Like:</span>{props.likesCount}
