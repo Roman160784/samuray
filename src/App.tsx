@@ -6,19 +6,22 @@ import Nav from './components/Nav/Nav'
 import Profile from './components/profile/Profile'
 import Dialogs from './components/dialogs/Dialogs'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
-import store, { ActionsType, StoreType, RootStateType} from './redux/state'
+
+import { ActionsProfileType } from './redux/Profile-reducer';
+import { ActionsDialogsType } from './redux/Dialogs-reducer';
+import { AppRootStateType, Dispathc, store } from './redux/reduxStore';
+
+
 
 
 export type AppType = {
-  
-  store: StoreType
-  dispatch: (action: ActionsType) => void
+  store: AppRootStateType
+  dispatch: Dispathc
 }
-// state = {весь ст'йт}
+
 
 const App: React.FC<AppType> = (props: AppType) => {
-
-  const state = props.store.getState()
+const state = store.getState()
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -26,20 +29,19 @@ const App: React.FC<AppType> = (props: AppType) => {
         <Nav />
         <div className='app-wrapper-content'>
           <Routes>
-          <Route path='/Profile' element={<Profile
-              posts={props.store._state.profilePage.posts}
-              dispatch={props.store.dispatch.bind(props.store)}
-              // addPost={props.store.addPost.bind(props.store)}
-              newPostText={props.store._state.profilePage.newPostText}
-              updateNewPostText={props.store.updateNewPostText}
-            />}
-            />
-            <Route path='/Dialogs' element={<Dialogs
-              dialogs={props.store._state.messagePage.dialogs}
-              messages={props.store._state.messagePage.messages}
-              store={props.store}
-              _state={state}
+          <Route path='/Dialogs' element={<Dialogs
+              dialogs={props.store.dialogPage.dialogs}
+              messages={props.store.dialogPage.messages}
+              dispatch={store.dispatch.bind(store)}
+              store={state}
+              _state={props.store}
             />} />
+          <Route path='/Profile' element={<Profile
+              posts={props.store.profilePage.posts}
+              dispatch={store.dispatch.bind(store)}
+              store={state}
+              _state={props.store}
+            />}/>
             
           </Routes>
         </div>

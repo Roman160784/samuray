@@ -2,8 +2,9 @@ import React, { ChangeEvent } from 'react';
 import s from './Dialogs.module.css'
 import DialogIteam from '../dialogs/DialogIteam/DialogIteam'
 import Message from '../dialogs/Message/Message'
-import { NavLink } from 'react-router-dom'
-import { RootStateType, sendMessgeAC, StoreType, updateNewMessageBodyAC } from '../../redux/state';
+import { RootStateType, StoreType, } from '../../redux/state';
+import { sendMessgeAC,  updateNewMessageBodyAC } from '../../redux/Dialogs-reducer';
+import { actionType, AppRootStateType } from '../../redux/reduxStore';
 
 
  type DialogsType = {
@@ -19,8 +20,9 @@ import { RootStateType, sendMessgeAC, StoreType, updateNewMessageBodyAC } from '
   type dialogsMainType= {
     dialogs: Array<DialogsType>
     messages:Array<messagesType>
-    store: StoreType
-    _state: RootStateType;
+    store: AppRootStateType
+    _state: AppRootStateType;
+    dispatch: (action: actionType) => void
 }
 
 
@@ -33,14 +35,14 @@ const Dialogs = (props:dialogsMainType) => {
         <Message message={mess.message} id={mess.id} />
     )
 
-    let newMessageBody = props._state.messagePage.newMessageBody
+    let newMessageBody = props.store.dialogPage.newMessageBody
         let onSendMessageClick = () => {
-            props.store.dispatch(sendMessgeAC())
+            props.dispatch(sendMessgeAC())
         }
 
     let onNewMessageHange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
-        props.store.dispatch(updateNewMessageBodyAC(body))
+        props.dispatch(updateNewMessageBodyAC(body))
     }  
 
     return (

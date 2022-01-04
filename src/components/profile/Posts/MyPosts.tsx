@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import p from './MyPosts.module.css'
 import MyPost from './post/MyPost'
-import { ActionsType, addPostAC, changeNewTextAC, PostsType } from '../../.././redux/state'
+import {  PostsType } from '../../.././redux/state'
+import { ActionsProfileType, addPostAC, changeNewTextAC} from '../../../redux/Profile-reducer'
+import { ActionsDialogsType} from '../../../redux/Dialogs-reducer'
+import { actionType } from '../../../redux/reduxStore';
 
 export type postType = {
   id: number
@@ -12,29 +15,27 @@ export type postType = {
 type postsType = {
   posts: Array<PostsType>
   newPostText: string
-  dispatch: (action: ActionsType) => void
-  updateNewPostText: (newText: string) => void
+  dispatch: (action: actionType) => void
+  
 }
 
 function MyPosts(props: postsType) {
+console.log(props.newPostText);
 
   let myPosts = props.posts.map(post =>
     <MyPost message={post.message} likesCount={post.likesCount} />
   )
 
-  let newPostElement = React.createRef<HTMLTextAreaElement>();
+  
 
   let addPost = () => {
-    let text = newPostElement.current?.value
-    if (text) {
-      props.dispatch(addPostAC(props.newPostText))
-    }
+      props.dispatch(addPostAC())
+  
   }
 
-  let onPostChange = () => {
-    if (newPostElement.current) {
-      props.dispatch(changeNewTextAC(newPostElement.current.value))
-    }
+  let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      console.log(e.currentTarget.value);
+      props.dispatch(changeNewTextAC(e.currentTarget.value))
   }
 
 
@@ -44,7 +45,7 @@ function MyPosts(props: postsType) {
       <div className={p.posts}>
         {myPosts}
         <div>
-          <textarea ref={newPostElement}
+          <textarea
             onChange={onPostChange}
             value={props.newPostText}
           />

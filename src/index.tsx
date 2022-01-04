@@ -2,22 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import store, { ActionsType } from './redux/state';
+import {AppRootStateType, store} from './redux/reduxStore';
 
 
 
 
-export const renderEntireTree = () => {
+export const renderEntireTree = (state: AppRootStateType) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App store={store} dispatch={store.dispatch.bind(store)} />
+            <App store={state} dispatch={store.dispatch.bind(store)} />
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-renderEntireTree()
-store.subscribe(renderEntireTree)
+renderEntireTree(store.getState())
+
+store.subscribe(() => {
+    let state = store.getState();
+    renderEntireTree(state)
+})
 
 
 
