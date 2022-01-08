@@ -21,7 +21,6 @@ import { actionType, AppRootStateType } from '../../redux/reduxStore';
     dialogs: Array<DialogsType>
     messages:Array<messagesType>
     store: AppRootStateType
-    _state: AppRootStateType;
     dispatch: (action: actionType) => void
 }
 

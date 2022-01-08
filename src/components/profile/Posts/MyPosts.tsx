@@ -4,7 +4,7 @@ import MyPost from './post/MyPost'
 import {  PostsType } from '../../.././redux/state'
 import { ActionsProfileType, addPostAC, changeNewTextAC} from '../../../redux/Profile-reducer'
 import { ActionsDialogsType} from '../../../redux/Dialogs-reducer'
-import { actionType } from '../../../redux/reduxStore';
+import { actionType, AppRootStateType } from '../../../redux/reduxStore';
 
 export type postType = {
   id: number
@@ -13,31 +13,29 @@ export type postType = {
 }
 
 type postsType = {
+  UpdateNewText:(text: string) => void
   posts: Array<PostsType>
   newPostText: string
-  dispatch: (action: actionType) => void
-  
+  addPost: () => void
+
+  // dispatch: (action: actionType) => void
 }
 
 function MyPosts(props: postsType) {
-console.log(props.newPostText);
-
   let myPosts = props.posts.map(post =>
     <MyPost message={post.message} likesCount={post.likesCount} />
   )
 
-  
-
   let addPost = () => {
-      props.dispatch(addPostAC())
-  
+    props.addPost()
+      // props.dispatch(addPostAC())
   }
 
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-      console.log(e.currentTarget.value);
-      props.dispatch(changeNewTextAC(e.currentTarget.value))
+    let newText = e.currentTarget.value
+    props.UpdateNewText(newText)
+      // props.dispatch(changeNewTextAC(e.currentTarget.value))
   }
-
 
   return (
     <div>
@@ -46,8 +44,9 @@ console.log(props.newPostText);
         {myPosts}
         <div>
           <textarea
+          value={props.newPostText}
             onChange={onPostChange}
-            value={props.newPostText}
+            
           />
         </div>
         <div>

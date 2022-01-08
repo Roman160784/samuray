@@ -22,6 +22,7 @@ export type AppType = {
 
 const App: React.FC<AppType> = (props: AppType) => {
 const state = store.getState()
+
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -34,15 +35,12 @@ const state = store.getState()
               messages={props.store.dialogPage.messages}
               dispatch={store.dispatch.bind(store)}
               store={state}
-              _state={props.store}
             />} />
           <Route path='/Profile' element={<Profile
               posts={props.store.profilePage.posts}
               dispatch={store.dispatch.bind(store)}
               store={state}
-              _state={props.store}
             />}/>
-            
           </Routes>
         </div>
       </div>

@@ -16,12 +16,12 @@ export const renderEntireTree = (state: AppRootStateType) => {
     );
 }
 
-renderEntireTree(store.getState())
+// renderEntireTree(store.getState())
 
-store.subscribe(() => {
-    let state = store.getState();
-    renderEntireTree(state)
-})
+// store.subscribe(() => {
+//     let state = store.getState();
+//     renderEntireTree(state)
+// })
 
 
 
