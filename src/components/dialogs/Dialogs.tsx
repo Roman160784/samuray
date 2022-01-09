@@ -2,9 +2,8 @@ import React, { ChangeEvent } from 'react';
 import s from './Dialogs.module.css'
 import DialogIteam from '../dialogs/DialogIteam/DialogIteam'
 import Message from '../dialogs/Message/Message'
-import { RootStateType, StoreType, } from '../../redux/state';
-import { sendMessgeAC,  updateNewMessageBodyAC } from '../../redux/Dialogs-reducer';
-import { actionType, AppRootStateType } from '../../redux/reduxStore';
+import { actionType, AppRootStateType, store } from '../../redux/reduxStore';
+
 
 
  type DialogsType = {
@@ -21,11 +20,15 @@ import { actionType, AppRootStateType } from '../../redux/reduxStore';
     dialogs: Array<DialogsType>
     messages:Array<messagesType>
     store: AppRootStateType
-    dispatch: (action: actionType) => void
+    sendMessge: () => void
+    updateNewMessageBody: (body: string) => void
+    newMessageBody: string
 }
 
 
 const Dialogs = (props:dialogsMainType) => {
+    const state = store.getState()
+
     let dialogsElements  = props.dialogs.map(dialog =>
         <div><DialogIteam name={dialog.name} id={dialog.id} /></div>
     )
@@ -34,14 +37,15 @@ const Dialogs = (props:dialogsMainType) => {
         <Message message={mess.message} id={mess.id} />
     )
 
-    let newMessageBody = props.store.dialogPage.newMessageBody
         let onSendMessageClick = () => {
-            props.dispatch(sendMessgeAC())
+            props.sendMessge()
         }
 
     let onNewMessageHange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        console.log(e.currentTarget.value);
+        
         let body = e.currentTarget.value
-        props.dispatch(updateNewMessageBodyAC(body))
+        props.updateNewMessageBody(body)
     }  
 
     return (
@@ -52,9 +56,9 @@ const Dialogs = (props:dialogsMainType) => {
             <div className={s.meaasges}>
                 <div>{messageElements}</div>
                 <div>
-                    <div> <textarea value={newMessageBody} 
+                    <div> <textarea value={props.newMessageBody} 
                     onChange={onNewMessageHange}
-                    placeholder='Enter your message'></textarea> </div>
+                    placeholder='Enter your message'></textarea></div>
                     <div> <button onClick={onSendMessageClick}>SEND</button></div>
                 </div>
             </div>

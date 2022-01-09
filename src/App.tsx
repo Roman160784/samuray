@@ -6,22 +6,22 @@ import Nav from './components/Nav/Nav'
 import Profile from './components/profile/Profile'
 import Dialogs from './components/dialogs/Dialogs'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
-
-import { ActionsProfileType } from './redux/Profile-reducer';
-import { ActionsDialogsType } from './redux/Dialogs-reducer';
 import { AppRootStateType, Dispathc, store } from './redux/reduxStore';
+import DialogsContainer from './components/dialogs/DialogsContainer';
+import { useDispatch } from 'react-redux';
 
 
 
 
 export type AppType = {
-  store: AppRootStateType
-  dispatch: Dispathc
+  // store: AppRootStateType
+  // dispatch: Dispathc
 }
 
 
 const App: React.FC<AppType> = (props: AppType) => {
 const state = store.getState()
+let dispatch = useDispatch();
 
   return (
     <BrowserRouter>
@@ -30,15 +30,15 @@ const state = store.getState()
         <Nav />
         <div className='app-wrapper-content'>
           <Routes>
-          <Route path='/Dialogs' element={<Dialogs
-              dialogs={props.store.dialogPage.dialogs}
-              messages={props.store.dialogPage.messages}
-              dispatch={store.dispatch.bind(store)}
+          <Route path='/Dialogs' element={<DialogsContainer
+              dialogs={state.dialogPage.dialogs}
+              messages={state.dialogPage.messages}
+              dispatch={dispatch.bind(store)}
               store={state}
             />} />
           <Route path='/Profile' element={<Profile
-              posts={props.store.profilePage.posts}
-              dispatch={store.dispatch.bind(store)}
+              posts={state.profilePage.posts}
+              dispatch={dispatch.bind(store)}
               store={state}
             />}/>
           </Routes>

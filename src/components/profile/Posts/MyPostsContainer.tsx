@@ -4,8 +4,8 @@ import MyPost from './post/MyPost'
 import MyPosts from '../Posts/MyPosts'
 import {  PostsType } from '../../../redux/state'
 import { ActionsProfileType, addPostAC, changeNewTextAC} from '../../../redux/Profile-reducer'
-import { ActionsDialogsType} from '../../../redux/Dialogs-reducer'
-import { actionType, AppRootStateType } from '../../../redux/reduxStore';
+import { actionType, AppRootStateType, store } from '../../../redux/reduxStore';
+import { useDispatch } from 'react-redux';
 
 
 type postsTypeContainer = {
@@ -15,19 +15,20 @@ type postsTypeContainer = {
 }
 
 function MyPostsContainer(props: postsTypeContainer) {
- 
+  const dispatch = useDispatch()
+  const state = store.getState()
 
   let addPost = () => {
-      props.dispatch(addPostAC()) // сделать зависимым от store
+      dispatch(addPostAC()) 
   }
 
   let onPostChange = (newText: string) => {
-      props.dispatch(changeNewTextAC(newText)) // сделать зависимым от store
+      dispatch(changeNewTextAC(newText)) 
   }
 
   return (
-    <MyPosts posts={props.posts} UpdateNewText={onPostChange}
-    newPostText={props.newPostText}
+    <MyPosts posts={state.profilePage.posts} UpdateNewText={onPostChange}
+    newPostText={state.profilePage.newPostText}
     addPost={addPost}  />
   )
 }

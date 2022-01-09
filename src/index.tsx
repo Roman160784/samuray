@@ -2,26 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {AppRootStateType, store} from './redux/reduxStore';
+import {store} from './redux/reduxStore';
+import { Provider } from 'react-redux';
 
 
 
 
-export const renderEntireTree = (state: AppRootStateType) => {
+export const renderEntireTree = () => { 
     ReactDOM.render(
-        <React.StrictMode>
-            <App store={state} dispatch={store.dispatch.bind(store)} />
-        </React.StrictMode>,
+        <Provider store={store}>  <React.StrictMode>
+            <App/>
+        </React.StrictMode> </Provider>,
         document.getElementById('root')
     );
 }
 
-// renderEntireTree(store.getState())
+renderEntireTree()
 
-// store.subscribe(() => {
-//     let state = store.getState();
-//     renderEntireTree(state)
-// })
+store.subscribe(() => {
+    renderEntireTree()
+})
 
 
 
