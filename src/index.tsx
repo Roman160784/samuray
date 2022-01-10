@@ -8,20 +8,20 @@ import { Provider } from 'react-redux';
 
 
 
-export const renderEntireTree = () => { 
+// export const renderEntireTree = () => { 
     ReactDOM.render(
         <Provider store={store}>  <React.StrictMode>
             <App/>
         </React.StrictMode> </Provider>,
         document.getElementById('root')
     );
-}
+// }
 
-renderEntireTree()
+// renderEntireTree()
 
-store.subscribe(() => {
-    renderEntireTree()
-})
+// store.subscribe(() => {
+//     renderEntireTree()
+// })
 
 
 

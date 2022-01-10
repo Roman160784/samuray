@@ -13,12 +13,10 @@ export type postType = {
 }
 
 type postsType = {
-  UpdateNewText:(text: string) => void
   posts: Array<PostsType>
   newPostText: string
   addPost: () => void
-
-  // dispatch: (action: actionType) => void
+  UpdateNewText:(newText: string) => void
 }
 
 function MyPosts(props: postsType) {

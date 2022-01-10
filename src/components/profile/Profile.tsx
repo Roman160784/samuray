@@ -5,7 +5,7 @@ import ProfileInfo from '../profile/Posts/ProfileInfo/ProfileInfo'
 import { PostsType, StoreType } from '../../redux/state'
 import { actionType, AppRootStateType, Dispathc } from '../../redux/reduxStore';
 import { store } from '../../redux/reduxStore'
-import MyPostsContainer from './Posts/MyPostsContainer';
+import {MyPostsContainer} from './Posts/MyPostsContainer';
 
 type ProfilePropsType__ = {
   store: AppRootStateType
@@ -19,11 +19,7 @@ function Profile(props: ProfilePropsType__) {
   return (
     <div>
       <ProfileInfo />
-      <MyPostsContainer
-        posts={props.posts}
-        newPostText={props.store.profilePage.newPostText}
-        dispatch={props.dispatch.bind(store)}
-      />
+      <MyPostsContainer/>      
     </div >
   )
 }

@@ -7,7 +7,7 @@ import Profile from './components/profile/Profile'
 import Dialogs from './components/dialogs/Dialogs'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { AppRootStateType, Dispathc, store } from './redux/reduxStore';
-import DialogsContainer from './components/dialogs/DialogsContainer';
+import {DialogsContainer} from './components/dialogs/DialogsContainer';
 import { useDispatch } from 'react-redux';
 
 
@@ -30,12 +30,7 @@ let dispatch = useDispatch();
         <Nav />
         <div className='app-wrapper-content'>
           <Routes>
-          <Route path='/Dialogs' element={<DialogsContainer
-              dialogs={state.dialogPage.dialogs}
-              messages={state.dialogPage.messages}
-              dispatch={dispatch.bind(store)}
-              store={state}
-            />} />
+          <Route path='/Dialogs' element={<DialogsContainer />} />
           <Route path='/Profile' element={<Profile
               posts={state.profilePage.posts}
               dispatch={dispatch.bind(store)}

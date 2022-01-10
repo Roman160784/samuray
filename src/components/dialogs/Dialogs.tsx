@@ -20,14 +20,15 @@ import { actionType, AppRootStateType, store } from '../../redux/reduxStore';
     dialogs: Array<DialogsType>
     messages:Array<messagesType>
     store: AppRootStateType
+    newMessageBody: string
     sendMessge: () => void
     updateNewMessageBody: (body: string) => void
-    newMessageBody: string
+    
 }
 
 
 const Dialogs = (props:dialogsMainType) => {
-    const state = store.getState()
+    //const state = store.getState()
 
     let dialogsElements  = props.dialogs.map(dialog =>
         <div><DialogIteam name={dialog.name} id={dialog.id} /></div>
@@ -42,8 +43,6 @@ const Dialogs = (props:dialogsMainType) => {
         }
 
     let onNewMessageHange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        console.log(e.currentTarget.value);
-        
         let body = e.currentTarget.value
         props.updateNewMessageBody(body)
     }  

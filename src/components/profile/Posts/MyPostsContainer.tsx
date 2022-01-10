@@ -4,34 +4,58 @@ import MyPost from './post/MyPost'
 import MyPosts from '../Posts/MyPosts'
 import {  PostsType } from '../../../redux/state'
 import { ActionsProfileType, addPostAC, changeNewTextAC} from '../../../redux/Profile-reducer'
-import { actionType, AppRootStateType, store } from '../../../redux/reduxStore';
-import { useDispatch } from 'react-redux';
+import { actionType, AppRootStateType, Dispathc, store } from '../../../redux/reduxStore';
+import { connect, useDispatch } from 'react-redux';
 
 
-type postsTypeContainer = {
+// type postsTypeContainer = {
+//   posts: Array<PostsType>
+//   newPostText: string
+//   dispatch: (action: actionType) => void
+// }
+
+// function MyPostsContainer(props: postsTypeContainer) {
+//   const dispatch = useDispatch()
+//   const state = store.getState()
+
+//   let addPost = () => {
+//       dispatch(addPostAC()) 
+//   }
+
+//   let onPostChange = (newText: string) => {
+//       dispatch(changeNewTextAC(newText)) 
+//   }
+
+//   return (
+//     <MyPosts posts={state.profilePage.posts} UpdateNewText={onPostChange}
+//     newPostText={state.profilePage.newPostText}
+//     addPost={addPost}  />
+//   )
+// }
+
+// export default MyPostsContainer;
+
+
+type MSTP = {
   posts: Array<PostsType>
   newPostText: string
-  dispatch: (action: actionType) => void
 }
 
-function MyPostsContainer(props: postsTypeContainer) {
-  const dispatch = useDispatch()
-  const state = store.getState()
-
-  let addPost = () => {
-      dispatch(addPostAC()) 
-  }
-
-  let onPostChange = (newText: string) => {
-      dispatch(changeNewTextAC(newText)) 
-  }
-
-  return (
-    <MyPosts posts={state.profilePage.posts} UpdateNewText={onPostChange}
-    newPostText={state.profilePage.newPostText}
-    addPost={addPost}  />
-  )
+type MDTP ={
+  addPost: () => void
+  UpdateNewText : (newText: string) => void
 }
 
-export default MyPostsContainer;
+let mapStateToProps = (state: AppRootStateType): MSTP =>({
+    posts: state.profilePage.posts,
+    newPostText: state.profilePage.newPostText
+})
 
+let mapDispatchToProps = (dispatch: Dispathc) : MDTP => ({
+  UpdateNewText : (newText: string) => dispatch(changeNewTextAC(newText)),
+  addPost: () => dispatch(addPostAC()) 
+})
+
+
+
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
