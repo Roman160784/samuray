@@ -5,9 +5,11 @@ import Header from './components/header/Header'
 import Nav from './components/Nav/Nav'
 import Profile from './components/profile/Profile'
 import Dialogs from './components/dialogs/Dialogs'
+import {Users} from './components/Users/Users'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { AppRootStateType, Dispathc, store } from './redux/reduxStore';
 import {DialogsContainer} from './components/dialogs/DialogsContainer';
+import {UsersContainer} from './components/Users/UsersContainer';
 import { useDispatch } from 'react-redux';
 
 
@@ -36,6 +38,7 @@ let dispatch = useDispatch();
               dispatch={dispatch.bind(store)}
               store={state}
             />}/>
+          <Route path='/Users' element={<UsersContainer/>}/> 
           </Routes>
         </div>
       </div>
