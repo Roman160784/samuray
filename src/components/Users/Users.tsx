@@ -7,7 +7,9 @@ import userPhoto from '../../assets/img/userPhoto.png'
 
 export type UsersStateType = {
     users: Array<UsersType>
-
+    pageSize: number
+    totalUsersCount: number
+    curentPage: number
 }
 
 export type UsersType = {

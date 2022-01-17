@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { ChangeEvent } from 'react';
 import style from '../Users/Users.module.css'
 import userPhoto from '../../assets/img/userPhoto.png'
+import { spawn } from 'child_process';
 
 
 
@@ -34,10 +35,13 @@ type LocationType = {
 
 type usersPropsStateType = {
     users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    curentPage: number
     unFollow: (id: number) => void
     follow: (id: number) => void
     setUsers: (users: Array<UsersType>) => void
-    
+    setCurrentPage : ( curentPage : number) => void
 }
 
 
@@ -46,17 +50,37 @@ class UsersC extends React.Component  <usersPropsStateType> {
 
  
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
-            debugger
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage} &count=${this.props.pageSize} `)
+        .then((response) => {
             this.props.setUsers(response.data.items)
         });
     }
 
+    onpageCanged = (curentPage : number) => {this.props.setCurrentPage(curentPage);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${curentPage} &count=${this.props.pageSize} `)
+        .then((response) => {
+            this.props.setUsers(response.data.items)
+        });
+    }
 
 render () {
+
+    let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize) 
+
+    let pages = []
+
+    for(let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
+
     return (
         
         <div>
+            <div>
+                {pages.map(p => {
+               return <span onClick={(e) => {this.onpageCanged(p)}} 
+               className={this.props.curentPage === p ? style.selectedPage : "" }>  {p}</span> } )}
+             </div>
            {/* <button onClick={this.getUsers}>Get users</button>  */}
             {
 
