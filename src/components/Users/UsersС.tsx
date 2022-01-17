@@ -44,15 +44,13 @@ type usersPropsStateType = {
 
 class UsersC extends React.Component  <usersPropsStateType> {
 
-    constructor (props: usersPropsStateType) {
-        super(props);
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
-                debugger
-                this.props.setUsers(response.data.items)
-            });
-        }
  
-    
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
+            debugger
+            this.props.setUsers(response.data.items)
+        });
+    }
 
 
 render () {
