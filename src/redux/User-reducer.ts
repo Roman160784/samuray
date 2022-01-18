@@ -7,7 +7,7 @@ type AppActionType = ActionsUsersType | ActionsDialogsType | ActionsProfileType
 let initialState: UsersStateType = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 21,
+    totalUsersCount: 0,
     curentPage: 1,
 }
 
@@ -25,13 +25,16 @@ export const usersReducer = (state: UsersStateType = initialState, action: AppAc
         case "SET-CURRENT-PAGE":
             return { ...state, curentPage : action.curentPage}
 
+        case "SET-TOTAL-USER-COUNT":
+            return { ...state, totalUsersCount : action.totalUsersCount}
+
         default:
             return state
     }
 }
 
 export type ActionsUsersType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>
- | ReturnType<typeof setUsersAC> | ReturnType<typeof setPageAC>
+ | ReturnType<typeof setUsersAC> | ReturnType<typeof setPageAC> | ReturnType<typeof setTotalUsersCountAC>
 
 export const followAC = (id: number) => {
     return {
@@ -56,6 +59,13 @@ export const setPageAC = (curentPage : number) => {
     return {
         type: "SET-CURRENT-PAGE",
         curentPage,
+
+    }as const
+}
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {
+        type: "SET-TOTAL-USER-COUNT",
+        totalUsersCount,
 
     }as const
 }

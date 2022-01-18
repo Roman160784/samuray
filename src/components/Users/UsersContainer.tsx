@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {Users, UsersStateType, UsersType} from './Users'
 import {  AppRootStateType, Dispathc } from '../../redux/reduxStore';
-import { followAC, setPageAC, setUsersAC, unFollowAC } from '../../redux/User-reducer';
+import { followAC, setPageAC, setTotalUsersCountAC, setUsersAC, unFollowAC } from '../../redux/User-reducer';
 import UsersC from "./UsersС"
 import { isPropertySignature } from 'typescript';
 
@@ -19,6 +19,7 @@ type MSTP = {
     unFollow : ( id: number) => void
     setCurrentPage : ( curentPage : number) => void
     setUsers : (users : Array<UsersType>) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
   }
   
   let mapStateToProps = (state: AppRootStateType): MSTP =>({
@@ -32,7 +33,8 @@ type MSTP = {
     follow : ( id: number) => dispatch(followAC(id)),
     unFollow : ( id: number) => dispatch(unFollowAC(id)),
     setUsers: (users: Array<UsersType>) => dispatch(setUsersAC(users)),
-    setCurrentPage: (curentPage : number) => dispatch(setPageAC(curentPage))
+    setCurrentPage: (curentPage : number) => dispatch(setPageAC(curentPage)),
+    setTotalUsersCount : (totalUsersCount: number) => dispatch(setTotalUsersCountAC(totalUsersCount)),
   })
   
 

@@ -42,6 +42,7 @@ type usersPropsStateType = {
     follow: (id: number) => void
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage : ( curentPage : number) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
 }
 
 
@@ -50,16 +51,18 @@ class UsersC extends React.Component  <usersPropsStateType> {
 
  
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage} &count=${this.props.pageSize} `)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage}&count=${this.props.pageSize}`)
         .then((response) => {
             this.props.setUsers(response.data.items)
+            //  this.props.setTotalUsersCount(response.data.totalCount); /// problem 
+             this.props.setTotalUsersCount(60); 
         });
     }
 
     onpageCanged = (curentPage : number) => {this.props.setCurrentPage(curentPage);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${curentPage} &count=${this.props.pageSize} `)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${curentPage}&count=${this.props.pageSize}`)
         .then((response) => {
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(response.data.items); 
         });
     }
 

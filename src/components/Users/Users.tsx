@@ -37,7 +37,6 @@ type usersPropsStateType = {
     users: Array<UsersType>
     unFollow: (id: number) => void
     follow: (id: number) => void
-
     setUsers: (users: Array<UsersType>) => void
 
 }
