@@ -1,11 +1,96 @@
-import React, { ChangeEvent } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import {Users, UsersStateType, UsersType} from './Users'
+import React from 'react';
+import { connect} from 'react-redux';
 import {  AppRootStateType, Dispathc } from '../../redux/reduxStore';
 import { followAC, setPageAC, setTotalUsersCountAC, setUsersAC, unFollowAC } from '../../redux/User-reducer';
-import UsersC from "./UsersС"
-import { isPropertySignature } from 'typescript';
+import { UserFunc } from './UsersFuncComponent';
+import axios from 'axios';
 
+
+export type UsersStateType = {
+  users: Array<UsersType>
+
+}
+
+export type UsersType = {
+  id: number
+  photos: photosType
+  // photoUrl: string
+  followed: boolean
+  name: string
+  // fullName: string
+  status: string
+  location: LocationType
+}
+
+type photosType = {
+  small: null | string
+  large: null | string
+}
+
+type LocationType = {
+  city: string
+  country: string
+}
+
+type usersPropsStateType = {
+  users: Array<UsersType>
+  pageSize: number
+  totalUsersCount: number
+  curentPage: number
+  unFollow: (id: number) => void
+  follow: (id: number) => void
+  setUsers: (users: Array<UsersType>) => void
+  setCurrentPage : ( curentPage : number) => void
+  setTotalUsersCount: (totalUsersCount: number) => void
+}
+
+
+
+class UsersAPIComponent extends React.Component  <usersPropsStateType> {
+
+
+  componentDidMount() {
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage}&count=${this.props.pageSize}`)
+      .then((response) => {
+          this.props.setUsers(response.data.items)
+          //  this.props.setTotalUsersCount(response.data.totalCount); /// problem 
+           this.props.setTotalUsersCount(60); 
+      });
+  }
+
+  onpageChanged = (curentPage : number) => {this.props.setCurrentPage(curentPage);
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${curentPage}&count=${this.props.pageSize}`)
+      .then((response) => {
+          this.props.setUsers(response.data.items); 
+      });
+  }
+  
+render () {
+
+  let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize) 
+
+  let pages = []
+
+  for(let i = 1; i <= pagesCount; i++) {
+      pages.push(i)
+  }
+
+  return <UserFunc 
+  users={this.props.users} 
+  pageSize={this.props.pageSize} 
+  totalUsersCount={this.props.totalUsersCount} 
+  curentPage={this.props.curentPage} 
+  unFollow={this.props.unFollow}
+  follow={this.props.follow}
+   setUsers={this.props.setUsers} 
+   setCurrentPage={this.props.setCurrentPage} 
+  setTotalUsersCount={this.props.setTotalUsersCount}
+  onpageChanged={this.onpageChanged}
+  />
+}
+}
+
+// export default UsersAPIComponent;
 
 type MSTP = {
     users: Array<UsersType>
@@ -39,6 +124,6 @@ type MSTP = {
   
 
 // export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
 
 

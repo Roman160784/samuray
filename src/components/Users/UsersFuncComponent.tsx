@@ -1,11 +1,5 @@
-import axios from 'axios';
-// import * as axios from 'axios';
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import style from '../Users/Users.module.css'
-import userPhoto from '../../assets/img/userPhoto.png'
-import { spawn } from 'child_process';
-
-
 
 export type UsersStateType = {
     users: Array<UsersType>
@@ -32,8 +26,7 @@ type LocationType = {
     city: string
     country: string
 }
-
-type usersPropsStateType = {
+type UserFuncType = {
     users: Array<UsersType>
     pageSize: number
     totalUsersCount: number
@@ -43,32 +36,12 @@ type usersPropsStateType = {
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage : ( curentPage : number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
+    onpageChanged: (curentPage : number) => void
 }
 
+export const UserFunc = (props: UserFuncType) => {
 
-
-class UsersC extends React.Component  <usersPropsStateType> {
-
- 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage}&count=${this.props.pageSize}`)
-        .then((response) => {
-            this.props.setUsers(response.data.items)
-            //  this.props.setTotalUsersCount(response.data.totalCount); /// problem 
-             this.props.setTotalUsersCount(60); 
-        });
-    }
-
-    onpageCanged = (curentPage : number) => {this.props.setCurrentPage(curentPage);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${curentPage}&count=${this.props.pageSize}`)
-        .then((response) => {
-            this.props.setUsers(response.data.items); 
-        });
-    }
-
-render () {
-
-    let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize) 
+    let pagesCount = Math.ceil(props.totalUsersCount/props.pageSize) 
 
     let pages = []
 
@@ -79,23 +52,24 @@ render () {
     return (
         
         <div>
+            
             <div>
                 {pages.map(p => {
-               return <span onClick={(e) => {this.onpageCanged(p)}} 
-               className={this.props.curentPage === p ? style.selectedPage : "" }>  {p}</span> } )}
+               return <span onClick={(e) => {props.onpageChanged(p)}} 
+               className={props.curentPage === p ? style.selectedPage : "" }> {p} </span> } )}
              </div>
            {/* <button onClick={this.getUsers}>Get users</button>  */}
             {
 
-            this.props.users.map(u => <div key={u.id}>
+            props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.userPhoto} />
+                        <img src={u.photos.small != null ? u.photos.small : style.userPhoto} className={style.userPhoto} />
                         {/* <img src={u.photoUrl} className={style.userPhoto} /> */}
                     </div>
                     <div>
-                        {u.followed ? <button onClick={() => { this.props.unFollow(u.id) }}>UnFollow</button>
-                            : <button onClick={() => this.props.follow(u.id)}>Follow</button>}
+                        {u.followed ? <button onClick={() => { props.unFollow(u.id) }}>UnFollow</button>
+                            : <button onClick={() => props.follow(u.id)}>Follow</button>}
 
                     </div>
                 </span>
@@ -114,6 +88,3 @@ render () {
         }</div>
     )
 }
-}
-
-export default UsersC;
