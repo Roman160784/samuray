@@ -9,6 +9,7 @@ let initialState: UsersStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     curentPage: 1,
+    isFething: false,
 }
 
 export const usersReducer = (state: UsersStateType = initialState, action: AppActionType): UsersStateType => {
@@ -28,13 +29,17 @@ export const usersReducer = (state: UsersStateType = initialState, action: AppAc
         case "SET-TOTAL-USER-COUNT":
             return { ...state, totalUsersCount : action.totalUsersCount}
 
+        case "TOGLE-IS-FETCHING":
+            return { ...state, isFething : action.isFething}
+
         default:
             return state
     }
 }
 
 export type ActionsUsersType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC>
- | ReturnType<typeof setUsersAC> | ReturnType<typeof setPageAC> | ReturnType<typeof setTotalUsersCountAC>
+ | ReturnType<typeof setUsersAC> | ReturnType<typeof setPageAC> | ReturnType<typeof setTotalUsersCountAC> 
+ | ReturnType<typeof togleIsFetchingAC>
 
 export const followAC = (id: number) => {
     return {
@@ -66,6 +71,13 @@ export const setTotalUsersCountAC = (totalUsersCount: number) => {
     return {
         type: "SET-TOTAL-USER-COUNT",
         totalUsersCount,
+
+    }as const
+}
+export const togleIsFetchingAC = (isFething: boolean) => {
+    return {
+        type: "TOGLE-IS-FETCHING",
+        isFething,
 
     }as const
 }

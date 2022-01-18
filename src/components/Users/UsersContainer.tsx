@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect} from 'react-redux';
 import {  AppRootStateType, Dispathc } from '../../redux/reduxStore';
-import { followAC, setPageAC, setTotalUsersCountAC, setUsersAC, unFollowAC } from '../../redux/User-reducer';
+import { followAC, setPageAC, setTotalUsersCountAC, setUsersAC, togleIsFetchingAC, unFollowAC } from '../../redux/User-reducer';
 import { UserFunc } from './UsersFuncComponent';
 import axios from 'axios';
+import { Preloader } from '../preloader/preloader';
 
 
 export type UsersStateType = {
@@ -37,11 +38,13 @@ type usersPropsStateType = {
   pageSize: number
   totalUsersCount: number
   curentPage: number
+  isFething: boolean
   unFollow: (id: number) => void
   follow: (id: number) => void
   setUsers: (users: Array<UsersType>) => void
   setCurrentPage : ( curentPage : number) => void
   setTotalUsersCount: (totalUsersCount: number) => void
+  togleIsFetching: (isFething: boolean) => void
 }
 
 
@@ -50,17 +53,22 @@ class UsersAPIComponent extends React.Component  <usersPropsStateType> {
 
 
   componentDidMount() {
+    this.props.togleIsFetching(true)
       axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage}&count=${this.props.pageSize}`)
       .then((response) => {
+        this.props.togleIsFetching(false)
           this.props.setUsers(response.data.items)
           //  this.props.setTotalUsersCount(response.data.totalCount); /// problem 
-           this.props.setTotalUsersCount(60); 
+           this.props.setTotalUsersCount(100); 
       });
   }
 
-  onpageChanged = (curentPage : number) => {this.props.setCurrentPage(curentPage);
+  onpageChanged = (curentPage : number) => {
+    this.props.togleIsFetching(true)
+    this.props.setCurrentPage(curentPage);
       axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${curentPage}&count=${this.props.pageSize}`)
       .then((response) => {
+        this.props.togleIsFetching(false)
           this.props.setUsers(response.data.items); 
       });
   }
@@ -75,7 +83,9 @@ render () {
       pages.push(i)
   }
 
-  return <UserFunc 
+  return  <>
+  {this.props.isFething ? <Preloader/>  : null}
+  <UserFunc 
   users={this.props.users} 
   pageSize={this.props.pageSize} 
   totalUsersCount={this.props.totalUsersCount} 
@@ -87,6 +97,7 @@ render () {
   setTotalUsersCount={this.props.setTotalUsersCount}
   onpageChanged={this.onpageChanged}
   />
+  </>
 }
 }
 
@@ -97,6 +108,7 @@ type MSTP = {
     pageSize: number
     totalUsersCount: number
     curentPage: number
+    isFething: boolean
   }
   
   type MDTP ={
@@ -105,9 +117,11 @@ type MSTP = {
     setCurrentPage : ( curentPage : number) => void
     setUsers : (users : Array<UsersType>) => void
     setTotalUsersCount: (totalUsersCount: number) => void
+    togleIsFetching : (isFething: boolean) => void
   }
   
   let mapStateToProps = (state: AppRootStateType): MSTP =>({
+      isFething: state.usersPage.isFething,
       users: state.usersPage.users,
       pageSize: state.usersPage.pageSize,
       totalUsersCount: state.usersPage.totalUsersCount,
@@ -120,6 +134,7 @@ type MSTP = {
     setUsers: (users: Array<UsersType>) => dispatch(setUsersAC(users)),
     setCurrentPage: (curentPage : number) => dispatch(setPageAC(curentPage)),
     setTotalUsersCount : (totalUsersCount: number) => dispatch(setTotalUsersCountAC(totalUsersCount)),
+    togleIsFetching : (isFething: boolean) => dispatch(togleIsFetchingAC(isFething))
   })
   
 

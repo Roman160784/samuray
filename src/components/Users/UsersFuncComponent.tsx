@@ -1,5 +1,6 @@
 import React from 'react';
 import style from '../Users/Users.module.css'
+import userPhoto from '../../assets/img/userPhoto.png'
 
 export type UsersStateType = {
     users: Array<UsersType>
@@ -64,7 +65,7 @@ export const UserFunc = (props: UserFuncType) => {
             props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img src={u.photos.small != null ? u.photos.small : style.userPhoto} className={style.userPhoto} />
+                        <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.userPhoto} />
                         {/* <img src={u.photoUrl} className={style.userPhoto} /> */}
                     </div>
                     <div>

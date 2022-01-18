@@ -10,6 +10,7 @@ export type UsersStateType = {
     pageSize: number
     totalUsersCount: number
     curentPage: number
+    isFething: boolean
 }
 
 export type UsersType = {
