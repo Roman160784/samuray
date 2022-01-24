@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { ChangeEvent } from 'react';
 import style from './Users.module.css'
 import userPhoto from '../../assets/img/userPhoto.png'
+import { NavLink } from 'react-router-dom';
 
 
 export type UsersStateType = {
@@ -106,7 +107,9 @@ export const Users = (props: usersPropsStateType) => {
             props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
+                        <NavLink to={"/Profile" + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.userPhoto} />
+                        </NavLink>
                         {/* <img src={u.photoUrl} className={style.userPhoto} /> */}
                     </div>
                     <div>

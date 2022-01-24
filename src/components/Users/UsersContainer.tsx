@@ -41,10 +41,10 @@ type usersPropsStateType = {
   isFething: boolean
   unFollow: (id: number) => void
   follow: (id: number) => void
-  setUsers: (users: Array<UsersType>) => void
   setCurrentPage: (curentPage: number) => void
   setTotalUsersCount: (totalUsersCount: number) => void
   togleIsFetching: (isFething: boolean) => void
+  setUsers: (users: Array<UsersType>) => void
 }
 
 

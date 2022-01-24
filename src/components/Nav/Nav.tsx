@@ -16,6 +16,9 @@ return (
         <div className={s.iteam}>
         <NavLink className={(navData) => navData.isActive? s.active:""} to="/Users">Users</NavLink> 
         </div>
+        {/* <div className={s.iteam}>
+        <NavLink className={(navData) => navData.isActive? s.active:""} to="/ProfilePerson">Pesonal Profile</NavLink> 
+        </div> */}
         <div className={s.iteam}>
         <NavLink className={(navData) => navData.isActive? s.active:""} to="/News">News</NavLink> 
         </div>

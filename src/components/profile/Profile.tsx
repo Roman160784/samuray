@@ -7,14 +7,14 @@ import { actionType, AppRootStateType, Dispathc } from '../../redux/reduxStore';
 import { store } from '../../redux/reduxStore'
 import {MyPostsContainer} from './Posts/MyPostsContainer';
 
-type ProfilePropsType__ = {
-  store: AppRootStateType
-  posts: Array<PostsType>
-  dispatch: (action: actionType) => void
-}
+// type ProfilePropsType__ = {
+//   store: AppRootStateType
+//   posts: Array<PostsType>
+//   dispatch: (action: actionType) => void
+// }
 
 
-function Profile(props: ProfilePropsType__) {
+function Profile() {
 
   return (
     <div>
