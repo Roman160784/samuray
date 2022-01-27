@@ -8,8 +8,9 @@ let initialState: ProfilePageType = {
             { id: 1, message: "Hi", likesCount: 0 },
             { id: 2, message: "Hey", likesCount: 23 },],
         newPostText: "it-Kamasutra",
+        profile: null
 }
-
+// const initState = {} as ProfilePageType 
 export const profileReducer = (state: ProfilePageType = initialState, action: AppActionType): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
@@ -18,12 +19,15 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ap
 
         case "CHANGE-NEW-TEXT":
             return {...state, newPostText : action.newText}
+
+        case "SET-USERS-PROFILE":
+            return {...state, profile : action.profile}
             default:
                 return state
     }
 }
 
-export type ActionsProfileType = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC> 
+export type ActionsProfileType = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC> | ReturnType<typeof setUsersPropfileAC>
 
 export const addPostAC = () => {
     return{
@@ -35,5 +39,12 @@ export const changeNewTextAC = (newText : string)  => {
     return{
         type: "CHANGE-NEW-TEXT",
         newText: newText
+    }as const
+}
+
+export const setUsersPropfileAC = (profile : null)  => {
+    return{
+        type: "SET-USERS-PROFILE",
+        profile,
     }as const
 }

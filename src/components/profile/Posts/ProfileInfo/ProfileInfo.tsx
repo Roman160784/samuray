@@ -1,8 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootStateType } from '../../../../redux/state';
+import { Preloader } from '../../../preloader/preloader';
 import p from './ProfileInfo.module.css'
 
 
 function ProfileInfo() {
+  const profile = useSelector<RootStateType, any>(state => state.profilePage.profile);
+  
+  // if (profile?.aboutMe) {
+  //   return <Preloader/>
+  // }
+
   return (
 
     <div>
@@ -11,6 +20,11 @@ function ProfileInfo() {
       </div>
       <div className={p.discriptionBlock}>
         ava + discr
+        
+        
+        
+        {profile?.aboutMe};
+        {/* {profile?.contacts}; */}
       </div>
 
     </div>

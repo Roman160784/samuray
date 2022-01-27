@@ -1,5 +1,4 @@
 
-
 import { ActionsDialogsType, dialogReducer } from "./Dialogs-reducer"
 import { ActionsProfileType, profileReducer } from "./Profile-reducer"
 
@@ -12,6 +11,7 @@ export type RootStateType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    profile: null
 }
 export type MessagePageType = {
     dialogs: Array<DialogsType>
@@ -23,9 +23,8 @@ export type PostsType = {
     id: number
     message: string
     likesCount: number
-
-
 }
+
 export type DialogsType = {
     id: number
     name: string
@@ -33,7 +32,6 @@ export type DialogsType = {
 export type MessagesType = {
     id: number
     message: string
-    
 }
 
 type sideBarType = {}
@@ -57,6 +55,7 @@ const store: StoreType = {
                 { id: 1, message: "Hi", likesCount: 0 },
                 { id: 2, message: "Hey", likesCount: 23 },],
             newPostText: "it-Kamasutra",
+            profile: null,
         },
         messagePage: {
             dialogs: [
@@ -71,6 +70,7 @@ const store: StoreType = {
             ],
             newMessageBody : "",
         },
+        
         sideBar: {}
     },
     updateNewPostText(newText: string) {

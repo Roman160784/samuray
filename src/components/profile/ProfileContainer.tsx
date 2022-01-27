@@ -5,14 +5,13 @@ import { actionType, AppRootStateType, Dispathc } from '../../redux/reduxStore';
 import {MyPostsContainer} from './Posts/MyPostsContainer';
 import axios from 'axios';
 import { UsersType } from '../Users/UsersFuncComponent';
+import { connect } from 'react-redux';
+import { setUsersPropfileAC } from '../../redux/Profile-reducer';
 
 
 type ProfileContainerPropsType__ = {
-  // store: AppRootStateType
-  // posts: Array<PostsType>
-  // dispatch: (action: actionType) => void
-  setTotalUsersCount: (totalUsersCount: number) => void
-  setUsers: (users: Array<UsersType>) => void
+  profile: null
+  setUsersPropfileAC: (propfile: null) => void
 }
 
 
@@ -20,9 +19,9 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType__>{
 
   componentDidMount () {
     axios.get(`https://social-network.samuraijs.com/api/1.0/Profile/2`)
-      .then((response) => {
-        this.props.setTotalUsersCount(100);
-        this.props.setUsers(response.data.items);
+    
+      .then(response => {
+        this.props.setUsersPropfileAC(response.data);
       })
   }
   
@@ -31,10 +30,17 @@ render () {
   return (
     <div>
       <Profile 
-      // {...this.props} 
       />      
     </div >
 )  } 
 }
 
-export default ProfileContainer;
+type MSTP = {
+  profile: null
+}
+
+let mapStateToProps = (state: AppRootStateType) : MSTP => ({
+profile: state.profilePage.profile
+})
+
+export default connect(mapStateToProps, {setUsersPropfileAC})(ProfileContainer) ;

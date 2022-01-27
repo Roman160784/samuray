@@ -9,7 +9,7 @@ import {DialogsContainer} from './components/dialogs/DialogsContainer';
 import {UsersContainer} from './components/Users/UsersContainer';
 import { useDispatch } from 'react-redux';
 import ProfileContainer from './components/profile/ProfileContainer';
-import { setTotalUsersCount, setUsers } from './redux/User-reducer';
+
 
 
 
@@ -32,12 +32,7 @@ let dispatch = useDispatch();
         <div className='app-wrapper-content'>
           <Routes>
           <Route path='/Dialogs' element={<DialogsContainer />} />
-          <Route path='/Profile/*' element={<ProfileContainer
-          setTotalUsersCount={setTotalUsersCount}
-          setUsers={setUsers}
-              // posts={state.profilePage.posts}
-              // dispatch={dispatch.bind(store)}
-              // store={state}
+          <Route path='/Profile/*' element={<ProfileContainer            
             />}/>
           <Route path='/Users' element={<UsersContainer/>}/> 
           </Routes>
