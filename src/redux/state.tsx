@@ -37,70 +37,70 @@ export type MessagesType = {
 type sideBarType = {}
 
 
-export type StoreType = {
-    _state: RootStateType
-    updateNewPostText: (newText: string) => void
-    addPost: (postMessage: string) => void
-    renderEntireTree: () => void
-    subscribe: (observer: () => void) => void
-    getState: () => RootStateType
-    dispatch: (action: ActionsProfileType | ActionsDialogsType) => void
+// export type StoreType = {
+//     _state: RootStateType
+//     updateNewPostText: (newText: string) => void
+//     addPost: (postMessage: string) => void
+//     renderEntireTree: () => void
+//     subscribe: (observer: () => void) => void
+//     getState: () => RootStateType
+//     dispatch: (action: ActionsProfileType | ActionsDialogsType) => void
     
-}
+// }
 
-const store: StoreType = {
-    _state: {
-        profilePage: {
-            posts: [
-                { id: 1, message: "Hi", likesCount: 0 },
-                { id: 2, message: "Hey", likesCount: 23 },],
-            newPostText: "it-Kamasutra",
-            profile: null,
-        },
-        messagePage: {
-            dialogs: [
-                { id: 1, name: "Roman" },
-                { id: 2, name: "Akhmed" },
-                { id: 3, name: "Zufra" },],
+// const store: StoreType = {
+//     _state: {
+//         profilePage: {
+//             posts: [
+//                 { id: 1, message: "Hi", likesCount: 0 },
+//                 { id: 2, message: "Hey", likesCount: 23 },],
+//             newPostText: "it-Kamasutra",
+//             profile: null,
+//         },
+//         messagePage: {
+//             dialogs: [
+//                 { id: 1, name: "Roman" },
+//                 { id: 2, name: "Akhmed" },
+//                 { id: 3, name: "Zufra" },],
 
-            messages: [
-                { id: 1, message: "Hi" },
-                { id: 2, message: "Hey" },
-                { id: 3, message: "Yo" },
-            ],
-            newMessageBody : "",
-        },
+//             messages: [
+//                 { id: 1, message: "Hi" },
+//                 { id: 2, message: "Hey" },
+//                 { id: 3, message: "Yo" },
+//             ],
+//             newMessageBody : "",
+//         },
         
-        sideBar: {}
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this.renderEntireTree()
-    },
-    addPost(postMessage: string) {
-        let newPost = { id: 3, message: postMessage, likesCount: 0 };
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ""
-        this.renderEntireTree()
-    },
+//         sideBar: {}
+//     },
+//     updateNewPostText(newText: string) {
+//         this._state.profilePage.newPostText = newText
+//         this.renderEntireTree()
+//     },
+//     addPost(postMessage: string) {
+//         let newPost = { id: 3, message: postMessage, likesCount: 0 };
+//         this._state.profilePage.posts.push(newPost)
+//         this._state.profilePage.newPostText = ""
+//         this.renderEntireTree()
+//     },
     
-    renderEntireTree() {
-        console.log('state changed')
-    },
+//     renderEntireTree() {
+//         console.log('state changed')
+//     },
 
-    subscribe(observer) {
-        this.renderEntireTree = observer
-    },
-    getState() {
-        return this._state
-    },
+//     subscribe(observer) {
+//         this.renderEntireTree = observer
+//     },
+//     getState() {
+//         return this._state
+//     },
 
-    dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.messagePage = dialogReducer(this._state.messagePage, action)
-            this.renderEntireTree()
-    }
-}
+//     dispatch(action) {
+//         this._state.profilePage = profileReducer(this._state.profilePage, action)
+//         this._state.messagePage = dialogReducer(this._state.messagePage, action)
+//             this.renderEntireTree()
+//     }
+// }
 
 
-export default store;
+// export default store;

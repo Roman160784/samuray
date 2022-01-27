@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from '../profile/Profile'
-import { PostsType, StoreType } from '../../redux/state'
+import { PostsType } from '../../redux/state'
 import { actionType, AppRootStateType, Dispathc } from '../../redux/reduxStore';
 import {MyPostsContainer} from './Posts/MyPostsContainer';
 import axios from 'axios';

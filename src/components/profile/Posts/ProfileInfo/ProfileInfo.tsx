@@ -19,12 +19,7 @@ function ProfileInfo() {
         <img src='https://media.gettyimages.com/photos/northen-lights-above-winter-mountains-picture-id466331590?s=612x612' />
       </div>
       <div className={p.discriptionBlock}>
-        ava + discr
-        
-        
-        
-        {profile?.aboutMe};
-        {/* {profile?.contacts}; */}
+      <div>{profile?.aboutMe}</div>
       </div>
 
     </div>
