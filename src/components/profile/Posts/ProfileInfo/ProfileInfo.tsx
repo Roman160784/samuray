@@ -5,10 +5,13 @@ import { Preloader } from '../../../preloader/preloader';
 import p from './ProfileInfo.module.css'
 
 
-function ProfileInfo() {
-  const profile = useSelector<RootStateType, ProfileType | null>(state => state.profilePage.profile);
+type ProfileInfoPropstype = {
+  profile: ProfileType | null
+}
 
-  if (!profile) {
+function ProfileInfo(props: ProfileInfoPropstype) {
+
+  if (!props.profile) {
     return <Preloader />
   }
 
@@ -18,9 +21,9 @@ function ProfileInfo() {
       <div>
         <img src='https://media.gettyimages.com/photos/northen-lights-above-winter-mountains-picture-id466331590?s=612x612' />
       </div>
-      <div>{profile.aboutMe}</div>
-      <img src={profile.photos.small} />
-      <div>{profile.fullName}</div>
+      <div>{props.profile.aboutMe}</div>
+      <img src={props.profile.photos.small} />
+      <div>{props.profile.fullName}</div>
       <div className={p.discriptionBlock}>
       </div>
 

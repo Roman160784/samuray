@@ -27,7 +27,7 @@ render () {
   
   return (
     <div>
-      <Profile 
+      <Profile profile={this.props.profile}
       />      
     </div >
 )  } 
@@ -35,10 +35,12 @@ render () {
 
 type MSTP = {
   profile: ProfileType | null
+  
 }
 
 let mapStateToProps = (state: AppRootStateType) : MSTP => ({
-profile: state.profilePage.profile
+profile: state.profilePage.profile,
+
 })
 
 export default connect(mapStateToProps, {setUsersPropfileAC})(ProfileContainer) ;
