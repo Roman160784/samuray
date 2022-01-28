@@ -1,17 +1,16 @@
 import React from 'react';
 import Profile from '../profile/Profile'
-import { PostsType } from '../../redux/state'
-import { actionType, AppRootStateType, Dispathc } from '../../redux/reduxStore';
-import {MyPostsContainer} from './Posts/MyPostsContainer';
+import { AppRootStateType, } from '../../redux/reduxStore';
 import axios from 'axios';
-import { UsersType } from '../Users/UsersFuncComponent';
+
 import { connect } from 'react-redux';
 import { setUsersPropfileAC } from '../../redux/Profile-reducer';
+import { ProfileType } from '../../redux/state';
 
 
 type ProfileContainerPropsType__ = {
-  profile: null
-  setUsersPropfileAC: (propfile: null) => void
+  profile: ProfileType | null
+  setUsersPropfileAC: (propfile: ProfileType) => void
 }
 
 
@@ -19,7 +18,6 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType__>{
 
   componentDidMount () {
     axios.get(`https://social-network.samuraijs.com/api/1.0/Profile/2`)
-    
       .then(response => {
         this.props.setUsersPropfileAC(response.data);
       })
@@ -36,7 +34,7 @@ render () {
 }
 
 type MSTP = {
-  profile: null
+  profile: ProfileType | null
 }
 
 let mapStateToProps = (state: AppRootStateType) : MSTP => ({

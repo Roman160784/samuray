@@ -20,6 +20,7 @@ type postsType = {
 }
 
 function MyPosts(props: postsType) {
+  console.log('props', props)
   let myPosts = props.posts.map(post =>
     <MyPost message={post.message} likesCount={post.likesCount} />
   )

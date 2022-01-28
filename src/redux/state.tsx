@@ -11,7 +11,7 @@ export type RootStateType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
-    profile: null
+    profile: ProfileType | null
 }
 export type MessagePageType = {
     dialogs: Array<DialogsType>
@@ -35,6 +35,32 @@ export type MessagesType = {
 }
 
 type sideBarType = {}
+
+export type ProfileType ={
+    aboutMe: string
+    contacts: ContactsType 
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: PhotosType
+}
+
+type ContactsType = {
+    facebook : string 
+    website: null
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: null
+    github: string
+    mainLink: null 
+}
+
+type PhotosType = {
+small: string
+large: string
+}
 
 
 // export type StoreType = {
