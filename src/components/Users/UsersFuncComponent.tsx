@@ -66,7 +66,7 @@ export const UserFunc = (props: UserFuncType) => {
             props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <NavLink to={"/Profile/*" + u.id}>
+                        <NavLink to={"/Profile/" + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.userPhoto} />
                         {/* <img src={u.photoUrl} className={style.userPhoto} /> */}
                         </NavLink>
