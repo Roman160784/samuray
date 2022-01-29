@@ -113,8 +113,9 @@ export const Users = (props: usersPropsStateType) => {
                         {/* <img src={u.photoUrl} className={style.userPhoto} /> */}
                     </div>
                     <div>
-                        {u.followed ? <button onClick={() => { props.unFollow(u.id) }}>UnFollow</button>
-                            : <button onClick={() => props.follow(u.id)}>Follow</button>}
+                        {u.followed 
+                        ? <button onClick={() => { props.unFollow(u.id) }}>UnFollow</button>
+                        : <button onClick={() => props.follow(u.id)}>Follow</button>}
 
                     </div>
                 </span>
