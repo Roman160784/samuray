@@ -32,12 +32,14 @@ type UserFuncType = {
     pageSize: number
     totalUsersCount: number
     curentPage: number
+    followingInProcess: boolean
     unFollow: (id: number) => void
     follow: (id: number) => void
-    setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (curentPage: number) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
     onpageChanged: (curentPage: number) => void
+    followingInProcessAC: (followingInProcess: boolean) => void
+    followThunkCreater: (id: number) => void
+    unFollowThunkCreater: (id: number) => void
 }
 
 export const UserFunc = (props: UserFuncType) => {
@@ -66,28 +68,15 @@ export const UserFunc = (props: UserFuncType) => {
                         <div>
                             <NavLink to={"/Profile/" + u.id}>
                                 <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.userPhoto} />
-                                
                             </NavLink>
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => {
-                                    usersAPI.unFollowUsers(u.id)
-                                    .then(data => {
-                                      if(data.resultCode == 0){
-                                          props.unFollow(u.id)} 
-                                    }); 
-                                }}>UnFollow</button>
-
-                                : <button onClick={() => {
-                                    usersAPI.followUsers(u.id)
-                                    .then(data => {
-                                      if(data.resultCode == 0){
-                                        props.follow(u.id);
-                                      }
-                                    }); 
-                                    }}>Follow</button>}
-
+                                ? <button disabled={props.followingInProcess} onClick={() => {
+                                    props.unFollowThunkCreater(u.id)}}>UnFollow</button>
+                                
+                                : <button disabled={props.followingInProcess} onClick={() => {
+                                   props.followThunkCreater(u.id)}}>Follow</button>} 
                         </div>
                     </span>
                     <span>
@@ -97,10 +86,10 @@ export const UserFunc = (props: UserFuncType) => {
                         </span>
                         <span>
                             {/* <div>{u.location.country}</div>
-                        <div>{u.location.city}</div> */}
+            <div>{u.location.city}</div> */}
                         </span>
                     </span>
-                </div>)
-            }</div>
+                </div>)}
+        </div>
     )
 }

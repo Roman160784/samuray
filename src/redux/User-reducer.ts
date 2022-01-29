@@ -1,3 +1,7 @@
+
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { usersAPI } from '../Api/Api';
 import { UsersStateType, UsersType } from '../components/Users/Users';
 import { ActionsDialogsType } from './Dialogs-reducer';
 import { ActionsProfileType } from './Profile-reducer';
@@ -10,6 +14,7 @@ let initialState: UsersStateType = {
     totalUsersCount: 0,
     curentPage: 1,
     isFething: false,
+    followingInProcess: false
 }
 
 export const usersReducer = (state: UsersStateType = initialState, action: AppActionType): UsersStateType => {
@@ -24,13 +29,16 @@ export const usersReducer = (state: UsersStateType = initialState, action: AppAc
             return { ...state, users: action.users }
 
         case "SET-CURRENT-PAGE":
-            return { ...state, curentPage : action.curentPage}
+            return { ...state, curentPage: action.curentPage }
 
         case "SET-TOTAL-USER-COUNT":
-            return { ...state, totalUsersCount : action.totalUsersCount}
+            return { ...state, totalUsersCount: action.totalUsersCount }
 
         case "TOGLE-IS-FETCHING":
-            return { ...state, isFething : action.isFething}
+            return { ...state, isFething: action.isFething }
+
+        case "FOLLOWING-IN-PROCESS":
+            return { ...state, isFething: action.followingInProcess }
 
         default:
             return state
@@ -38,8 +46,8 @@ export const usersReducer = (state: UsersStateType = initialState, action: AppAc
 }
 
 export type ActionsUsersType = ReturnType<typeof follow> | ReturnType<typeof unFollow>
- | ReturnType<typeof setUsers> | ReturnType<typeof setPage> | ReturnType<typeof setTotalUsersCount> 
- | ReturnType<typeof togleIsFetching>
+    | ReturnType<typeof setUsers> | ReturnType<typeof setPage> | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof togleIsFetching> | ReturnType<typeof followingInProcessAC>
 
 export const follow = (id: number) => {
     return {
@@ -60,24 +68,70 @@ export const setUsers = (users: Array<UsersType>) => {
     } as const
 }
 
-export const setPage = (curentPage : number) => {
+export const setPage = (curentPage: number) => {
     return {
         type: "SET-CURRENT-PAGE",
         curentPage,
 
-    }as const
+    } as const
 }
 export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: "SET-TOTAL-USER-COUNT",
         totalUsersCount,
 
-    }as const
+    } as const
 }
 export const togleIsFetching = (isFething: boolean) => {
     return {
         type: "TOGLE-IS-FETCHING",
         isFething,
 
-    }as const
+    } as const
+}
+export const followingInProcessAC = (followingInProcess: boolean) => {
+    return {
+        type: "FOLLOWING-IN-PROCESS",
+        followingInProcess,
+
+    } as const
+}
+
+
+
+export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => {
+    return (dispatch: Dispatch) => {
+        dispatch(togleIsFetching(true))
+        usersAPI.getUsers(curentPage, pageSize)
+            .then(data => {
+                dispatch(togleIsFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setPage(curentPage))
+                dispatch(setTotalUsersCount(100));
+                // dispatch(setTotalUsersCount(data.totalUsersCount));
+            });
+    }
+}
+
+export const followThunkCreater = (id: number) => {
+    return (dispatch: Dispatch) => {
+        // dispatch(followingInProcessAC(true))
+        usersAPI.followUsers(id)
+            .then(data => {
+                if (data.resultCode == 0) {
+                    dispatch(follow(id))
+                }
+                // dispatch(followingInProcessAC(false))
+            });
+    }
+}
+export const unFollowThunkCreater = (id: number) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.unFollowUsers(id)
+            .then(data => {
+                if (data.resultCode == 0) {
+                    dispatch(unFollow(id))
+                }
+            });
+    }
 }

@@ -6,6 +6,7 @@ import { useParams} from "react-router-dom";
 import { AppRootStateType } from "../../redux/reduxStore";
 import { ProfileType } from "../../redux/state";
 import { setUsersPropfileAC } from "../../redux/Profile-reducer";
+import { usersAPI } from "../../Api/Api";
 
 const withRouter = (WrappedComponent: React.ComponentType<any>) => (props: JSX.IntrinsicAttributes) => {
     const params = useParams<any>();
@@ -29,9 +30,10 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType__>{
         if (!userId){
             userId="2";
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
-            .then(response => {
-                this.props.setUsersPropfileAC(response.data);
+        usersAPI.setUserLoginInProfile(userId)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
+            .then(data => {
+                this.props.setUsersPropfileAC(data);
             });
     }
     render () {

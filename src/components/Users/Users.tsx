@@ -12,6 +12,7 @@ export type UsersStateType = {
     totalUsersCount: number
     curentPage: number
     isFething: boolean
+    followingInProcess: boolean
 }
 
 export type UsersType = {
@@ -40,6 +41,8 @@ type usersPropsStateType = {
     unFollow: (id: number) => void
     follow: (id: number) => void
     setUsers: (users: Array<UsersType>) => void
+    followingInProcessAC: (followingInProcess: boolean) => void
+    followingInProcess: boolean
 
 }
 
@@ -114,9 +117,8 @@ export const Users = (props: usersPropsStateType) => {
                     </div>
                     <div>
                         {u.followed 
-                        ? <button onClick={() => { props.unFollow(u.id) }}>UnFollow</button>
-                        : <button onClick={() => props.follow(u.id)}>Follow</button>}
-
+                        ? <button disabled={props.followingInProcess} onClick={() => {props.unFollow(u.id) }}>UnFollow</button>
+                        : <button disabled={props.followingInProcess} onClick={() => {props.follow(u.id)}}>Follow</button>}
                     </div>
                 </span>
                 <span>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRootStateType, Dispathc } from '../../redux/reduxStore';
-import { follow, setPage, setTotalUsersCount, setUsers, togleIsFetching, unFollow } from '../../redux/User-reducer';
+import { follow, followingInProcessAC, followThunkCreater, getUsersThunkCreater, setPage, setTotalUsersCount, setUsers, togleIsFetching, unFollow, unFollowThunkCreater } from '../../redux/User-reducer';
 import { UserFunc } from './UsersFuncComponent';
 import axios from 'axios';
 import { Preloader } from '../preloader/preloader';
-import {usersAPI} from '../../Api/Api'
+
 
 
 export type UsersStateType = {
@@ -40,12 +40,14 @@ type usersPropsStateType = {
   totalUsersCount: number
   curentPage: number
   isFething: boolean
+  followingInProcess: boolean
   unFollow: (id: number) => void
   follow: (id: number) => void
   setCurrentPage: (curentPage: number) => void
-  setTotalUsersCount: (totalUsersCount: number) => void
-  togleIsFetching: (isFething: boolean) => void
-  setUsers: (users: Array<UsersType>) => void
+  followingInProcessAC :(followingInProcess: boolean) => void
+  getUsersThunkCreater: (curentPage: number, pageSize: number) => void
+  followThunkCreater: (id: number) => void
+  unFollowThunkCreater: (id: number) => void
 }
 
 
@@ -54,25 +56,28 @@ class UsersAPIComponent extends React.Component<usersPropsStateType> {
 
 
   componentDidMount() {
-    this.props.togleIsFetching(true)
-    usersAPI.getUsers(this.props.curentPage, this.props.pageSize)
-    // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage}&count=${this.props.pageSize}`,{withCredentials: true})
-      .then(data => {
-        this.props.togleIsFetching(false)
-        this.props.setUsers(data.items)
-        //  this.props.setTotalUsersCount(response.data.totalCount); /// problem 
-        this.props.setTotalUsersCount(100);
-      });
+
+    this.props.getUsersThunkCreater(this.props.curentPage, this.props.pageSize)
+    // this.props.togleIsFetching(true)
+    // usersAPI.getUsers(this.props.curentPage, this.props.pageSize)
+    // // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage}&count=${this.props.pageSize}`,{withCredentials: true})
+    //   .then(data => {
+    //     this.props.togleIsFetching(false)
+    //     this.props.setUsers(data.items)
+    //     //  this.props.setTotalUsersCount(response.data.totalCount); /// problem 
+    //     this.props.setTotalUsersCount(100);
+    //   });
   }
 
   onpageChanged = (curentPage: number) => {
-    this.props.togleIsFetching(true)
-    this.props.setCurrentPage(curentPage);
-    usersAPI.getUsers(this.props.curentPage, this.props.pageSize)
-      .then(data => {
-        this.props.togleIsFetching(false)
-        this.props.setUsers(data.items);
-      });
+    this.props.getUsersThunkCreater(curentPage, this.props.pageSize)
+    // this.props.togleIsFetching(true)
+    // this.props.setCurrentPage(curentPage);
+    // usersAPI.getUsers(this.props.curentPage, this.props.pageSize)
+    //   .then(data => {
+    //     this.props.togleIsFetching(false)
+    //     this.props.setUsers(data.items);
+    //   });
   }
 
   render() {
@@ -91,13 +96,15 @@ class UsersAPIComponent extends React.Component<usersPropsStateType> {
         users={this.props.users}
         pageSize={this.props.pageSize}
         totalUsersCount={this.props.totalUsersCount}
+        followingInProcess = {this.props.followingInProcess}
         curentPage={this.props.curentPage}
         unFollow={this.props.unFollow}
         follow={this.props.follow}
-        setUsers={this.props.setUsers}
         setCurrentPage={this.props.setCurrentPage}
-        setTotalUsersCount={this.props.setTotalUsersCount}
-        onpageChanged={this.onpageChanged}
+        onpageChanged={this.onpageChanged} 
+        followingInProcessAC={this.props.followingInProcessAC} 
+        followThunkCreater={this.props.followThunkCreater}
+        unFollowThunkCreater={this.props.unFollowThunkCreater}     
       />
     </>
   }
@@ -111,6 +118,7 @@ type MSTP = {
   totalUsersCount: number
   curentPage: number
   isFething: boolean
+  followingInProcess: boolean
 }
 
 
@@ -121,16 +129,18 @@ let mapStateToProps = (state: AppRootStateType): MSTP => ({
   pageSize: state.usersPage.pageSize,
   totalUsersCount: state.usersPage.totalUsersCount,
   curentPage: state.usersPage.curentPage,
+  followingInProcess: state.usersPage.followingInProcess
 })
 
 
 export const UsersContainer = connect(mapStateToProps, {
   follow,
   unFollow,
-  setUsers,
-  setTotalUsersCount,
-  togleIsFetching,
   setCurrentPage: setPage,
+  followingInProcessAC,
+  getUsersThunkCreater,
+  followThunkCreater,
+  unFollowThunkCreater,
 })(UsersAPIComponent)
 
 
