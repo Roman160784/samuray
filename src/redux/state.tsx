@@ -62,6 +62,13 @@ small: string
 large: string
 }
 
+export type AuthType = {
+    id: null | string | number
+    email: null | string
+    login: null | string
+    isAuth: boolean
+}
+
 
 // export type StoreType = {
 //     _state: RootStateType

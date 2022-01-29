@@ -56,8 +56,6 @@ class UsersAPIComponent extends React.Component<usersPropsStateType> {
     this.props.togleIsFetching(true)
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage}&count=${this.props.pageSize}`)
       .then((response) => {
-        console.log(response.data);
-        
         this.props.togleIsFetching(false)
         this.props.setUsers(response.data.items)
         //  this.props.setTotalUsersCount(response.data.totalCount); /// problem 
@@ -103,7 +101,7 @@ class UsersAPIComponent extends React.Component<usersPropsStateType> {
   }
 }
 
-// export default UsersAPIComponent;
+
 
 type MSTP = {
   users: Array<UsersType>
@@ -113,14 +111,7 @@ type MSTP = {
   isFething: boolean
 }
 
-// type MDTP = {
-//   follow: (id: number) => void
-//   unFollow: (id: number) => void
-//   setCurrentPage: (curentPage: number) => void
-//   setUsers: (users: Array<UsersType>) => void
-//   setTotalUsersCount: (totalUsersCount: number) => void
-//   togleIsFetching: (isFething: boolean) => void
-// }
+
 
 let mapStateToProps = (state: AppRootStateType): MSTP => ({
   isFething: state.usersPage.isFething,
@@ -130,19 +121,6 @@ let mapStateToProps = (state: AppRootStateType): MSTP => ({
   curentPage: state.usersPage.curentPage,
 })
 
-// let mapDispatchToProps = (dispatch: Dispathc) : MDTP => ({
-//   follow : ( id: number) => dispatch(followAC(id)),
-//   unFollow : ( id: number) => dispatch(unFollowAC(id)),
-//   setUsers: (users: Array<UsersType>) => dispatch(setUsersAC(users)),
-//   setCurrentPage: (curentPage : number) => dispatch(setPageAC(curentPage)),
-//   setTotalUsersCount : (totalUsersCount: number) => dispatch(setTotalUsersCountAC(totalUsersCount)),
-//   togleIsFetching : (isFething: boolean) => dispatch(togleIsFetchingAC(isFething)),
-// })
-
-
-
-
-// export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
 
 export const UsersContainer = connect(mapStateToProps, {
   follow,
