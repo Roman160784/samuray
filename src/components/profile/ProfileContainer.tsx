@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 import { useParams} from "react-router-dom";
 import { AppRootStateType } from "../../redux/reduxStore";
 import { ProfileType } from "../../redux/state";
-import { setUsersPropfileAC } from "../../redux/Profile-reducer";
-import { usersAPI } from "../../Api/Api";
+import { setUsersPropfileThunkCreator } from "../../redux/Profile-reducer";
+
 
 const withRouter = (WrappedComponent: React.ComponentType<any>) => (props: JSX.IntrinsicAttributes) => {
     const params = useParams<any>();
@@ -20,8 +20,8 @@ const withRouter = (WrappedComponent: React.ComponentType<any>) => (props: JSX.I
 
 type ProfileContainerPropsType__ = {
   profile: ProfileType | null
-  setUsersPropfileAC: (propfile: ProfileType) => void
   params: any
+  setUsersPropfileThunkCreator: (id: string, propfile: ProfileType | null) => void
 }
 
 class ProfileContainer extends React.Component <ProfileContainerPropsType__>{
@@ -30,11 +30,13 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType__>{
         if (!userId){
             userId="2";
         }
-        usersAPI.setUserLoginInProfile(userId)
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
-            .then(data => {
-                this.props.setUsersPropfileAC(data);
-            });
+        
+         this.props.setUsersPropfileThunkCreator(userId, this.props.profile)
+        // usersAPI.setUserLoginInProfile(userId)
+        // // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
+        //     .then(data => {
+        //         this.props.setUsersPropfileAC(data);
+        //     });
     }
     render () {
     
@@ -51,5 +53,5 @@ let mapStateToProps = (state: AppRootStateType) => ({
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
 export default connect(mapStateToProps, {
-  setUsersPropfileAC
+    setUsersPropfileThunkCreator
 }) (WithUrlDataContainerComponent);

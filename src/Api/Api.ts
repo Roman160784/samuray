@@ -31,8 +31,7 @@ export const usersAPI = {
      },
      setUserLoginInProfile(id: string) {
         return instance.get(`profile/` + id)
-        .then(response => {
-           return response.data})
+        .then(response => response.data)
 
      }
 }

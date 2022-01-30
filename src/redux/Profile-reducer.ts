@@ -1,5 +1,9 @@
+
+import { Dispatch } from 'redux';
+import { usersAPI } from '../Api/Api';
 import { ProfilePageType, ProfileType, RootStateType } from '../redux/state'
 import { ActionsDialogsType } from './Dialogs-reducer';
+import { unFollow } from './User-reducer';
 
 type AppActionType = ActionsProfileType | ActionsDialogsType;
 
@@ -71,3 +75,16 @@ export const setUsersPropfileAC = (profile: ProfileType) => {
         profile,
     } as const
 }
+
+export const setUsersPropfileThunkCreator = (userId: string) => {
+console.log(userId);
+
+    return (dispatch: Dispatch) => {
+        usersAPI.setUserLoginInProfile(userId)
+            .then(data => {
+                    dispatch(setUsersPropfileAC(data))
+            });
+    }
+}
+
+

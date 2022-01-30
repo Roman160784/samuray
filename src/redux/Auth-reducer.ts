@@ -1,6 +1,8 @@
 import { AuthType, ProfilePageType, ProfileType, RootStateType } from './state'
 import { ActionsDialogsType } from './Dialogs-reducer';
 import { ActionsProfileType } from './Profile-reducer';
+import { Dispatch } from 'redux';
+import { usersAPI } from '../Api/Api';
 
 type AppActionType = ActionsProfileType | ActionsDialogsType | ActionsAuthType
 
@@ -29,12 +31,27 @@ export const authReducer = (state: AuthType = initialState, action: AppActionTyp
 
 export type ActionsAuthType = ReturnType<typeof setAuthUserDataAC> 
 
-export const setAuthUserDataAC = (id: string| null| number, email: null | string, login: null | string ) => {
+export const setAuthUserDataAC = (id: null | string| number, login: null | string, email: null | string, ) => {
     return {
         type: "SET-USERS-DATA",
         payload: {
-            id, email, login, 
+            id, login, email, 
         }
 
     } as const
 }
+
+
+export const setAuthUserDataThunkCreator = () => {
+    return (dispatch: Dispatch) => {
+        usersAPI.setUserLogin()
+        .then(data=> {
+                if(data.resultCode === 0) {
+                  let {id, login, email} = data.data
+                  dispatch(setAuthUserDataAC(id, login, email))
+               }
+            });
+    }
+}
+
+
