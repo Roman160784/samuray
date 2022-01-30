@@ -4,7 +4,7 @@ import { actionType, AppRootStateType, Dispathc, store } from '../../redux/redux
 import Dialogs from './Dialogs';
 import { connect,} from 'react-redux';
 
-import { DialogsType } from '../../redux/state';
+import { DialogsType, MessagePageType } from '../../redux/state';
 
 
 
@@ -15,6 +15,8 @@ type messagesType = {
 }
 
 type MSTP = {
+  isAuth: boolean
+  dialogPage: MessagePageType
   messages: Array<messagesType>
   dialogs:  Array<DialogsType>
   store: AppRootStateType
@@ -27,6 +29,8 @@ type MDTP ={
 }
 
 let mapStateToProps = (state: AppRootStateType): MSTP => ({
+    isAuth: state.authReducer.isAuth,
+    dialogPage: state.dialogPage,
     messages: state.dialogPage.messages,
     dialogs: state.dialogPage.dialogs,
     store: state,

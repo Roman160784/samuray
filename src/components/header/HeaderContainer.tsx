@@ -1,12 +1,10 @@
-import axios from 'axios';
+
 import React from 'react';
-import { render } from 'react-dom';
 import {Header} from './Header'
-import { AuthType } from '../../redux/state';
-import { setAuthUserDataAC, setAuthUserDataThunkCreator } from '../../redux/Auth-reducer';
+import { setAuthUserDataThunkCreator } from '../../redux/Auth-reducer';
 import { connect } from 'react-redux';
 import { AppRootStateType } from '../../redux/reduxStore';
-import { usersAPI } from '../../Api/Api';
+
 
 
 type HeaderContainerPropsType = {

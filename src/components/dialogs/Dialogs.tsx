@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import DialogIteam from '../dialogs/DialogIteam/DialogIteam'
 import Message from '../dialogs/Message/Message'
 import { actionType, AppRootStateType, store } from '../../redux/reduxStore';
+import { Navigate } from 'react-router-dom';
 
 
 
@@ -17,6 +18,7 @@ import { actionType, AppRootStateType, store } from '../../redux/reduxStore';
 }
 
   type dialogsMainType= {
+    isAuth: boolean
     dialogs: Array<DialogsType>
     messages:Array<messagesType>
     store: AppRootStateType
@@ -29,6 +31,8 @@ import { actionType, AppRootStateType, store } from '../../redux/reduxStore';
 
 const Dialogs = (props:dialogsMainType) => {
     //const state = store.getState()
+
+  if (!props.isAuth) return <Navigate replace to="/Login" />
 
     let dialogsElements  = props.dialogs.map(dialog =>
         <div><DialogIteam name={dialog.name} id={dialog.id} /></div>
