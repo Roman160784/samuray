@@ -14,7 +14,7 @@ type messagesType = {
 }
 
 type MSTP = {
-  isAuth: boolean
+  // isAuth: boolean
   dialogPage: MessagePageType
   messages: Array<messagesType>
   dialogs:  Array<DialogsType>
@@ -28,7 +28,7 @@ type MDTP ={
 }
 
 let mapStateToProps = (state: AppRootStateType): MSTP => ({
-    isAuth: state.authReducer.isAuth,
+    // isAuth: state.authReducer.isAuth,
     dialogPage: state.dialogPage,
     messages: state.dialogPage.messages,
     dialogs: state.dialogPage.dialogs,

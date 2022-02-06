@@ -18,7 +18,7 @@ import { Navigate } from 'react-router-dom';
 }
 
   type dialogsMainType= {
-    isAuth: boolean
+    // isAuth: boolean
     dialogs: Array<DialogsType>
     messages:Array<messagesType>
     store: AppRootStateType

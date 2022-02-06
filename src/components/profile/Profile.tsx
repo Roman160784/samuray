@@ -7,7 +7,7 @@ import {MyPostsContainer} from './Posts/MyPostsContainer';
 
 type ProfilePropsType__ = {
   profile: ProfileType | null
-  isAuth: boolean
+  // isAuth: boolean
 }
 
 

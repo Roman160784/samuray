@@ -22,7 +22,7 @@ const withRouter = (WrappedComponent: React.ComponentType<any>) => (props: JSX.I
 export type ProfileContainerPropsType__ = {
     profile: ProfileType | null
     params: any
-    isAuth: boolean
+    // isAuth: boolean
     setUsersPropfileThunkCreator: (id: string, propfile: ProfileType | null) => void
 }
 
@@ -42,7 +42,9 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
     }
     render() {
         return (
-            <Profile {...this.props} isAuth={this.props.isAuth} profile={this.props.profile} />
+            <Profile {...this.props} 
+            // isAuth={this.props.isAuth} 
+            profile={this.props.profile} />
         )
     }
 }
