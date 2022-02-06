@@ -28,11 +28,9 @@ import { Navigate } from 'react-router-dom';
     
 }
 
-
 const Dialogs = (props:dialogsMainType) => {
-    //const state = store.getState()
 
-  if (!props.isAuth) return <Navigate replace to="/Login" />
+//   if (!props.isAuth) return <Navigate replace to="/Login" />
 
     let dialogsElements  = props.dialogs.map(dialog =>
         <div><DialogIteam name={dialog.name} id={dialog.id} /></div>

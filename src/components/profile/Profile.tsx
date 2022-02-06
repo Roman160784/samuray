@@ -13,8 +13,6 @@ type ProfilePropsType__ = {
 
 function Profile(props: ProfilePropsType__) {
 
-  if (!props.isAuth) return <Navigate replace to="/Login" />
-
   return (
     <div>
       <ProfileInfo profile={props.profile} />

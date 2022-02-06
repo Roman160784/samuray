@@ -1,11 +1,12 @@
 import React from "react";
 import Profile from "./Profile";
-import  axios from "axios";
-import {connect} from 'react-redux';
-import { useParams} from "react-router-dom";
+import axios from "axios";
+import { connect } from 'react-redux';
+import { Navigate, useParams } from "react-router-dom";
 import { AppRootStateType } from "../../redux/reduxStore";
 import { ProfileType } from "../../redux/state";
 import { setUsersPropfileThunkCreator } from "../../redux/Profile-reducer";
+import {WithAuthRedirectComponent} from "../../hoc/WithAuthComonent"
 
 
 const withRouter = (WrappedComponent: React.ComponentType<any>) => (props: JSX.IntrinsicAttributes) => {
@@ -18,34 +19,34 @@ const withRouter = (WrappedComponent: React.ComponentType<any>) => (props: JSX.I
     );
 };
 
-type ProfileContainerPropsType__ = {
-  profile: ProfileType | null
-  params: any
-  isAuth: boolean
-  setUsersPropfileThunkCreator: (id: string, propfile: ProfileType | null) => void
+export type ProfileContainerPropsType__ = {
+    profile: ProfileType | null
+    params: any
+    isAuth: boolean
+    setUsersPropfileThunkCreator: (id: string, propfile: ProfileType | null) => void
 }
 
-class ProfileContainer extends React.Component <ProfileContainerPropsType__>{
+class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
     componentDidMount() {
         let userId = this.props.params.userId;
-        if (!userId){
-            userId="2";
+        if (!userId) {
+            userId = "2";
         }
-        
-         this.props.setUsersPropfileThunkCreator(userId, this.props.profile)
+
+        this.props.setUsersPropfileThunkCreator(userId, this.props.profile)
         // usersAPI.setUserLoginInProfile(userId)
         // // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
         //     .then(data => {
         //         this.props.setUsersPropfileAC(data);
         //     });
     }
-    render () {
-    
-    return(
-<Profile {...this.props} isAuth={this.props.isAuth} profile={this.props.profile} />
-    )
-  }
+    render() {
+        return (
+            <Profile {...this.props} isAuth={this.props.isAuth} profile={this.props.profile} />
+        )
+    }
 }
+
 
 let mapStateToProps = (state: AppRootStateType) => ({
     profile: state.profilePage.profile,
@@ -54,6 +55,9 @@ let mapStateToProps = (state: AppRootStateType) => ({
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {
+
+
+//WithAuthRedirectComponent
+export default WithAuthRedirectComponent(connect(mapStateToProps, {
     setUsersPropfileThunkCreator
-}) (WithUrlDataContainerComponent);
+})(WithUrlDataContainerComponent));
