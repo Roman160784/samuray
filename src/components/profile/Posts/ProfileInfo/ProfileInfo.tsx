@@ -8,6 +8,7 @@ import p from './ProfileInfo.module.css'
 
 type ProfileInfoPropstype = {
   profile: ProfileType | null
+  status: string | null
 }
 
 function ProfileInfo(props: ProfileInfoPropstype) {
@@ -24,7 +25,7 @@ function ProfileInfo(props: ProfileInfoPropstype) {
       </div> */}
       <div>{props.profile.aboutMe}</div>
       <img src={props.profile.photos.small} />
-      <ProfileStatus status={"Hello"}/>
+      <ProfileStatus status={props.status}/>
       <div>{props.profile.fullName}</div>
       <div className={p.discriptionBlock}>
       </div>

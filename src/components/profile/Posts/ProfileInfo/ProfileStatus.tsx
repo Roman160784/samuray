@@ -2,7 +2,7 @@ import React, { ChangeEvent, } from "react";
 import { textSpanIntersection } from "typescript";
 
 type ProfileStatusPropsType = {
-    status: string
+    status: string | null
 }
 
 class ProfileStatus extends React.Component<ProfileStatusPropsType>{
@@ -35,7 +35,7 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType>{
                 }
                 {this.state.editMode &&
                     <div>
-                        <input onBlur={this.disactivateEditMode.bind(this)} value={this.props.status} autoFocus />
+                        <input onBlur={this.disactivateEditMode.bind(this)}  autoFocus />
                     </div>
                 }
             </div>

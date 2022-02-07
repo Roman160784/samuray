@@ -7,6 +7,7 @@ import {MyPostsContainer} from './Posts/MyPostsContainer';
 
 type ProfilePropsType__ = {
   profile: ProfileType | null
+  status: string | null
   // isAuth: boolean
 }
 
@@ -15,7 +16,7 @@ function Profile(props: ProfilePropsType__) {
 
   return (
     <div>
-      <ProfileInfo profile={props.profile} />
+      <ProfileInfo profile={props.profile} status={props.status} />
       <MyPostsContainer/>      
     </div >
   )

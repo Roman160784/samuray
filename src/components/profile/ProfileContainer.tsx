@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Navigate, useParams } from "react-router-dom";
 import { AppRootStateType } from "../../redux/reduxStore";
 import { ProfileType } from "../../redux/state";
-import { setUsersPropfileThunkCreator } from "../../redux/Profile-reducer";
+import {  getUsersStatusThunkCreator, setUsersPropfileThunkCreator } from "../../redux/Profile-reducer";
 import {WithAuthRedirectComponent} from "../../hoc/WithAuthComonent"
 import { compose } from "redux";
 
@@ -22,9 +22,11 @@ const withRouter = (WrappedComponent: React.ComponentType<any>) => (props: JSX.I
 
 export type ProfileContainerPropsType__ = {
     profile: ProfileType | null
+    status: string | null
     params: any
     // isAuth: boolean
     setUsersPropfileThunkCreator: (id: string, propfile: ProfileType | null) => void
+    getUsersStatusThunkCreator: (userId: string) => void
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
@@ -35,25 +37,37 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
         }
 
         this.props.setUsersPropfileThunkCreator(userId, this.props.profile)
+        this.props.getUsersStatusThunkCreator(userId)
         // usersAPI.setUserLoginInProfile(userId)
         // // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
         //     .then(data => {
         //         this.props.setUsersPropfileAC(data);
         //     });
+
+        
     }
+        
+
     render() {
         return (
             <Profile {...this.props} 
             // isAuth={this.props.isAuth} 
-            profile={this.props.profile} />
+            profile={this.props.profile}
+            status={this.props.status} />
         )
     }
 }
 
+type MSTP = {
+    status: string | null
+    profile: ProfileType | null
+    isAuth: boolean
+}
 
-let mapStateToProps = (state: AppRootStateType) => ({
+let mapStateToProps = (state: AppRootStateType): MSTP => ({
     profile: state.profilePage.profile,
-    isAuth: state.authReducer.isAuth
+    isAuth: state.authReducer.isAuth,
+    status: state.profilePage.status
 });
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
@@ -66,7 +80,9 @@ let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 // })(WithUrlDataContainerComponent));
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setUsersPropfileThunkCreator}),   
+    connect(mapStateToProps, {setUsersPropfileThunkCreator, getUsersStatusThunkCreator}),   
     withRouter,
     WithAuthRedirectComponent, 
 )(ProfileContainer)
+
+
