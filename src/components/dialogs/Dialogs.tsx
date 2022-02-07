@@ -21,7 +21,7 @@ import { Navigate } from 'react-router-dom';
     // isAuth: boolean
     dialogs: Array<DialogsType>
     messages:Array<messagesType>
-    store: AppRootStateType
+    // store: AppRootStateType
     newMessageBody: string
     sendMessge: () => void
     updateNewMessageBody: (body: string) => void

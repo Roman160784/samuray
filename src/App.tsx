@@ -4,7 +4,7 @@ import Nav from './components/Nav/Nav'
 import { HeaderContainer } from '../src/components/header/HeaderContainer'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { store } from './redux/reduxStore';
-import { DialogsContainer } from './components/dialogs/DialogsContainer';
+import  {DialogsContainer}  from './components/dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
 import { useDispatch } from 'react-redux';
 import ProfileContainer from './components/profile/ProfileContainer';
@@ -18,8 +18,7 @@ export type AppType = {
 
 
 const App: React.FC<AppType> = (props: AppType) => {
-  const state = store.getState()
-  let dispatch = useDispatch();
+  
 
   return (
     <BrowserRouter>

@@ -6,6 +6,8 @@ import { connect,} from 'react-redux';
 
 import { DialogsType, MessagePageType } from '../../redux/state';
 import { WithAuthRedirectComponent } from '../../hoc/WithAuthComonent';
+import { compose } from 'redux';
+import { isPropertySignature } from 'typescript';
 
 
 type messagesType = {
@@ -21,6 +23,8 @@ type MSTP = {
   store: AppRootStateType
   newMessageBody: string
 }
+
+
 
 type MDTP ={
   sendMessge: () => void
@@ -42,9 +46,30 @@ let mapDispatchToProps = (dispatch: Dispathc) : MDTP => ({
     sendMessge: () => dispatch(sendMessgeAC()),
   })
 
-  let AuthRedirectComponent = WithAuthRedirectComponent(Dialogs)
-
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 
+//  const DialogsContainer = (props : DialogsContainerPropsType) => {
+// return (
+//   <div><Dialogs dialogs={props.dialogs} messages={[]} newMessageBody={''} sendMessge={function (): void {
+//     throw new Error('Function not implemented.');
+//   } } updateNewMessageBody={function (body: string): void {
+//     throw new Error('Function not implemented.');
+//   } } {...props}/></div>
+// )
+//  }
 
+// compose(
+//   connect(mapStateToProps, mapDispatchToProps),
+//   WithAuthRedirectComponent
+// ) (Dialogs)
+
+//   let AuthRedirectComponent = WithAuthRedirectComponent(Dialogs)
+
+// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+
+export const DialogsContainer = compose <React.ComponentType>(
+  connect(mapStateToProps, mapDispatchToProps),
+  WithAuthRedirectComponent
+) (Dialogs)
+
+// export default DialogsContainer

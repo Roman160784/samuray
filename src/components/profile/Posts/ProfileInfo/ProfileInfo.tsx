@@ -18,9 +18,9 @@ function ProfileInfo(props: ProfileInfoPropstype) {
   return (
 
     <div>
-      <div>
+      {/* <div>
         <img src='https://media.gettyimages.com/photos/northen-lights-above-winter-mountains-picture-id466331590?s=612x612' />
-      </div>
+      </div> */}
       <div>{props.profile.aboutMe}</div>
       <img src={props.profile.photos.small} />
       <div>{props.profile.fullName}</div>

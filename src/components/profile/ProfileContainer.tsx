@@ -7,6 +7,7 @@ import { AppRootStateType } from "../../redux/reduxStore";
 import { ProfileType } from "../../redux/state";
 import { setUsersPropfileThunkCreator } from "../../redux/Profile-reducer";
 import {WithAuthRedirectComponent} from "../../hoc/WithAuthComonent"
+import { compose } from "redux";
 
 
 const withRouter = (WrappedComponent: React.ComponentType<any>) => (props: JSX.IntrinsicAttributes) => {
@@ -60,6 +61,12 @@ let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
 
 //WithAuthRedirectComponent
-export default WithAuthRedirectComponent(connect(mapStateToProps, {
-    setUsersPropfileThunkCreator
-})(WithUrlDataContainerComponent));
+// export default WithAuthRedirectComponent(connect(mapStateToProps, {
+//     setUsersPropfileThunkCreator
+// })(WithUrlDataContainerComponent));
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {setUsersPropfileThunkCreator}),   
+    withRouter,
+    WithAuthRedirectComponent, 
+)(ProfileContainer)
