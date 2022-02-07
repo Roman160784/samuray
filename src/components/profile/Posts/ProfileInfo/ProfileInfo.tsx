@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { ProfileType, RootStateType } from '../../../../redux/state';
 import { Preloader } from '../../../preloader/preloader';
+import ProfileStatus from './ProfileStatus'
 import p from './ProfileInfo.module.css'
 
 
@@ -23,6 +24,7 @@ function ProfileInfo(props: ProfileInfoPropstype) {
       </div> */}
       <div>{props.profile.aboutMe}</div>
       <img src={props.profile.photos.small} />
+      <ProfileStatus status={"Hello"}/>
       <div>{props.profile.fullName}</div>
       <div className={p.discriptionBlock}>
       </div>
