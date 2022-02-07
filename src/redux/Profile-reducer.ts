@@ -1,6 +1,6 @@
 
 import { Dispatch } from 'redux';
-import { usersAPI } from '../Api/Api';
+import { ProfileAPI, usersAPI } from '../Api/Api';
 import { ProfilePageType, ProfileType, RootStateType } from '../redux/state'
 import { ActionsDialogsType } from './Dialogs-reducer';
 import { unFollow } from './User-reducer';
@@ -80,7 +80,7 @@ export const setUsersPropfileThunkCreator = (userId: string) => {
 console.log(userId);
 
     return (dispatch: Dispatch) => {
-        usersAPI.setUserLoginInProfile(userId)
+        ProfileAPI.setUserLoginInProfile(userId)
             .then(data => {
                     dispatch(setUsersPropfileAC(data))
             });

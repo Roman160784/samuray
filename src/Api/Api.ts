@@ -29,10 +29,13 @@ export const usersAPI = {
         return instance.get(`auth/me`)
         .then(response => response.data)
      },
-     setUserLoginInProfile(id: string) {
+   
+}
+
+export const ProfileAPI = {
+    setUserLoginInProfile(id: string) {
         return instance.get(`profile/` + id)
         .then(response => response.data)
-
-     }
+     },  
 }
 

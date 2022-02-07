@@ -1,28 +1,46 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, } from "react";
+import { textSpanIntersection } from "typescript";
 
 type ProfileStatusPropsType = {
     status: string
 }
 
-class ProfileStatus  extends React.Component <ProfileStatusPropsType>{
+class ProfileStatus extends React.Component<ProfileStatusPropsType>{
 
-//     let [status, setStatus] = useState("")
+    state = {
+        editMode: false
+    }
 
-// const onCangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-//     setStatus(e.currentTarget.value)
-// }
-render () {
-    return (
-        <div>
-        <div>
-            <span>{this.props.status}</span>
-        </div>
-        <div>
-            <input value={this.props.status} onChange={() => {}} type="text" />
-        </div>
-        </div>
-    )
-} 
+    activateEditMode() {
+        this.setState({
+            editMode: true
+        }
+        );
+    }
+
+    disactivateEditMode() {
+        this.setState({
+            editMode: false
+        }
+        );
+    }
+
+    render() {
+        return (
+            <div>
+                {!this.state.editMode &&
+                    <div>
+                        <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+                    </div>
+                }
+                {this.state.editMode &&
+                    <div>
+                        <input onBlur={this.disactivateEditMode.bind(this)} value={this.props.status} autoFocus />
+                    </div>
+                }
+            </div>
+        )
+    }
 }
 
 export default ProfileStatus
