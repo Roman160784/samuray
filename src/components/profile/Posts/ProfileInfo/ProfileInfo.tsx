@@ -8,7 +8,8 @@ import p from './ProfileInfo.module.css'
 
 type ProfileInfoPropstype = {
   profile: ProfileType | null
-  status: string | null
+  status: string 
+  updateUserStatusThunkCreator: (status: string) => void
 }
 
 function ProfileInfo(props: ProfileInfoPropstype) {
@@ -23,11 +24,17 @@ function ProfileInfo(props: ProfileInfoPropstype) {
       {/* <div>
         <img src='https://media.gettyimages.com/photos/northen-lights-above-winter-mountains-picture-id466331590?s=612x612' />
       </div> */}
+      
       <div>{props.profile.aboutMe}</div>
       <img src={props.profile.photos.small} />
-      <ProfileStatus status={props.status}/>
+      <ProfileStatus status={props.status}
+      updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
+      />
       <div>{props.profile.fullName}</div>
       <div className={p.discriptionBlock}>
+      
+      
+      
       </div>
 
     </div>

@@ -13,7 +13,7 @@ let initialState: ProfilePageType = {
         { id: 2, message: "Hey", likesCount: 23 },],
     newPostText: "it-Kamasutra",
     profile: null,
-    status: null,
+    status: '',
 
         // {
         //     aboutMe: "я круто чувак 1001%",

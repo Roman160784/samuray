@@ -1,28 +1,38 @@
 import React, { ChangeEvent, } from "react";
-import { textSpanIntersection } from "typescript";
+
 
 type ProfileStatusPropsType = {
-    status: string | null
+    status: string 
+    updateUserStatusThunkCreator: (status : string) => void
 }
 
 class ProfileStatus extends React.Component<ProfileStatusPropsType>{
 
+    // statusInputRef = React.createRef()
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode() {
         this.setState({
             editMode: true
-        }
-        );
+        });
+        
     }
 
-    disactivateEditMode() {
+    disactivateEditMode (){
         this.setState({
             editMode: false
-        }
-        );
+        });
+        this.props.updateUserStatusThunkCreator(this.state.status)
+    }
+
+    onStatusChange =(e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+        // this.props.updateUserStatusThunkCreator(this.state.status)
     }
 
     render() {
@@ -30,12 +40,13 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType>{
             <div>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+                        <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status }</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input onBlur={this.disactivateEditMode.bind(this)}  autoFocus />
+                        <input onChange={this.onStatusChange} onBlur={this.disactivateEditMode.bind(this)} 
+                        value={this.state.status}  autoFocus />
                     </div>
                 }
             </div>
