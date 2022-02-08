@@ -35,6 +35,11 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType>{
         // this.props.updateUserStatusThunkCreator(this.state.status)
     }
 
+    // componentDidUpdate (pevProps, prevState) {
+    //    if(prevProps.status)
+        
+    // }
+
     render() {
         return (
             <div>
