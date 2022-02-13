@@ -8,11 +8,6 @@ type FormDataType = {
     rememberMe: boolean
 }
 
- 
-
-
-    
-
  const LginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <>
