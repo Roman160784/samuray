@@ -20,9 +20,7 @@ let initialState: MessagePageType = {
 
 export const dialogReducer = (state: MessagePageType = initialState, action: actionType) :MessagePageType  => {
      switch(action.type) {
-         case "UPDATE-NEW-MESSAGE-BODY" :
-            return {...state, newMessageBody : action.body}
-            
+          
         case "SEND-MESSAGE" :
 
             let body = action.newMessageBody;
@@ -33,14 +31,9 @@ export const dialogReducer = (state: MessagePageType = initialState, action: act
      }
 }
 
-export type ActionsDialogsType = ReturnType<typeof updateNewMessageBodyAC> | ReturnType<typeof sendMessgeAC>
+export type ActionsDialogsType = ReturnType<typeof sendMessgeAC>
 
-export const updateNewMessageBodyAC = (body : string)  => {
-    return{
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body: body
-    }as const
-}
+
 export const sendMessgeAC = (newMessageBody: string)  => {
     return{
         type: "SEND-MESSAGE",

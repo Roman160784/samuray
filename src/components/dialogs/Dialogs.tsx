@@ -25,7 +25,6 @@ type dialogsMainType = {
     // store: AppRootStateType
     newMessageBody: string
     sendMessge: (newMessageBody: string) => void
-    updateNewMessageBody: (body: string) => void
 
 }
 
@@ -45,10 +44,7 @@ const Dialogs = (props: dialogsMainType) => {
     //     props.sendMessge()
     // }
 
-    let onNewMessageHange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
-        props.updateNewMessageBody(body)
-    }
+   
     let addNewMessage = (values: any) => {
     //   alert(values.newMessageBody )
       props.sendMessge(values.newMessageBody)

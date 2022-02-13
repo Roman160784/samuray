@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { ActionsDialogsType, sendMessgeAC, updateNewMessageBodyAC } from '../../redux/Dialogs-reducer';
+import { ActionsDialogsType, sendMessgeAC } from '../../redux/Dialogs-reducer';
 import { actionType, AppRootStateType, Dispathc, store } from '../../redux/reduxStore';
 import Dialogs from './Dialogs';
 import { connect,} from 'react-redux';
@@ -28,7 +28,6 @@ type MSTP = {
 
 type MDTP ={
   sendMessge: (newMessageBody: string) => void
-  updateNewMessageBody: (body : string) => void
 }
 
 let mapStateToProps = (state: AppRootStateType): MSTP => ({
@@ -42,7 +41,7 @@ let mapStateToProps = (state: AppRootStateType): MSTP => ({
 
 
 let mapDispatchToProps = (dispatch: Dispathc) : MDTP => ({
-    updateNewMessageBody: (body : string) => dispatch(updateNewMessageBodyAC(body)),
+  
     sendMessge: (newMessageBody: string) => dispatch(sendMessgeAC(newMessageBody)),
   })
 
