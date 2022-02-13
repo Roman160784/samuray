@@ -24,7 +24,7 @@ type dialogsMainType = {
     messages: Array<messagesType>
     // store: AppRootStateType
     newMessageBody: string
-    sendMessge: () => void
+    sendMessge: (newMessageBody: string) => void
     updateNewMessageBody: (body: string) => void
 
 }
@@ -41,16 +41,17 @@ const Dialogs = (props: dialogsMainType) => {
         <Message message={mess.message} id={mess.id} />
     )
 
-    let onSendMessageClick = () => {
-        props.sendMessge()
-    }
+    // let onSendMessageClick = () => {
+    //     props.sendMessge()
+    // }
 
     let onNewMessageHange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
         props.updateNewMessageBody(body)
     }
     let addNewMessage = (values: any) => {
-      alert(values.newMessageBody )
+    //   alert(values.newMessageBody )
+      props.sendMessge(values.newMessageBody)
     }
 
 

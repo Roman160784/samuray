@@ -27,7 +27,7 @@ type MSTP = {
 
 
 type MDTP ={
-  sendMessge: () => void
+  sendMessge: (newMessageBody: string) => void
   updateNewMessageBody: (body : string) => void
 }
 
@@ -43,7 +43,7 @@ let mapStateToProps = (state: AppRootStateType): MSTP => ({
 
 let mapDispatchToProps = (dispatch: Dispathc) : MDTP => ({
     updateNewMessageBody: (body : string) => dispatch(updateNewMessageBodyAC(body)),
-    sendMessge: () => dispatch(sendMessgeAC()),
+    sendMessge: (newMessageBody: string) => dispatch(sendMessgeAC(newMessageBody)),
   })
 
 
