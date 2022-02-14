@@ -9,6 +9,7 @@ type ProfilePropsType__ = {
   profile: ProfileType | null
   status: string 
   // isAuth: boolean
+  addNewPost: (newPostText: string) => void
   updateUserStatusThunkCreator : (status: string) => void
 }
 
@@ -21,7 +22,7 @@ function Profile(props: ProfilePropsType__) {
       status={props.status}       
       updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
       />
-      <MyPostsContainer/>      
+      <MyPostsContainer addNewPost={props.addNewPost}/>      
     </div >
   )
 }

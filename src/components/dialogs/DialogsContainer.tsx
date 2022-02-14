@@ -1,13 +1,13 @@
 import React, { ChangeEvent } from 'react';
-import { ActionsDialogsType, sendMessgeAC } from '../../redux/Dialogs-reducer';
-import { actionType, AppRootStateType, Dispathc, store } from '../../redux/reduxStore';
+import {  sendMessgeAC } from '../../redux/Dialogs-reducer';
+import { AppRootStateType, Dispathc } from '../../redux/reduxStore';
 import Dialogs from './Dialogs';
 import { connect,} from 'react-redux';
 
 import { DialogsType, MessagePageType } from '../../redux/state';
 import { WithAuthRedirectComponent } from '../../hoc/WithAuthComonent';
 import { compose } from 'redux';
-import { isPropertySignature } from 'typescript';
+
 
 
 type messagesType = {
@@ -41,7 +41,6 @@ let mapStateToProps = (state: AppRootStateType): MSTP => ({
 
 
 let mapDispatchToProps = (dispatch: Dispathc) : MDTP => ({
-  
     sendMessge: (newMessageBody: string) => dispatch(sendMessgeAC(newMessageBody)),
   })
 

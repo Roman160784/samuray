@@ -40,10 +40,6 @@ const Dialogs = (props: dialogsMainType) => {
         <Message message={mess.message} id={mess.id} />
     )
 
-    // let onSendMessageClick = () => {
-    //     props.sendMessge()
-    // }
-
    
     let addNewMessage = (values: any) => {
     //   alert(values.newMessageBody )
@@ -72,9 +68,7 @@ const Dialogs = (props: dialogsMainType) => {
     )
 }
 
-type AddMessgeFormPropsType = {
 
-}
 
 
 const AddMessgeForm = (props: InjectedFormProps) => {
