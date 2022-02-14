@@ -2,10 +2,8 @@ import React, { ChangeEvent } from 'react';
 import p from './MyPosts.module.css'
 import MyPost from './post/MyPost'
 import {  PostsType } from '../../.././redux/state'
-import { ActionsProfileType, addPostAC, changeNewTextAC} from '../../../redux/Profile-reducer'
-import { ActionsDialogsType} from '../../../redux/Dialogs-reducer'
-import { actionType, AppRootStateType } from '../../../redux/reduxStore';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { maxLengthCreater, requairedField } from '../../../utils/validators/validater'
 
 export type postType = {
   id: number
@@ -66,11 +64,18 @@ function MyPosts(props: postsType) {
   )
 }
 
+const maxLengthValidater = maxLengthCreater(30)
+
 export const AddMessageForMyPosts = (props: InjectedFormProps) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field component={"textarea"} name={"newPostText"} placeholder={"Add your post"} />
+        <Field component={"textarea"} 
+        name={"newPostText"} 
+        placeholder={"Add your post"} 
+        validate={[requairedField, maxLengthValidater]}
+
+        />
       </div>
       <div>
         <button>Add Post</button>
