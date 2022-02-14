@@ -7,13 +7,18 @@ type TextAreaPropsType = {
 }
 
 
+
+
 export const TextArea = (props: TextAreaPropsType) => {
+
+    const showError = props.meta.touched && props.meta.error
+
     return (
-        <div className={styles.formControl}>
+        <div className={styles.formControl + " " + (showError ? styles.error : "")}>
             <div>
                 <textarea {...props.input} {...props} />
             </div>
-            <span>'Some error'</span>
+            {showError && <span>{props.meta.error}</span>}
         </div>
     )
 }

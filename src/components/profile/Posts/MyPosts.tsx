@@ -65,7 +65,7 @@ function MyPosts(props: postsType) {
   )
 }
 
-const maxLengthValidater = maxLengthCreater(30)
+const maxLengthValidater = maxLengthCreater(10)
 
 export const AddMessageForMyPosts = (props: InjectedFormProps) => {
   return (
