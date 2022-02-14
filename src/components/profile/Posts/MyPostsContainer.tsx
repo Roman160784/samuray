@@ -3,7 +3,7 @@ import React, { ChangeEvent } from 'react';
 
 import MyPosts from '../Posts/MyPosts'
 import {  PostsType } from '../../../redux/state'
-import {  addPostAC, changeNewTextAC} from '../../../redux/Profile-reducer'
+import {  addPostAC, } from '../../../redux/Profile-reducer'
 import {  AppRootStateType, Dispathc } from '../../../redux/reduxStore';
 import { connect,  } from 'react-redux';
 
@@ -15,8 +15,10 @@ type MSTP = {
 }
 
 type MDTP ={
-  addPost: () => void
-  UpdateNewText : (newText: string) => void
+  // addPost: () => void
+  // UpdateNewText : (newText: string) => void
+  sendNewPost: (newPostText: string) => void
+  
 }
 
 let mapStateToProps = (state: AppRootStateType): MSTP =>({
@@ -25,8 +27,8 @@ let mapStateToProps = (state: AppRootStateType): MSTP =>({
 })
 
 let mapDispatchToProps = (dispatch: Dispathc) : MDTP => ({
-  UpdateNewText : (newText: string) => dispatch(changeNewTextAC(newText)),
-  addPost: () => dispatch(addPostAC()) 
+  sendNewPost : (newPostText: string) => dispatch(addPostAC(newPostText)),
+  // addPost: () => dispatch(addPostAC()) 
 })
 
 

@@ -16,9 +16,9 @@ export type postType = {
 type postsType = {
   posts: Array<PostsType>
   newPostText: string
-  addPost: () => void
-  UpdateNewText:(newText: string) => void
-  addNewPost: (newPostText: string) => void
+  // addPost: () => void
+  // UpdateNewText:(newText: string) => void
+  sendNewPost: (newPostText: string) => void
 }
 
 function MyPosts(props: postsType) {
@@ -38,7 +38,7 @@ function MyPosts(props: postsType) {
   // }
 
   const addNewPost = (values: any) => {
-    props.UpdateNewText(values.newPostText)
+    props.sendNewPost(values.newPostText)
   }
 
   return (

@@ -28,7 +28,7 @@ export type ProfileContainerPropsType__ = {
     setUsersPropfileThunkCreator: (id: string, propfile: ProfileType | null) => void
     getUsersStatusThunkCreator: (userId: string) => void
     updateUserStatusThunkCreator : (status: string) => void
-    addNewPost: (newPostText: string) => void
+    sendNewPost: (newPostText: string) => void
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
