@@ -4,6 +4,7 @@ import MyPost from './post/MyPost'
 import {  PostsType } from '../../.././redux/state'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { maxLengthCreater, requairedField } from '../../../utils/validators/validater'
+import { TextArea } from '../../../components/formsControls/FormsControls'
 
 export type postType = {
   id: number
@@ -70,7 +71,7 @@ export const AddMessageForMyPosts = (props: InjectedFormProps) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field component={"textarea"} 
+        <Field component={TextArea} 
         name={"newPostText"} 
         placeholder={"Add your post"} 
         validate={[requairedField, maxLengthValidater]}
