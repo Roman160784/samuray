@@ -23,6 +23,7 @@ export type ProfileContainerPropsType__ = {
     profile: ProfileType | null
     status: string 
     params: any
+    autorisedUserId: string | number | null
     // isAuth: boolean
     setUsersPropfileThunkCreator: (id: string, propfile: ProfileType | null) => void
     getUsersStatusThunkCreator: (userId: string) => void
@@ -34,7 +35,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
     componentDidMount() {
         let userId = this.props.params.userId;
         if (!userId) {
-            userId = "2";
+            userId = this.props.autorisedUserId;
         }
 
         this.props.setUsersPropfileThunkCreator(userId, this.props.profile)
@@ -65,12 +66,14 @@ type MSTP = {
     status: string | null
     profile: ProfileType | null
     isAuth: boolean
+    autorisedUserId: string | number | null
 }
 
 let mapStateToProps = (state: AppRootStateType): MSTP => ({
     profile: state.profilePage.profile,
     isAuth: state.authReducer.isAuth,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    autorisedUserId: state.authReducer.id
 });
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer);
