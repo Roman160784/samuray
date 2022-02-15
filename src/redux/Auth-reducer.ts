@@ -2,7 +2,7 @@ import { AuthType, ProfilePageType, ProfileType, RootStateType } from './state'
 import { ActionsDialogsType } from './Dialogs-reducer';
 import { ActionsProfileType } from './Profile-reducer';
 import { Dispatch } from 'redux';
-import { usersAPI } from '../Api/Api';
+import { authAPI, usersAPI } from '../Api/Api';
 
 type AppActionType = ActionsProfileType | ActionsDialogsType | ActionsAuthType
 
@@ -54,4 +54,13 @@ export const setAuthUserDataThunkCreator = () => {
     }
 }
 
+
+export const loginTC = (email: string, password: string, rememberME: boolean) => {
+    return(dispatch: Dispatch) => {
+        authAPI.login(email, password, rememberME)
+        .then(data => {
+            
+        })
+    }
+}
 

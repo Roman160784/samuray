@@ -18,17 +18,17 @@ const maxLengthValidater = maxLengthCreater(15)
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field  component={InputForLogin} name={'login'} placeholder={"Login"}
-                 validate={[requairedField, maxLengthValidater]}/>
-            </div>
-            <div>
-                <Field component={InputForLogin} name={'password'} placeholder={"Password"}
                 validate={[requairedField, maxLengthValidater]}
                 />
             </div>
             <div>
-                <Field component={InputForLogin} name={'rememberMe'} type={"checkbox"} 
+                <Field component={InputForLogin} name={'password'} placeholder={"Password"} 
                 validate={[requairedField, maxLengthValidater]}
-                /> Remember
+                />
+            </div>
+            
+            <div>
+                <Field component={"input"} name={'rememberMe'} type={"checkbox"} /> Remember 
             </div>
             <div>
                 <button>Log In</button>
