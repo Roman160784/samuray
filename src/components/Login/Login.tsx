@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import {Field, reduxForm, InjectedFormProps} from "redux-form"
 import { loginTC } from '../../redux/Auth-reducer';
+import { AppRootStateType } from '../../redux/reduxStore';
 import { maxLengthCreater, requairedField } from '../../utils/validators/validater';
 import { InputForLogin } from '../formsControls/FormsControls';
 
@@ -44,8 +46,10 @@ const maxLengthValidater = maxLengthCreater(30)
 const LoginReduxForm = reduxForm<FormDataType>({form:"login"})(LginForm)
 
 type LoginPropsType = {
+    isAuth: boolean
     loginTC : (email: string, password: string,  rememberME: boolean) => void
 }
+
 
 
 const Login = (props: LoginPropsType) => {
@@ -53,6 +57,10 @@ const Login = (props: LoginPropsType) => {
         props.loginTC(formData.email, formData.password, formData.rememberMe);
         
     }
+
+if(props.isAuth){
+return <Navigate to={'/Profile'}/>
+} 
 
     return(
         <div>
@@ -64,6 +72,13 @@ const Login = (props: LoginPropsType) => {
     )
 }
 
+type MSTP = {
+    isAuth: boolean  
+}
 
 
-export default connect(null, {loginTC})(Login)
+const mapStateToProps = (state: AppRootStateType):MSTP => ({
+    isAuth : state.authReducer.isAuth
+})
+
+export default connect(mapStateToProps, {loginTC})(Login)
