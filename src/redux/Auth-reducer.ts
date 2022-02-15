@@ -19,7 +19,7 @@ export const authReducer = (state: AuthType = initialState, action: AppActionTyp
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true,
+                isAuth: action.payload.isAuth,
             }
         
         //    return { ...state, id : action.payload.id, email: action.payload.email, login: action.payload.login}
@@ -64,7 +64,7 @@ export const loginTC = (email: string, password: string, rememberME: boolean) =>
         })
     }
 }
-export const loginOutTC = () => {
+export const loginOutTC : any = () => {
     return(dispatch: Dispatch) => {
         authAPI.loginOut()
         .then(data => {
