@@ -8,7 +8,7 @@ import  {DialogsContainer}  from './components/dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
 import { useDispatch } from 'react-redux';
 import ProfileContainer from './components/profile/ProfileContainer';
-import {Login} from './components/Login/Login'
+import Login from './components/Login/Login'
 
 
 export type AppType = {

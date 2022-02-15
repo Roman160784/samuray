@@ -31,35 +31,46 @@ export const authReducer = (state: AuthType = initialState, action: AppActionTyp
 
 export type ActionsAuthType = ReturnType<typeof setAuthUserDataAC> 
 
-export const setAuthUserDataAC = (id: null | string| number, login: null | string, email: null | string, ) => {
+export const setAuthUserDataAC = (id: null | string| number, login: null | string, email: null | string, isAuth: boolean) => {
     return {
         type: "SET-USERS-DATA",
         payload: {
-            id, login, email, 
+            id, login, email, isAuth,
         }
 
     } as const
 }
 
 
-export const setAuthUserDataThunkCreator = () => {
+export const setAuthUserDataThunkCreator: any  = () => {
     return (dispatch: Dispatch) => {
-        usersAPI.setUserLogin()
+        authAPI.setUserLogin()
         .then(data=> {
                 if(data.resultCode === 0) {
-                  let {id, login, email} = data.data
-                  dispatch(setAuthUserDataAC(id, login, email))
+                  let {id, login, email, isAuth = false} = data.data
+                  dispatch(setAuthUserDataAC(id, login, email, true))
                }
-            });
+            })
     }
 }
-
 
 export const loginTC = (email: string, password: string, rememberME: boolean) => {
     return(dispatch: Dispatch) => {
         authAPI.login(email, password, rememberME)
         .then(data => {
-            
+            if(data.resultCode === 0) {
+                dispatch(setAuthUserDataThunkCreator())
+            }
+        })
+    }
+}
+export const loginOutTC = () => {
+    return(dispatch: Dispatch) => {
+        authAPI.loginOut()
+        .then(data => {
+            if(data.resultCode === 0) {
+                dispatch(setAuthUserDataAC(null, null, null, false))
+            }
         })
     }
 }

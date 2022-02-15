@@ -25,10 +25,10 @@ export const usersAPI = {
          return instance.delete(`follow/${id}`)
          .then(response => response.data)
      },
-     setUserLogin() {
-        return instance.get(`auth/me`)
-        .then(response => response.data)
-     },
+    //  setUserLogin() {
+    //     return instance.get(`auth/me`)
+    //     .then(response => response.data)
+    //  },
    
 }
 
@@ -49,6 +49,11 @@ export const profileAPI = {
 }
 
 export const authAPI = {
+    setUserLogin() {
+        return instance.get(`auth/me`)
+        .then(response => response.data)
+     },
+
     login(email: string, password: string, rememberME: boolean = false){
         return instance.post(`/auth/login`, {email, password, rememberME})
         .then(res => res.data)

@@ -1,28 +1,31 @@
+
 import React from 'react';
+import { connect } from 'react-redux';
 import {Field, reduxForm, InjectedFormProps} from "redux-form"
+import { loginTC } from '../../redux/Auth-reducer';
 import { maxLengthCreater, requairedField } from '../../utils/validators/validater';
 import { InputForLogin } from '../formsControls/FormsControls';
 
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
 
-const maxLengthValidater = maxLengthCreater(15)
+const maxLengthValidater = maxLengthCreater(30)
 
  const LginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <>
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field  component={InputForLogin} name={'login'} placeholder={"Login"}
+                <Field  component={InputForLogin} name={'email'} placeholder={"Email"}
                 validate={[requairedField, maxLengthValidater]}
                 />
             </div>
             <div>
-                <Field component={InputForLogin} name={'password'} placeholder={"Password"} 
+                <Field component={InputForLogin} name={'password'} placeholder={"Password"} type={"password"}
                 validate={[requairedField, maxLengthValidater]}
                 />
             </div>
@@ -40,9 +43,14 @@ const maxLengthValidater = maxLengthCreater(15)
 
 const LoginReduxForm = reduxForm<FormDataType>({form:"login"})(LginForm)
 
-export const Login = () => {
+type LoginPropsType = {
+    loginTC : (email: string, password: string,  rememberME: boolean) => void
+}
+
+
+const Login = (props: LoginPropsType) => {
     const onSubmit=(formData: FormDataType) => {
-        console.log(formData);
+        props.loginTC(formData.email, formData.password, formData.rememberMe);
         
     }
 
@@ -57,3 +65,5 @@ export const Login = () => {
 }
 
 
+
+export default connect(null, {loginTC})(Login)
