@@ -7,6 +7,7 @@ import { loginTC } from '../../redux/Auth-reducer';
 import { AppRootStateType } from '../../redux/reduxStore';
 import { maxLengthCreater, requairedField } from '../../utils/validators/validater';
 import { InputForLogin } from '../formsControls/FormsControls';
+import styles from '../formsControls/FormsControls.module.css'
 
 
 type FormDataType = {
@@ -35,6 +36,7 @@ const maxLengthValidater = maxLengthCreater(30)
             <div>
                 <Field component={"input"} name={'rememberMe'} type={"checkbox"} /> Remember 
             </div>
+            { props.error && <div className={styles.summoryError}>{props.error}</div>}
             <div>
                 <button>Log In</button>
                 </div>

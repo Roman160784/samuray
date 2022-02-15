@@ -9,3 +9,10 @@
 {
     color: red;
 }
+
+.summoryError{
+    border: red 1px solid;
+    color: red;
+    padding: 5px;
+    width: 70px;
+}

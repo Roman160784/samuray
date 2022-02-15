@@ -3,6 +3,7 @@ import { ActionsDialogsType } from './Dialogs-reducer';
 import { ActionsProfileType } from './Profile-reducer';
 import { Dispatch } from 'redux';
 import { authAPI, usersAPI } from '../Api/Api';
+import { stopSubmit } from 'redux-form';
 
 type AppActionType = ActionsProfileType | ActionsDialogsType | ActionsAuthType
 
@@ -60,6 +61,9 @@ export const loginTC = (email: string, password: string, rememberME: boolean) =>
         .then(data => {
             if(data.resultCode === 0) {
                 dispatch(setAuthUserDataThunkCreator())
+            }else {
+                let message = data.messages.length > 0 ? data.messages[0] : "Some error"
+                dispatch(stopSubmit("login", {_error: message}))
             }
         })
     }
