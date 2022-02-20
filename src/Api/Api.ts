@@ -17,11 +17,11 @@ export const usersAPI = {
              return response.data
          }
      )},
-     followUsers(id=1){
+     followUsers(id: number=1){
          return instance.post(`follow/${id}`, {})
          .then(response => response.data)
      },
-     unFollowUsers(id=1){
+     unFollowUsers(id: number=1){
          return instance.delete(`follow/${id}`)
          .then(response => response.data)
      },
@@ -50,16 +50,44 @@ export const profileAPI = {
 
 export const authAPI = {
     setUserLogin() {
-        return instance.get(`auth/me`)
+        return instance.get<setUserLoginResponseType>(`auth/me`)
         .then(response => response.data)
      },
 
     login(email: string, password: string, rememberME: boolean = false){
-        return instance.post(`/auth/login`, {email, password, rememberME})
+        return instance.post<LoginResponseType>(`/auth/login`, {email, password, rememberME})
         .then(res => res.data)
     },
     loginOut(){
         return instance.delete(`/auth/login`)
         .then(res => res.data)
     }
+}
+
+
+type setUserLoginResponseType = {
+    data:{
+        id: number
+        login : string 
+        email: string
+    }
+    resultCode: ResultCodesEnum | ResultCodesWithCapchaEnum
+    messages: string[] 
+} 
+type LoginResponseType = {
+    data:{
+        userId: number
+    }
+    resultCode: ResultCodesEnum
+    messages: string[] 
+} 
+
+export enum ResultCodesEnum  {
+Success = 0,
+Error = 1,
+
+}
+
+export enum ResultCodesWithCapchaEnum {
+    CupchaIsRequired = 10,
 }

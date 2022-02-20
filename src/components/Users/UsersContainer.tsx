@@ -56,28 +56,11 @@ class UsersAPIComponent extends React.Component<usersPropsStateType> {
 
 
   componentDidMount() {
-
     this.props.getUsersThunkCreater(this.props.curentPage, this.props.pageSize)
-    // this.props.togleIsFetching(true)
-    // usersAPI.getUsers(this.props.curentPage, this.props.pageSize)
-    // // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.curentPage}&count=${this.props.pageSize}`,{withCredentials: true})
-    //   .then(data => {
-    //     this.props.togleIsFetching(false)
-    //     this.props.setUsers(data.items)
-    //     //  this.props.setTotalUsersCount(response.data.totalCount); /// problem 
-    //     this.props.setTotalUsersCount(100);
-    //   });
   }
 
   onpageChanged = (curentPage: number) => {
     this.props.getUsersThunkCreater(curentPage, this.props.pageSize)
-    // this.props.togleIsFetching(true)
-    // this.props.setCurrentPage(curentPage);
-    // usersAPI.getUsers(this.props.curentPage, this.props.pageSize)
-    //   .then(data => {
-    //     this.props.togleIsFetching(false)
-    //     this.props.setUsers(data.items);
-    //   });
   }
 
   render() {
@@ -134,7 +117,7 @@ let mapStateToProps = (state: AppRootStateType): MSTP => ({
 
 
 export const UsersContainer = connect(mapStateToProps, {
-  follow,
+  follow ,
   unFollow,
   setCurrentPage: setPage,
   followingInProcessAC,

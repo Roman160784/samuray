@@ -2,7 +2,7 @@ import { AuthType, ProfilePageType, ProfileType, RootStateType } from './state'
 import { ActionsDialogsType } from './Dialogs-reducer';
 import { ActionsProfileType } from './Profile-reducer';
 import { Dispatch } from 'redux';
-import { authAPI, usersAPI } from '../Api/Api';
+import { authAPI, ResultCodesEnum, usersAPI } from '../Api/Api';
 import { stopSubmit } from 'redux-form';
 
 type AppActionType = ActionsProfileType | ActionsDialogsType | ActionsAuthType
@@ -47,8 +47,8 @@ export const setAuthUserDataThunkCreator: any  = () => {
     return (dispatch: Dispatch) => {
         authAPI.setUserLogin()
         .then(data=> {
-                if(data.resultCode === 0) {
-                  let {id, login, email, isAuth = false} = data.data
+                if(data.resultCode === ResultCodesEnum.Success) {
+                  let {id, login, email, } = data.data
                   dispatch(setAuthUserDataAC(id, login, email, true))
                }
             })
@@ -59,7 +59,7 @@ export const loginTC = (email: string, password: string, rememberME: boolean) =>
     return(dispatch: Dispatch) => {
         authAPI.login(email, password, rememberME)
         .then(data => {
-            if(data.resultCode === 0) {
+            if(data.resultCode === ResultCodesEnum.Success) {
                 dispatch(setAuthUserDataThunkCreator())
             }else {
                 let message = data.messages.length > 0 ? data.messages[0] : "Some error"
@@ -68,7 +68,7 @@ export const loginTC = (email: string, password: string, rememberME: boolean) =>
         })
     }
 }
-export const loginOutTC : any = () => {
+export const loginOutTC = () => {
     return(dispatch: Dispatch) => {
         authAPI.loginOut()
         .then(data => {

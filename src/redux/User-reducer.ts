@@ -1,10 +1,12 @@
 
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 import { usersAPI } from '../Api/Api';
 import { UsersStateType, UsersType } from '../components/Users/Users';
 import { ActionsDialogsType } from './Dialogs-reducer';
 import { ActionsProfileType } from './Profile-reducer';
+import { AppRootStateType } from './reduxStore';
 
 type AppActionType = ActionsUsersType | ActionsDialogsType | ActionsProfileType
 
@@ -97,10 +99,8 @@ export const followingInProcessAC = (followingInProcess: boolean) => {
     } as const
 }
 
-
-
 export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<ActionsUsersType>) => {
         dispatch(togleIsFetching(true))
         usersAPI.getUsers(curentPage, pageSize)
             .then(data => {
@@ -114,7 +114,7 @@ export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => {
 }
 
 export const followThunkCreater = (id: number) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<ActionsUsersType>) => {
         // dispatch(followingInProcessAC(true))
         usersAPI.followUsers(id)
             .then(data => {
@@ -125,8 +125,8 @@ export const followThunkCreater = (id: number) => {
             });
     }
 }
-export const unFollowThunkCreater = (id: number) => {
-    return (dispatch: Dispatch) => {
+export const unFollowThunkCreater = (id: number)  => {
+    return (dispatch: Dispatch<ActionsUsersType>) => {
         usersAPI.unFollowUsers(id)
             .then(data => {
                 if (data.resultCode == 0) {
