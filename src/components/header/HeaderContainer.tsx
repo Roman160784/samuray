@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {Header} from './Header'
-import { loginOutTC, setAuthUserDataThunkCreator } from '../../redux/Auth-reducer';
+import { loginOutTC } from '../../redux/Auth-reducer';
 import { connect } from 'react-redux';
 import { AppRootStateType } from '../../redux/reduxStore';
 
@@ -11,24 +11,15 @@ type HeaderContainerPropsType = {
   login: string | null
   isAuth: boolean
   loginOutTC: () => void
-  setAuthUserDataThunkCreator: ( ) => void
+  // setAuthUserDataThunkCreator: ( ) => void
 }
 
 
   class HeaderContainerI extends React.Component <HeaderContainerPropsType>{
 
-  componentDidMount() {
-
-    this.props.setAuthUserDataThunkCreator()
-    // usersAPI.setUserLogin()
-    // // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials : true})
-    //   .then(data=> {
-    //     if(data.resultCode === 0) {
-    //       let {id, login, email} = data.data
-    //       this.props.setAuthUserDataAC(id, email, login)
-    //     }
-    //   });
-  }
+  // componentDidMount() {
+  //   this.props.setAuthUserDataThunkCreator()
+  // }
 
   render () {
     return <Header 
@@ -50,7 +41,7 @@ const mapStateToProps =  (state: AppRootStateType):MSTP => ({
   isAuth: state.authReducer.isAuth
 });
 
-export const HeaderContainer =  connect (mapStateToProps, {setAuthUserDataThunkCreator,  loginOutTC})(HeaderContainerI);
+export const HeaderContainer =  connect (mapStateToProps, {loginOutTC})(HeaderContainerI);
 
 
 

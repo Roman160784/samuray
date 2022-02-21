@@ -6,39 +6,44 @@ import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { store } from './redux/reduxStore';
 import  {DialogsContainer}  from './components/dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import ProfileContainer from './components/profile/ProfileContainer';
 import Login from './components/Login/Login'
+import { setAuthUserDataThunkCreator } from './redux/Auth-reducer';
 
 
-export type AppType = {
-  // store: AppRootStateType
-  // dispatch: Dispathc
+export type AppPropsType = {
+  setAuthUserDataThunkCreator?: () => void
 }
 
 
-const App: React.FC<AppType> = (props: AppType) => {
+class App  extends React.Component <AppPropsType> {
+  componentDidMount() {
+    this.props.setAuthUserDataThunkCreator && this.props.setAuthUserDataThunkCreator()
+  }
+  render() {
+    return (
+      <BrowserRouter>
+        <div className='app-wrapper'>
+          <HeaderContainer />
+          <Nav />
+          <div className='app-wrapper-content'>
+            <Routes>
+              <Route path='/Dialogs' element={<DialogsContainer />} />
+              <Route path='/Login' element={<Login />} />
+              <Route path='/Profile' element={<ProfileContainer />} >
+                <Route path=':userId' element={<ProfileContainer />} />
+              </Route>
+              <Route path='/Users' element={<UsersContainer />} />
   
-
-  return (
-    <BrowserRouter>
-      <div className='app-wrapper'>
-        <HeaderContainer />
-        <Nav />
-        <div className='app-wrapper-content'>
-          <Routes>
-            <Route path='/Dialogs' element={<DialogsContainer />} />
-            <Route path='/Login' element={<Login />} />
-            <Route path='/Profile' element={<ProfileContainer />} >
-              <Route path=':userId' element={<ProfileContainer />} />
-            </Route>
-            <Route path='/Users' element={<UsersContainer />} />
-
-          </Routes>
+            </Routes>
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
-  );
+      </BrowserRouter>
+    );
+  }
+
+
 }
 
-export default App;
+export default connect (null, {setAuthUserDataThunkCreator})(App);
