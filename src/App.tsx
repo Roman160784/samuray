@@ -3,25 +3,32 @@ import './App.css';
 import Nav from './components/Nav/Nav'
 import { HeaderContainer } from '../src/components/header/HeaderContainer'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
-import { store } from './redux/reduxStore';
+import { AppRootStateType, store } from './redux/reduxStore';
 import  {DialogsContainer}  from './components/dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
 import { connect, useDispatch } from 'react-redux';
 import ProfileContainer from './components/profile/ProfileContainer';
 import Login from './components/Login/Login'
-import { setAuthUserDataThunkCreator } from './redux/Auth-reducer';
+import { initioliseAppTC } from './redux/App-reducer';
+import { Preloader } from './components/preloader/preloader';
 
 
 export type AppPropsType = {
-  setAuthUserDataThunkCreator?: () => void
+  intialized?: boolean
+  initioliseAppTC?: () => void
 }
 
 
 class App  extends React.Component <AppPropsType> {
   componentDidMount() {
-    this.props.setAuthUserDataThunkCreator && this.props.setAuthUserDataThunkCreator()
+    this.props.initioliseAppTC && this.props.initioliseAppTC()
   }
   render() {
+if(!this.props.intialized ) {
+return <Preloader/>
+}
+
+
     return (
       <BrowserRouter>
         <div className='app-wrapper'>
@@ -46,4 +53,13 @@ class App  extends React.Component <AppPropsType> {
 
 }
 
-export default connect (null, {setAuthUserDataThunkCreator})(App);
+type MSTP = {
+  intialized: boolean
+}
+
+const mapStateToProps =  (state: AppRootStateType):MSTP => ({
+  intialized: state.appReducer.intialized
+});
+
+
+export default connect (mapStateToProps,{initioliseAppTC})(App);

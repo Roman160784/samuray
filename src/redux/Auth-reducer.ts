@@ -45,7 +45,7 @@ export const setAuthUserDataAC = (id: null | string| number, login: null | strin
 
 export const setAuthUserDataThunkCreator: any  = () => {
     return (dispatch: Dispatch) => {
-        authAPI.setUserLogin()
+        return authAPI.setUserLogin()
         .then(data=> {
                 if(data.resultCode === ResultCodesEnum.Success) {
                   let {id, login, email, } = data.data
