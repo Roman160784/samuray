@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRootStateType, Dispathc } from '../../redux/reduxStore';
-import { follow, followingInProcessAC, followThunkCreater, getUsersThunkCreater, setPage, setTotalUsersCount, setUsers, togleIsFetching, unFollow, unFollowThunkCreater } from '../../redux/User-reducer';
+import { follow, followingInProcessAC, followThunkCreater, getUsersThunkCreater, setPage, unFollow, unFollowThunkCreater } from '../../redux/User-reducer';
+import { curentPageSelector, followingInProcessSelector, getPageSizeSelector, getTotalUsersCountSelector, getUsersSelector, isFethingSelector } from '../../redux/users-selectors'
 import { UserFunc } from './UsersFuncComponent';
 import axios from 'axios';
 import { Preloader } from '../preloader/preloader';
@@ -107,12 +108,12 @@ type MSTP = {
 
 
 let mapStateToProps = (state: AppRootStateType): MSTP => ({
-  isFething: state.usersPage.isFething,
-  users: state.usersPage.users,
-  pageSize: state.usersPage.pageSize,
-  totalUsersCount: state.usersPage.totalUsersCount,
-  curentPage: state.usersPage.curentPage,
-  followingInProcess: state.usersPage.followingInProcess
+  isFething: isFethingSelector(state),
+  users: getUsersSelector(state),
+  pageSize: getPageSizeSelector(state),
+  totalUsersCount: getTotalUsersCountSelector(state),
+  curentPage: curentPageSelector(state),
+  followingInProcess: followingInProcessSelector(state),
 })
 
 
@@ -125,5 +126,6 @@ export const UsersContainer = connect(mapStateToProps, {
   followThunkCreater,
   unFollowThunkCreater,
 })(UsersAPIComponent)
+
 
 

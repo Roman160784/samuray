@@ -39,7 +39,6 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
         let userId = this.props.params.userId;
         if (!userId) {
             userId = this.props.autorisedUserId;
-            debugger
             if(!userId) {
                 this.props.navigate.push('/Login')
             }
