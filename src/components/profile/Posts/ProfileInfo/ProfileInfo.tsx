@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { ProfileType, RootStateType } from '../../../../redux/state';
 import { Preloader } from '../../../preloader/preloader';
-import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from './ProfileStatus'
 import p from './ProfileInfo.module.css'
 
 
@@ -27,7 +27,7 @@ function ProfileInfo(props: ProfileInfoPropstype) {
       
       <div>{props.profile.aboutMe}</div>
       <img src={props.profile.photos.small} />
-      <ProfileStatus status={props.status}
+      <ProfileStatusWithHooks status={props.status}
       updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
       />
       <div>{props.profile.fullName}</div>

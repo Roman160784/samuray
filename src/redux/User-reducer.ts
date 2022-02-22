@@ -107,7 +107,7 @@ export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => {
             .then(data => {
                 dispatch(togleIsFetching(false))
                 dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(100));
+                dispatch(setTotalUsersCount(1000));
                 // dispatch(setTotalUsersCount(data.totalUsersCount));
             });
     }

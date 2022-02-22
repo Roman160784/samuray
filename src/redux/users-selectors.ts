@@ -10,9 +10,9 @@ return state.usersPage.users
 
 
 //Reselect
-export const getUsersSuperSelectot = createSelector(getUsersSelector,( users: Array<UsersType>) =>{
- return users.filter(u => true)
-})
+// export const getUsersSuperSelectot = createSelector(getUsersSelector,( users: Array<UsersType>) =>{
+//  return users.filter(u => true)
+// })
 
 export const getPageSizeSelector = (state: AppRootStateType) => {
 return state.usersPage.pageSize
