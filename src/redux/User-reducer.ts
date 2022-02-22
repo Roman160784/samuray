@@ -102,11 +102,11 @@ export const followingInProcessAC = (followingInProcess: boolean) => {
 export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => {
     return (dispatch: Dispatch<ActionsUsersType>) => {
         dispatch(togleIsFetching(true))
+        dispatch(setPage(curentPage))
         usersAPI.getUsers(curentPage, pageSize)
             .then(data => {
                 dispatch(togleIsFetching(false))
                 dispatch(setUsers(data.items))
-                dispatch(setPage(curentPage))
                 dispatch(setTotalUsersCount(100));
                 // dispatch(setTotalUsersCount(data.totalUsersCount));
             });
