@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useState, } from "react";
+import userEvent from "@testing-library/user-event";
+import React, { ChangeEvent, useEffect, useState, } from "react";
 
 
 type ProfileStatusPropsType = {
@@ -11,6 +12,9 @@ const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
     const [editMode, setEditMode] = useState <boolean> (false)
     const [value, setValue] = useState <string> (props.status)
   
+    useEffect(() => {
+        setValue(props.status)
+    }, [props.status])
     
 const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
