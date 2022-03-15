@@ -15,8 +15,6 @@ export type postType = {
 type postsType = {
   posts: Array<PostsType>
   newPostText: string
-  // addPost: () => void
-  // UpdateNewText:(newText: string) => void
   sendNewPost: (newPostText: string) => void
 }
 
@@ -25,16 +23,6 @@ function MyPosts(props: postsType) {
     <MyPost message={post.message} likesCount={post.likesCount} />
   )
 
-  // let addPost = () => {
-  //   props.addPost()
-  //     // props.dispatch(addPostAC())
-  // }
-
-  // let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   let newText = e.currentTarget.value
-  //   props.UpdateNewText(newText)
-  //     // props.dispatch(changeNewTextAC(e.currentTarget.value))
-  // }
 
   const addNewPost = (values: any) => {
     props.sendNewPost(values.newPostText)
@@ -48,16 +36,6 @@ function MyPosts(props: postsType) {
         <div>
           <AddMessageForMyPostsReduxFornm onSubmit={addNewPost} />
         </div>
-        {/* <div>
-          <textarea
-          value={props.newPostText}
-            onChange={onPostChange}
-            
-          />
-        </div>
-        <div>
-          <button onClick={addPost}>Add Post</button>
-        </div> */}
       </div>
 
     </div>
