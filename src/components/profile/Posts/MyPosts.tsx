@@ -18,7 +18,7 @@ type postsType = {
   sendNewPost: (newPostText: string) => void
 }
 
-function MyPosts(props: postsType) {
+const  MyPosts = React.memo( (props: postsType) => {
   let myPosts = props.posts.map(post =>
     <MyPost message={post.message} likesCount={post.likesCount} />
   )
@@ -41,7 +41,7 @@ function MyPosts(props: postsType) {
     </div>
 
   )
-}
+})
 
 const maxLengthValidater = maxLengthCreater(10)
 
