@@ -12,6 +12,11 @@ it('add new post', () => {
         status: '',
     }
     let newState = profileReducer(state, action)
+
+    expect (newState.posts.length).toBe(3)
+    // expect (newState.posts).toBe("Hey every one")
+    expect (newState.posts[2].message).toBe("Hey every one")
+  
 })
 
 
