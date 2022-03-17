@@ -28,6 +28,14 @@ it('remove post', () => {
 
     expect (newState.posts.length).toBe(1)
 })
+it('cant to delete post without correct id, lenght can not be cchanged', () => {
+
+    let action = removePostAC(100)
+   
+    let newState = profileReducer(state, action)
+
+    expect (newState.posts.length).toBe(2)
+})
 
 
 
