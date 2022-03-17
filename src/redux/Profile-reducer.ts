@@ -31,13 +31,16 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ap
         case "SET-USERS-STATUS":
             return { ...state, status: action.status }
 
+        case 'REMOVE-POST': 
+            return {...state, posts : state.posts.filter(p => p.id !== action.id)}
+
         default:
             return state
     }
 }
 
 export type ActionsProfileType = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC> 
-| ReturnType<typeof setUsersPropfileAC> | ReturnType<typeof setUserStausAC> 
+| ReturnType<typeof setUsersPropfileAC> | ReturnType<typeof setUserStausAC> | ReturnType<typeof removePostAC>
 
 export const addPostAC = (newPostText: string) => {
     return {
@@ -62,6 +65,12 @@ export const setUserStausAC = (status: string) => {
     return {
         type: "SET-USERS-STATUS",
         status,
+    } as const
+}
+export const removePostAC = (id: number) => {
+    return {
+        type: "REMOVE-POST",
+        id,
     } as const
 }
 
