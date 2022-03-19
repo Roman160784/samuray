@@ -18,20 +18,20 @@ let initialState: ProfilePageType = {
 const initState = {} as ProfilePageType 
 export const profileReducer = (state: ProfilePageType = initialState, action: AppActionType): ProfilePageType => {
     switch (action.type) {
-        case "ADD-POST":
+        case "PROFILE/ADD-POST":
             let newPost = { id: 3, message: action.newPostText, likesCount: 0 };
             return { ...state, newPostText: "", posts: [...state.posts, newPost] }
 
-        case "CHANGE-NEW-TEXT":
+        case "PROFILE/CHANGE-NEW-TEXT":
             return { ...state, newPostText: action.newPostText }
 
-        case "SET-USERS-PROFILE":
+        case "PROFILE/SET-USERS-PROFILE":
             return { ...state, profile: action.profile }
 
-        case "SET-USERS-STATUS":
+        case "PROFILE/SET-USERS-STATUS":
             return { ...state, status: action.status }
 
-        case 'REMOVE-POST': 
+        case "PROFILE/REMOVE-POST": 
             return {...state, posts : state.posts.filter(p => p.id !== action.id)}
 
         default:
@@ -44,32 +44,32 @@ export type ActionsProfileType = ReturnType<typeof addPostAC> | ReturnType<typeo
 
 export const addPostAC = (newPostText: string) => {
     return {
-        type: "ADD-POST",
+        type: "PROFILE/ADD-POST",
         newPostText,
     } as const
 }
 export const changeNewTextAC = (newPostText: string) => {
     return {
-        type: "CHANGE-NEW-TEXT",
+        type: "PROFILE/CHANGE-NEW-TEXT",
          newPostText
     } as const
 }
 
 export const setUsersPropfileAC = (profile: ProfileType) => {
     return {
-        type: "SET-USERS-PROFILE",
+        type: "PROFILE/SET-USERS-PROFILE",
         profile,
     } as const
 }
 export const setUserStausAC = (status: string) => {
     return {
-        type: "SET-USERS-STATUS",
+        type: "PROFILE/SET-USERS-STATUS",
         status,
     } as const
 }
 export const removePostAC = (id: number) => {
     return {
-        type: "REMOVE-POST",
+        type: "PROFILE/REMOVE-POST",
         id,
     } as const
 }
