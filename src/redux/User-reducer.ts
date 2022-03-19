@@ -21,25 +21,25 @@ let initialState: UsersStateType = {
 
 export const usersReducer = (state: UsersStateType = initialState, action: AppActionType): UsersStateType => {
     switch (action.type) {
-        case "FOLLOW":
+        case "USERS/FOLLOW":
             return { ...state, users: state.users.map(u => u.id === action.id ? { ...u, followed: true } : u) }
 
-        case "UN-FOLLOW":
+        case "USERS/UN-FOLLOW":
             return { ...state, users: state.users.map(u => u.id === action.id ? { ...u, followed: false } : u) }
 
-        case "SET-USERS":
+        case "USERS/SET-USERS":
             return { ...state, users: action.users }
 
-        case "SET-CURRENT-PAGE":
+        case "USERS/SET-CURRENT-PAGE":
             return { ...state, curentPage: action.curentPage }
 
-        case "SET-TOTAL-USER-COUNT":
+        case "USERS/SET-TOTAL-USER-COUNT":
             return { ...state, totalUsersCount: action.totalUsersCount }
 
-        case "TOGLE-IS-FETCHING":
+        case "USERS/TOGLE-IS-FETCHING":
             return { ...state, isFething: action.isFething }
 
-        case "FOLLOWING-IN-PROCESS":
+        case "USERS/FOLLOWING-IN-PROCESS":
             return { ...state, isFething: action.followingInProcess }
 
         default:
@@ -53,47 +53,47 @@ export type ActionsUsersType = ReturnType<typeof follow> | ReturnType<typeof unF
 
 export const follow = (id: number) => {
     return {
-        type: "FOLLOW",
+        type: "USERS/FOLLOW",
         id,
     } as const
 }
 export const unFollow = (id: number) => {
     return {
-        type: "UN-FOLLOW",
+        type: "USERS/UN-FOLLOW",
         id,
     } as const
 }
 export const setUsers = (users: Array<UsersType>) => {
     return {
-        type: "SET-USERS",
+        type: "USERS/SET-USERS",
         users,
     } as const
 }
 
 export const setPage = (curentPage: number) => {
     return {
-        type: "SET-CURRENT-PAGE",
+        type: "USERS/SET-CURRENT-PAGE",
         curentPage,
 
     } as const
 }
 export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
-        type: "SET-TOTAL-USER-COUNT",
+        type: "USERS/SET-TOTAL-USER-COUNT",
         totalUsersCount,
 
     } as const
 }
 export const togleIsFetching = (isFething: boolean) => {
     return {
-        type: "TOGLE-IS-FETCHING",
+        type: "USERS/TOGLE-IS-FETCHING",
         isFething,
 
     } as const
 }
 export const followingInProcessAC = (followingInProcess: boolean) => {
     return {
-        type: "FOLLOWING-IN-PROCESS",
+        type: "USERS/FOLLOWING-IN-PROCESS",
         followingInProcess,
 
     } as const
