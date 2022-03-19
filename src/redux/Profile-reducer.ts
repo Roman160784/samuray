@@ -77,31 +77,23 @@ export const removePostAC = (id: number) => {
 
 
 
-export const setUsersPropfileThunkCreator = (userId: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.setUserLoginInProfile(userId)
-            .then(data => {
-                    dispatch(setUsersPropfileAC(data))
-            });
+export const setUsersPropfileThunkCreator = (userId: string) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.setUserLoginInProfile(userId)
+    dispatch(setUsersPropfileAC(data))
+}
+
+export const getUsersStatusThunkCreator = (userId: string) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.getUserStatus(userId)
+    dispatch(setUserStausAC(data))
+}
+
+export const updateUserStatusThunkCreator = (status: string) => async (dispatch: Dispatch) => {
+
+    let data = await profileAPI.updateUserStatus(status)
+    if (data.resultCode === 0) {
+        dispatch(setUserStausAC(status))
     }
 }
-export const getUsersStatusThunkCreator = (userId: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.getUserStatus(userId)
-            .then(data => {
-                    dispatch(setUserStausAC(data))
-            });
-    }
-}
-export const updateUserStatusThunkCreator = (status: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.updateUserStatus(status)
-            .then(data => {
-                if(data.resultCode === 0) {
-                    dispatch(setUserStausAC(status))  
-                }
-            });
-    }
-}
+
 
 
