@@ -43,39 +43,30 @@ export const setAuthUserDataAC = (id: null | string| number, login: null | strin
 }
 
 
-export const setAuthUserDataThunkCreator: any  = () => {
-    return (dispatch: Dispatch) => {
-        return authAPI.setUserLogin()
-        .then(data=> {
+export const setAuthUserDataThunkCreator: any  = () => async (dispatch: Dispatch) => {
+        let data = await authAPI.setUserLogin()
                 if(data.resultCode === ResultCodesEnum.Success) {
                   let {id, login, email, } = data.data
                   dispatch(setAuthUserDataAC(id, login, email, true))
                }
-            })
     }
-}
 
-export const loginTC = (email: string, password: string, rememberME: boolean) => {
-    return(dispatch: Dispatch) => {
-        authAPI.login(email, password, rememberME)
-        .then(data => {
+
+export const loginTC = (email: string, password: string, rememberME: boolean) => async (dispatch: Dispatch) => {
+       let data = await authAPI.login(email, password, rememberME)
             if(data.resultCode === ResultCodesEnum.Success) {
                 dispatch(setAuthUserDataThunkCreator())
             }else {
                 let message = data.messages.length > 0 ? data.messages[0] : "Some error"
                 dispatch(stopSubmit("login", {_error: message}))
             }
-        })
     }
-}
-export const loginOutTC = () => {
-    return(dispatch: Dispatch) => {
-        authAPI.loginOut()
-        .then(data => {
+
+export const loginOutTC = () => async (dispatch: Dispatch) => {
+       let data = await authAPI.loginOut()
             if(data.resultCode === 0) {
                 dispatch(setAuthUserDataAC(null, null, null, false))
             }
-        })
     }
-}
+
 
