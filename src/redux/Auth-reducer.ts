@@ -16,7 +16,7 @@ let initialState: AuthType = {
 // const initState = {} as ProfilePageType
 export const authReducer = (state: AuthType = initialState, action: AppActionType): AuthType => {
     switch (action.type) {
-        case "SET-USERS-DATA":
+        case "AUTH/SET-USERS-DATA":
             return {
                 ...state,
                 ...action.payload,
@@ -34,7 +34,7 @@ export type ActionsAuthType = ReturnType<typeof setAuthUserDataAC>
 
 export const setAuthUserDataAC = (id: null | string| number, login: null | string, email: null | string, isAuth: boolean) => {
     return {
-        type: "SET-USERS-DATA",
+        type: "AUTH/SET-USERS-DATA",
         payload: {
             id, login, email, isAuth,
         }
