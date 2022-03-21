@@ -51,7 +51,7 @@ export type ActionsUsersType = ReturnType<typeof follow> | ReturnType<typeof unF
     | ReturnType<typeof setUsers> | ReturnType<typeof setPage> | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof togleIsFetching> | ReturnType<typeof followingInProcessAC>
 
-export const follow = (id: number) => {
+export const follow = (id: number, ) => {
     return {
         type: "USERS/FOLLOW",
         id,
@@ -99,39 +99,29 @@ export const followingInProcessAC = (followingInProcess: boolean) => {
     } as const
 }
 
-export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => {
-    return (dispatch: Dispatch<ActionsUsersType>) => {
-        dispatch(togleIsFetching(true))
-        dispatch(setPage(curentPage))
-        usersAPI.getUsers(curentPage, pageSize)
-            .then(data => {
-                dispatch(togleIsFetching(false))
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(1000));
-                // dispatch(setTotalUsersCount(data.totalUsersCount));
-            });
-    }
+export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => async (dispatch: Dispatch<ActionsUsersType>) => {
+    dispatch(togleIsFetching(true))
+    dispatch(setPage(curentPage))
+    let data = await usersAPI.getUsers(curentPage, pageSize)
+    dispatch(togleIsFetching(false))
+    dispatch(setUsers(data.items))
+    dispatch(setTotalUsersCount(1000));
+    // dispatch(setTotalUsersCount(data.totalUsersCount));
 }
 
-export const followThunkCreater = (id: number) => {
-    return (dispatch: Dispatch<ActionsUsersType>) => {
-        // dispatch(followingInProcessAC(true))
-        usersAPI.followUsers(id)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(follow(id))
-                }
-                // dispatch(followingInProcessAC(false))
-            });
+
+export const followThunkCreater = (id: number) => async (dispatch: Dispatch<ActionsUsersType>) => {
+    // dispatch(followingInProcessAC(true))
+    let data = await usersAPI.followUsers(id)
+    if (data.resultCode == 0) {
+        dispatch(follow(id))
     }
+    // dispatch(followingInProcessAC(false))
 }
-export const unFollowThunkCreater = (id: number)  => {
-    return (dispatch: Dispatch<ActionsUsersType>) => {
-        usersAPI.unFollowUsers(id)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(unFollow(id))
-                }
-            });
+
+export const unFollowThunkCreater = (id: number) => async (dispatch: Dispatch<ActionsUsersType>) => {
+    let data = await usersAPI.unFollowUsers(id)
+    if (data.resultCode == 0) {
+        dispatch(unFollow(id))
     }
 }

@@ -88,7 +88,6 @@ export const getUsersStatusThunkCreator = (userId: string) => async (dispatch: D
 }
 
 export const updateUserStatusThunkCreator = (status: string) => async (dispatch: Dispatch) => {
-
     let data = await profileAPI.updateUserStatus(status)
     if (data.resultCode === 0) {
         dispatch(setUserStausAC(status))
