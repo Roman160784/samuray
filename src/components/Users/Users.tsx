@@ -54,52 +54,11 @@ export const Users = (props: usersPropsStateType) => {
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response: any) => {
                 debugger
                 props.setUsers(response.data.items)
-                // props.setUsers( [
-                //      {
-                //         id: 1, photoUrl: 'https://2ch.hk/b/thumb/214705633/15830721515210s.jpg', followed: false, fullName: "Roma", status: "Try to learn React",
-                //         location: { city: "Gomel", country: "Belarus" }
-                //     },
-                //     {
-                //         id: 2, photoUrl: 'https://rf4game.ru/wp-content/uploads/avatar/256/0007/7198.jpg', followed: true, fullName: "Alex", status: "Driver",
-                //         location: { city: "Rome", country: "Italy" }
-                //     },
-                //     {
-                //         id: 3, photoUrl: 'https://i1.sndcdn.com/avatars-000231267714-v4a7cf-t240x240.jpg', followed: false, fullName: "Sam", status: "I love USA",
-                //         location: { city: "NY", country: "USA" }
-                //     },
-                //     {
-                //         id: 4, photoUrl: 'https://99px.ru/sstorage/1/2010/08/11508101338482051.jpg', followed: false, fullName: "Vasya", status: "I like VODKA",
-                //         location: { city: "Warshav", country: "Poland" }
-                //     },]
-                // )
+               
             });
         }
     }
-    // if (props.users.length === 0) {
-    //     debugger
-    //     axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response: any) => {
-    //         debugger
-    //         props.setUsers(response.data.items)
-    //         // props.setUsers( [
-    //         //      {
-    //         //         id: 1, photoUrl: 'https://2ch.hk/b/thumb/214705633/15830721515210s.jpg', followed: false, fullName: "Roma", status: "Try to learn React",
-    //         //         location: { city: "Gomel", country: "Belarus" }
-    //         //     },
-    //         //     {
-    //         //         id: 2, photoUrl: 'https://rf4game.ru/wp-content/uploads/avatar/256/0007/7198.jpg', followed: true, fullName: "Alex", status: "Driver",
-    //         //         location: { city: "Rome", country: "Italy" }
-    //         //     },
-    //         //     {
-    //         //         id: 3, photoUrl: 'https://i1.sndcdn.com/avatars-000231267714-v4a7cf-t240x240.jpg', followed: false, fullName: "Sam", status: "I love USA",
-    //         //         location: { city: "NY", country: "USA" }
-    //         //     },
-    //         //     {
-    //         //         id: 4, photoUrl: 'https://99px.ru/sstorage/1/2010/08/11508101338482051.jpg', followed: false, fullName: "Vasya", status: "I like VODKA",
-    //         //         location: { city: "Warshav", country: "Poland" }
-    //         //     },]
-    //         // )
-    //     });
-    // }
+  
 
     return (
         
@@ -124,7 +83,6 @@ export const Users = (props: usersPropsStateType) => {
                 <span>
                     <span>
                         <div>{u.name}</div>
-                        {/* <div>{u.fullName}</div> */}
                         <div>{u.status}</div>
                     </span>
                     <span>

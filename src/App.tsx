@@ -4,9 +4,9 @@ import Nav from './components/Nav/Nav'
 import { HeaderContainer } from '../src/components/header/HeaderContainer'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { AppRootStateType, store } from './redux/reduxStore';
-import  {DialogsContainer}  from './components/dialogs/DialogsContainer';
+import { DialogsContainer } from './components/dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import ProfileContainer from './components/profile/ProfileContainer';
 import Login from './components/Login/Login'
 import { initioliseAppTC } from './redux/App-reducer';
@@ -19,15 +19,14 @@ export type AppPropsType = {
 }
 
 
-class App  extends React.Component <AppPropsType> {
+class App extends React.Component<AppPropsType> {
   componentDidMount() {
     this.props.initioliseAppTC && this.props.initioliseAppTC()
   }
   render() {
-if(!this.props.intialized ) {
-return <Preloader/>
-}
-
+    if (!this.props.intialized) {
+      return <Preloader />
+    }
 
     return (
       <BrowserRouter>
@@ -42,7 +41,7 @@ return <Preloader/>
                 <Route path=':userId' element={<ProfileContainer />} />
               </Route>
               <Route path='/Users' element={<UsersContainer />} />
-  
+
             </Routes>
           </div>
         </div>
@@ -57,9 +56,9 @@ type MSTP = {
   intialized: boolean
 }
 
-const mapStateToProps =  (state: AppRootStateType):MSTP => ({
+const mapStateToProps = (state: AppRootStateType): MSTP => ({
   intialized: state.appReducer.intialized
 });
 
 
-export default connect (mapStateToProps,{initioliseAppTC})(App);
+export default connect(mapStateToProps, { initioliseAppTC })(App);

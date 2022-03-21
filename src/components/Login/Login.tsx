@@ -8,6 +8,7 @@ import { AppRootStateType } from '../../redux/reduxStore';
 import { maxLengthCreater, requairedField } from '../../utils/validators/validater';
 import { InputForLogin } from '../formsControls/FormsControls';
 import styles from '../formsControls/FormsControls.module.css'
+import { Preloader } from '../preloader/preloader';
 
 
 type FormDataType = {
@@ -18,10 +19,10 @@ type FormDataType = {
 
 const maxLengthValidater = maxLengthCreater(30)
 
- const LginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+ const LginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}, ...props) => {
     return (
         <>
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field  component={InputForLogin} name={'email'} placeholder={"Email"}
                 validate={[requairedField, maxLengthValidater]}
@@ -36,7 +37,7 @@ const maxLengthValidater = maxLengthCreater(30)
             <div>
                 <Field component={"input"} name={'rememberMe'} type={"checkbox"} /> Remember 
             </div>
-            { props.error && <div className={styles.summoryError}>{props.error}</div>}
+            { error && <div className={styles.summoryError}>{error}</div>}
             <div>
                 <button>Log In</button>
                 </div>
@@ -51,8 +52,6 @@ type LoginPropsType = {
     isAuth: boolean
     loginTC : (email: string, password: string,  rememberME: boolean) => void
 }
-
-
 
 const Login = (props: LoginPropsType) => {
     const onSubmit=(formData: FormDataType) => {

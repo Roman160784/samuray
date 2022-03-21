@@ -32,6 +32,7 @@ export const authReducer = (state: AuthType = initialState, action: AppActionTyp
 
 export type ActionsAuthType = ReturnType<typeof setAuthUserDataAC> 
 
+
 export const setAuthUserDataAC = (id: null | string| number, login: null | string, email: null | string, isAuth: boolean) => {
     return {
         type: "AUTH/SET-USERS-DATA",
@@ -41,6 +42,8 @@ export const setAuthUserDataAC = (id: null | string| number, login: null | strin
 
     } as const
 }
+
+
 
 
 export const setAuthUserDataThunkCreator: any  = () => async (dispatch: Dispatch) => {
