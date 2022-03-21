@@ -50,16 +50,13 @@ export const Users = (props: usersPropsStateType) => {
 
     let getUsers = () => {
         if (props.users.length === 0) {
-            debugger
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response: any) => {
-                debugger
                 props.setUsers(response.data.items)
                
             });
         }
     }
   
-
     return (
         
         <div>
