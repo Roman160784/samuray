@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { AppRootStateType, store } from './redux/reduxStore';
 import { DialogsContainer } from './components/dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import ProfileContainer from './components/profile/ProfileContainer';
 import Login from './components/Login/Login'
 import { initioliseAppTC } from './redux/App-reducer';
@@ -61,4 +61,16 @@ const mapStateToProps = (state: AppRootStateType): MSTP => ({
 });
 
 
-export default connect(mapStateToProps, { initioliseAppTC })(App);
+export const AppContainer = connect(mapStateToProps, { initioliseAppTC })(App);
+
+const SamuraiTSApp = () => {
+  return <Provider store={store}>
+  <AppContainer />
+</Provider>
+  
+    
+  
+ 
+}
+
+export default SamuraiTSApp
