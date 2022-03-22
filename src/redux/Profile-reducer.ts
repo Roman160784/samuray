@@ -26,7 +26,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ap
             return { ...state, newPostText: action.newPostText }
 
         case "PROFILE/SET-USERS-PROFILE":
-            return { ...state, profile: action.profile }
+            return { ...state,  profile: action.profile }
 
         case "PROFILE/SET-USERS-STATUS":
             return { ...state, status: action.status }
