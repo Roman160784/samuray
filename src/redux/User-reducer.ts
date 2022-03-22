@@ -105,8 +105,7 @@ export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => async (dis
     let data = await usersAPI.getUsers(curentPage, pageSize)
     dispatch(togleIsFetching(false))
     dispatch(setUsers(data.items))
-    dispatch(setTotalUsersCount(1000));
-    // dispatch(setTotalUsersCount(data.totalUsersCount));
+    dispatch(setTotalUsersCount(data.totalCount));
 }
 
 
