@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from '../Users/Users.module.css'
 
 type PagenatorType ={
@@ -10,13 +10,18 @@ type PagenatorType ={
 
 
 export const Pagenator = (props: PagenatorType) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
-    let pages = []
+    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    const portionSize = 10
+    const pages = []
 
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+
+    const portionCount = Math.ceil(pagesCount/portionSize)
+    const [portionNumber, setPortionNumber] = useState<number>(1)
+    const leftPortionpageNumber = (portionNumber-1) * portionSize +1
+    const rightPortionpageNumber = portionNumber * portionSize
 
     return (
             <div>
@@ -27,3 +32,5 @@ export const Pagenator = (props: PagenatorType) => {
             </div>
             )
 }
+
+
