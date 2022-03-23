@@ -65,9 +65,9 @@ let mapDispatchToProps = (dispatch: Dispathc) : MDTP => ({
 
 // export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
-export const DialogsContainer = compose <React.ComponentType>(
+ const DialogsContainer = compose <React.ComponentType>(
   connect(mapStateToProps, mapDispatchToProps),
   WithAuthRedirectComponent
 ) (Dialogs)
 
-// export default DialogsContainer
+export default DialogsContainer

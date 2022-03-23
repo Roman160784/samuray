@@ -4,13 +4,14 @@ import Nav from './components/Nav/Nav'
 import { HeaderContainer } from '../src/components/header/HeaderContainer'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import { AppRootStateType, store } from './redux/reduxStore';
-import { DialogsContainer } from './components/dialogs/DialogsContainer';
+// import { DialogsContainer } from './components/dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
 import { connect, Provider } from 'react-redux';
 import ProfileContainer from './components/profile/ProfileContainer';
 import Login from './components/Login/Login'
 import { initioliseAppTC } from './redux/App-reducer';
 import { Preloader } from './components/preloader/preloader';
+const DialogsContainer = React.lazy(() => import ('./components/dialogs/DialogsContainer'))
 
 
 export type AppPropsType = {
