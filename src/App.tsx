@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import Nav from './components/Nav/Nav'
 import { HeaderContainer } from '../src/components/header/HeaderContainer'
@@ -36,7 +36,11 @@ class App extends React.Component<AppPropsType> {
           <Nav />
           <div className='app-wrapper-content'>
             <Routes>
-              <Route path='/Dialogs' element={<DialogsContainer />} />
+              <Route path='/Dialogs' element= {
+               <Suspense fallback={<div>Loading...</div>}>
+              <DialogsContainer />
+              </Suspense>
+              }/>
               <Route path='/Login' element={<Login />} />
               <Route path='/Profile' element={<ProfileContainer />} >
                 <Route path=':userId' element={<ProfileContainer />} />
