@@ -11,6 +11,7 @@ import ProfileContainer from './components/profile/ProfileContainer';
 import Login from './components/Login/Login'
 import { initioliseAppTC } from './redux/App-reducer';
 import { Preloader } from './components/preloader/preloader';
+import { WithSuspense } from './hoc/WithSusoense';
 const DialogsContainer = React.lazy(() => import ('./components/dialogs/DialogsContainer'))
 
 
@@ -19,6 +20,8 @@ export type AppPropsType = {
   initioliseAppTC?: () => void
 }
 
+//Colling Hock WithSuspense
+ const DialogsWithSupense = WithSuspense(DialogsContainer)
 
 class App extends React.Component<AppPropsType> {
   componentDidMount() {
@@ -29,6 +32,7 @@ class App extends React.Component<AppPropsType> {
       return <Preloader />
     }
 
+
     return (
       <BrowserRouter>
         <div className='app-wrapper'>
@@ -36,11 +40,7 @@ class App extends React.Component<AppPropsType> {
           <Nav />
           <div className='app-wrapper-content'>
             <Routes>
-              <Route path='/Dialogs' element= {
-               <Suspense fallback={<div>Loading...</div>}>
-              <DialogsContainer />
-              </Suspense>
-              }/>
+              <Route path='/Dialogs' element= {<DialogsWithSupense />}/>
               <Route path='/Login' element={<Login />} />
               <Route path='/Profile' element={<ProfileContainer />} >
                 <Route path=':userId' element={<ProfileContainer />} />
