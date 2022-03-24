@@ -11,6 +11,7 @@ type ProfilePropsType__ = {
   status: string 
   updateUserStatusThunkCreator : (status: string) => void
   sendNewPost: (newPostText: string) => void
+  savePhoto: (img: File) => void
 }
 
 function Profile(props: ProfilePropsType__) {
@@ -18,6 +19,7 @@ function Profile(props: ProfilePropsType__) {
   return (
     <div>
       <ProfileInfo profile={props.profile}
+      savePhoto={props.savePhoto}
       status={props.status}
       isOwner={props.isOwner}       
       updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}

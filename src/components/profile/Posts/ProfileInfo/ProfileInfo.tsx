@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { ProfileType, RootStateType } from '../../../../redux/state';
 import { Preloader } from '../../../preloader/preloader';
 import ProfileStatusWithHooks from './ProfileStatus'
@@ -11,6 +11,7 @@ type ProfileInfoPropstype = {
   profile: ProfileType | null
   status: string 
   updateUserStatusThunkCreator: (status: string) => void
+  savePhoto: (img: File) => void
 }
 
 function ProfileInfo(props: ProfileInfoPropstype) {
@@ -19,13 +20,20 @@ function ProfileInfo(props: ProfileInfoPropstype) {
     return <Preloader />
   }
 
-      
+   const onMainPhotoSlectied = (e: ChangeEvent<HTMLInputElement>) => {
+     debugger
+      if(e.currentTarget.files?.length) {
+        props.savePhoto(e.currentTarget.files[0]) 
+      }
+   }
+  
+
   return (
 
     <div>
       <div>{props.profile.aboutMe}</div>
       <img className={p.ava} src={props.profile.photos.small || userPhoto} />
-      {props.isOwner && <div> <input type="file" /> </div>}
+      {props.isOwner && <div> <input type="file" onChange={onMainPhotoSlectied} /> </div>}
       
       <ProfileStatusWithHooks status={props.status}
       updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams,  } from "react-router-dom";
 import { AppRootStateType } from "../../redux/reduxStore";
 import { ProfileType } from "../../redux/state";
-import {  getUsersStatusThunkCreator, setUsersPropfileThunkCreator, updateUserStatusThunkCreator } from "../../redux/Profile-reducer";
+import {  getUsersStatusThunkCreator, savePhotoTC, setUsersPropfileThunkCreator, updateUserStatusThunkCreator } from "../../redux/Profile-reducer";
 import {WithAuthRedirectComponent} from "../../hoc/WithAuthComonent"
 import { compose } from "redux";
 
@@ -32,6 +32,7 @@ export type ProfileContainerPropsType__ = {
     getUsersStatusThunkCreator: (userId: string) => void
     updateUserStatusThunkCreator : (status: string) => void
     sendNewPost: (newPostText: string) => void
+    savePhotoTC: (img: File) => void
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
@@ -71,6 +72,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
             profile={this.props.profile}
             status={this.props.status} 
             updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator}
+            savePhoto={this.props.savePhotoTC}
             />
         )
     }
@@ -93,7 +95,7 @@ let mapStateToProps = (state: AppRootStateType): MSTP => ({
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setUsersPropfileThunkCreator, getUsersStatusThunkCreator, updateUserStatusThunkCreator}),   
+    connect(mapStateToProps, {setUsersPropfileThunkCreator, getUsersStatusThunkCreator, updateUserStatusThunkCreator, savePhotoTC}),   
     withRouter,
     WithAuthRedirectComponent,
 )(ProfileContainer)
