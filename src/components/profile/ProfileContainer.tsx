@@ -35,6 +35,7 @@ export type ProfileContainerPropsType__ = {
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
+    [x: string]: any;
 
     refreshProfile() {
         let userId = this.props.params.userId;
@@ -54,8 +55,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
         this.refreshProfile()
     }
 
-    componentDidUpdate() {
-        this.refreshProfile()
+    componentDidUpdate(prevProps: ProfileContainerPropsType__) {
+        if (this.props.params.userId !== prevProps.params.userId){
+            this.refreshProfile()
+        }
     }
         
 
