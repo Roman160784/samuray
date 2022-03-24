@@ -103,8 +103,8 @@ export const updateUserStatusThunkCreator = (status: string) => async (dispatch:
 
 export const savePhotoTC = (img: File) => async (dispatch: Dispatch) => {
     let data = await profileAPI.savePhoto(img)
-    // if (data.resultCode === 0) {
-    //     dispatch(savePhotoAC(data.photos))
-    // }
+    if (data.resultCode === 0) {
+        dispatch(savePhotoAC(data.photos))
+    }
 }
 
