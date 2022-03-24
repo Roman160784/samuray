@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { ProfileType, RootStateType } from '../../../../redux/state';
 import { Preloader } from '../../../preloader/preloader';
 import ProfileStatusWithHooks from './ProfileStatus'
 import p from './ProfileInfo.module.css'
+import userPhoto from '../../../../assets/img/userPhoto.png'
 
 
 type ProfileInfoPropstype = {
@@ -26,7 +26,7 @@ function ProfileInfo(props: ProfileInfoPropstype) {
       </div> */}
       
       <div>{props.profile.aboutMe}</div>
-      <img src={props.profile.photos.small} />
+      <img className={p.ava} src={props.profile.photos.small || userPhoto} />
       <ProfileStatusWithHooks status={props.status}
       updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
       />

@@ -35,7 +35,8 @@ export type ProfileContainerPropsType__ = {
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
-    componentDidMount() {
+
+    refreshProfile() {
         let userId = this.props.params.userId;
         if (!userId) {
             userId = this.props.autorisedUserId;
@@ -46,7 +47,15 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
 
         this.props.setUsersPropfileThunkCreator(userId, this.props.profile)
         this.props.getUsersStatusThunkCreator(userId)
+    }
 
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate() {
+        this.refreshProfile()
     }
         
 
