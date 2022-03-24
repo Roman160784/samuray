@@ -46,7 +46,7 @@ export const profileAPI = {
          .then(response => response.data)
      },
      savePhoto(file: File) {
-        
+        return instance.put('profile/photo', {file})
      },
      
 }
