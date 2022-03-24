@@ -47,6 +47,7 @@ export const profileAPI = {
      },
      savePhoto(file: File) {
         return instance.put('profile/photo', {file})
+        .then(response => response.data)
      },
      
 }
