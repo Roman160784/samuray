@@ -21,7 +21,6 @@ function ProfileInfo(props: ProfileInfoPropstype) {
   }
 
    const onMainPhotoSlectied = (e: ChangeEvent<HTMLInputElement>) => {
-     debugger
       if(e.currentTarget.files?.length) {
         props.savePhoto(e.currentTarget.files[0]) 
       }
@@ -32,7 +31,7 @@ function ProfileInfo(props: ProfileInfoPropstype) {
 
     <div>
       <div>{props.profile.aboutMe}</div>
-      <img className={p.ava} src={props.profile.photos.small || userPhoto} />
+      <img className={p.ava} src={props.profile.photos.large || userPhoto} />
       {props.isOwner && <div> <input type="file" onChange={onMainPhotoSlectied} /> </div>}
       
       <ProfileStatusWithHooks status={props.status}
