@@ -7,6 +7,7 @@ import userPhoto from '../../../../assets/img/userPhoto.png'
 
 
 type ProfileInfoPropstype = {
+  isOwner: boolean
   profile: ProfileType | null
   status: string 
   updateUserStatusThunkCreator: (status: string) => void
@@ -18,15 +19,14 @@ function ProfileInfo(props: ProfileInfoPropstype) {
     return <Preloader />
   }
 
+      
   return (
 
     <div>
-      {/* <div>
-        <img src='https://media.gettyimages.com/photos/northen-lights-above-winter-mountains-picture-id466331590?s=612x612' />
-      </div> */}
-      
       <div>{props.profile.aboutMe}</div>
       <img className={p.ava} src={props.profile.photos.small || userPhoto} />
+      {props.isOwner && <div> <input type="file" /> </div>}
+      
       <ProfileStatusWithHooks status={props.status}
       updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
       />

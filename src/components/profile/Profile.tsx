@@ -6,10 +6,9 @@ import {MyPostsContainer} from './Posts/MyPostsContainer';
 
 
 type ProfilePropsType__ = {
+  isOwner: boolean
   profile: ProfileType | null
   status: string 
-  // isAuth: boolean
-  // addNewPost: (newPostText: string) => void
   updateUserStatusThunkCreator : (status: string) => void
   sendNewPost: (newPostText: string) => void
 }
@@ -19,7 +18,8 @@ function Profile(props: ProfilePropsType__) {
   return (
     <div>
       <ProfileInfo profile={props.profile}
-      status={props.status}       
+      status={props.status}
+      isOwner={props.isOwner}       
       updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
       />
       <MyPostsContainer />      
