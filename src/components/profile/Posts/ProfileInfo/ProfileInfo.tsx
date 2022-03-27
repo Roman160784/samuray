@@ -48,7 +48,10 @@ function ProfileInfo(props: ProfileInfoPropstype) {
           <b> About me </b> {props.profile.aboutMe}
         </div>
         <div>
-          <b> Contacts </b> {props.profile.contacts.github}
+          <b> Contacts :</b> {Object.keys(props.profile.contacts).map(key => {
+            const data  = props.profile?.contacts
+            if(data) {return <Contacts key={key} contactsTitle={key} contactsValue={ data[key as keyof typeof data]!}/>
+          }})}    
         </div>
       </div>
       
@@ -60,3 +63,15 @@ function ProfileInfo(props: ProfileInfoPropstype) {
 }
 
 export default ProfileInfo;
+
+
+export type ContactsPropsType = {
+  contactsTitle: string
+  contactsValue: string
+}
+
+export const Contacts = (props: ContactsPropsType) => {
+
+  return <div className={p.contacts}>  <b>{props.contactsTitle}</b>: {props.contactsValue} </div>
+
+}
