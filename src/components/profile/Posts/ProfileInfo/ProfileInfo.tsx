@@ -9,7 +9,7 @@ import userPhoto from '../../../../assets/img/userPhoto.png'
 type ProfileInfoPropstype = {
   isOwner: boolean
   profile: ProfileType | null
-  status: string 
+  status: string
   updateUserStatusThunkCreator: (status: string) => void
   savePhoto: (img: File) => void
 }
@@ -20,30 +20,40 @@ function ProfileInfo(props: ProfileInfoPropstype) {
     return <Preloader />
   }
 
-   const onMainPhotoSlectied = (e: ChangeEvent<HTMLInputElement>) => {
-      if(e.currentTarget.files?.length) {
-        props.savePhoto(e.currentTarget.files[0]) 
-      }
-   }
-  
+  const onMainPhotoSlectied = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files?.length) {
+      props.savePhoto(e.currentTarget.files[0])
+    }
+  }
+
 
   return (
 
     <div>
-      <div>{props.profile.aboutMe}</div>
       <img className={p.ava} src={props.profile.photos.large || userPhoto} />
       {props.isOwner && <div> <input type="file" onChange={onMainPhotoSlectied} /> </div>}
-      
-      <ProfileStatusWithHooks status={props.status}
-      updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
+      <div>
+      <div>
+          <b>Full name </b> {props.profile.fullName}
+        </div>
+        <ProfileStatusWithHooks status={props.status}
+        updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
       />
-      <div>{props.profile.fullName}</div>
-      <div className={p.discriptionBlock}>
-      
-      
-      
+        <div>
+          <b>Loking for a job </b> {props.profile.lookingForAJob ? 'Yes' : 'No'}
+        </div>
+        {props.profile.lookingForAJob && <div>
+          <b>My professional skils</b>  {props.profile.lookingForAJobDescription}</div>}
+        <div>
+          <b> About me </b> {props.profile.aboutMe}
+        </div>
+        <div>
+          <b> Contacts </b> {props.profile.contacts.github}
+        </div>
       </div>
-
+      
+      <div className={p.discriptionBlock}>
+      </div>
     </div>
 
   )
