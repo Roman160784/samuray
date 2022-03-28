@@ -80,6 +80,7 @@ export type ProfileDataPropsType = {
 
 export const ProfileData = (props: ProfileDataPropsType) => {
   
+  
     return (
       <div>
         {props.isOwner && <div> <button onClick={props.activateEditMode}>edit</button> </div>}
@@ -104,4 +105,6 @@ export const ProfileData = (props: ProfileDataPropsType) => {
         </div>
     )
 }
+
+
 
