@@ -90,7 +90,7 @@ export type ProfileDataResponseType = {
 
 type setUserLoginResponseType = {
     data:{
-        id: number
+        id: string
         login : string 
         email: string
     }

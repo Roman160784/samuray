@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { profileAPI, ProfileDataResponseType, ResultCodesEnum} from '../Api/Api';
 import { PhotosType, ProfilePageType, ProfileType, RootStateType } from '../redux/state'
 import { ActionsDialogsType } from './Dialogs-reducer';
+import { actionType, AppRootStateType } from './reduxStore';
 import { unFollow } from './User-reducer';
 
 type AppActionType = ActionsProfileType | ActionsDialogsType;
@@ -39,9 +40,6 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ap
         case "PROFILE/SAVE-PHOTO" :
             return {...state, profile: {...state.profile!, photos: action.img}} 
 
-        case 'PROFILE/SET-PROFILE' :
-            return {...state} 
-
         default:
             return state
     }
@@ -49,7 +47,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ap
 
 export type ActionsProfileType = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC> 
 | ReturnType<typeof setUsersPropfileAC> | ReturnType<typeof setUserStausAC> | ReturnType<typeof removePostAC> 
- | ReturnType<typeof savePhotoAC> | ReturnType<typeof setProfileAC>
+ | ReturnType<typeof savePhotoAC> 
 
 export const addPostAC = (newPostText: string) => {
     return {
@@ -84,7 +82,7 @@ export const removePostAC = (id: number) => {
 }
 
 export const savePhotoAC = (img: PhotosType) => ({type: "PROFILE/SAVE-PHOTO", img} as const)
-export const setProfileAC = (profileData: ProfileDataResponseType) => ({type: "PROFILE/SET-PROFILE", profileData} as const)
+
 
 
 
@@ -112,11 +110,13 @@ export const savePhotoTC = (img: File) => async (dispatch: Dispatch) => {
     }
 }
 
-export const setProfileDataTC = (profileData: ProfileDataResponseType) => async (dispatch: Dispatch) => {
+export const setProfileDataTC = (profileData: ProfileDataResponseType) => async (dispatch: any, getStae: () => AppRootStateType) => {
+    const userId = getStae().authReducer.id
     const data = await profileAPI.setProfile(profileData)
     if(data.resultCode === ResultCodesEnum.Success){
-        debugger
-        dispatch(setProfileAC(data))
+        if( userId !== null) {
+            dispatch(setUsersPropfileThunkCreator(userId))
+        }
     }
 }
 

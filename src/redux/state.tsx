@@ -64,7 +64,7 @@ large: string
 }
 
 export type AuthType = {
-    id: null | string | number
+    id: string | null
     email: null | string
     login: null | string
     isAuth: boolean
