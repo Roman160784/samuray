@@ -1,5 +1,6 @@
 import axios from "axios";
 import { textChangeRangeIsUnchanged } from "typescript";
+import { ContactsType, PhotosType, ProfileType } from "../redux/state";
 
 
 const instance = axios.create({
@@ -55,6 +56,10 @@ export const profileAPI = {
         })
         .then(response => response.data)
      },
+     setProfile(profileData: ProfileDataResponseType) {
+         return instance.put('profile', profileData)
+         .then(response => response.data)
+     }
      
 }
 
@@ -74,6 +79,14 @@ export const authAPI = {
     }
 }
 
+
+export type ProfileDataResponseType = {
+    contacts?: ContactsType 
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
+    fullName?: string
+    userId?: string
+}
 
 type setUserLoginResponseType = {
     data:{

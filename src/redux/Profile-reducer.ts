@@ -1,7 +1,7 @@
 
 import { profile } from 'console';
 import { Dispatch } from 'redux';
-import { profileAPI} from '../Api/Api';
+import { profileAPI, ProfileDataResponseType, ResultCodesEnum} from '../Api/Api';
 import { PhotosType, ProfilePageType, ProfileType, RootStateType } from '../redux/state'
 import { ActionsDialogsType } from './Dialogs-reducer';
 import { unFollow } from './User-reducer';
@@ -37,7 +37,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ap
             return {...state, posts : state.posts.filter(p => p.id !== action.id)}
 
         case "PROFILE/SAVE-PHOTO" :
-            return {...state, profile: {...state.profile!, photos: action.img}}   
+            return {...state, profile: {...state.profile!, photos: action.img}} 
+
+        case 'PROFILE/SET-PROFILE' :
+            return {...state} 
+
         default:
             return state
     }
@@ -45,7 +49,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ap
 
 export type ActionsProfileType = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC> 
 | ReturnType<typeof setUsersPropfileAC> | ReturnType<typeof setUserStausAC> | ReturnType<typeof removePostAC> 
- | ReturnType<typeof savePhotoAC>
+ | ReturnType<typeof savePhotoAC> | ReturnType<typeof setProfileAC>
 
 export const addPostAC = (newPostText: string) => {
     return {
@@ -80,7 +84,7 @@ export const removePostAC = (id: number) => {
 }
 
 export const savePhotoAC = (img: PhotosType) => ({type: "PROFILE/SAVE-PHOTO", img} as const)
-
+export const setProfileAC = (profileData: ProfileDataResponseType) => ({type: "PROFILE/SET-PROFILE", profileData} as const)
 
 
 
@@ -96,15 +100,23 @@ export const getUsersStatusThunkCreator = (userId: string) => async (dispatch: D
 
 export const updateUserStatusThunkCreator = (status: string) => async (dispatch: Dispatch) => {
     let data = await profileAPI.updateUserStatus(status)
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(setUserStausAC(status))
     }
 }
 
 export const savePhotoTC = (img: File) => async (dispatch: Dispatch) => {
     let data = await profileAPI.savePhoto(img)
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(savePhotoAC(data.data.photos))
+    }
+}
+
+export const setProfileDataTC = (profileData: ProfileDataResponseType) => async (dispatch: Dispatch) => {
+    const data = await profileAPI.setProfile(profileData)
+    if(data.resultCode === ResultCodesEnum.Success){
+        debugger
+        dispatch(setProfileAC(data))
     }
 }
 
