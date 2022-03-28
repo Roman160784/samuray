@@ -104,7 +104,7 @@ export const ProfileData = (props: ProfileDataPropsType) => {
             <b> About me </b> {props.profile.aboutMe}
           </div>
           <div>
-            <b> Contacts :</b> {Object.keys(props.profile.contacts).map(key => {
+            <b> Contacts :</b> {Object.keys(props.profile.contacts).map((key, i) => {
               const data  = props.profile?.contacts
               if(data) {return <Contacts key={key} contactsTitle={key} contactsValue={data[key as keyof typeof data]!} isOwner={props.isOwner}/>
             }})}    

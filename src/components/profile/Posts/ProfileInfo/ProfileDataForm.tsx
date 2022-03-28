@@ -1,7 +1,7 @@
-import { ProfileType } from "../../../../redux/state"
+import { ContactsType, ProfileType } from "../../../../redux/state"
 import { Contacts } from "./ProfileInfo"
 import { useFormik } from 'formik';
-
+import p from './ProfileInfo.module.css'
 
 export type ProfileDataFormPropsType = {
   profile: ProfileType
@@ -14,6 +14,7 @@ export type dataFormType ={
     lookingForAJob: boolean
     lookingForAJobDescription: string
     aboutMe: string
+    contacts: ContactsType
 }
 
 export const ProfileDataForm = (props: ProfileDataFormPropsType) => {
@@ -25,7 +26,17 @@ export const ProfileDataForm = (props: ProfileDataFormPropsType) => {
       lookingForAJob: props.profile.lookingForAJob,
       lookingForAJobDescription: props.profile.lookingForAJobDescription,
       aboutMe: props.profile.aboutMe,
-
+      contacts: {
+        facebook: props.profile.contacts.facebook,
+        website: props.profile.contacts.website,
+        vk: props.profile.contacts.vk,
+        twitter: props.profile.contacts.twitter,
+        instagram: props.profile.contacts.instagram,
+        youtube: props.profile.contacts.youtube,
+        github: props.profile.contacts.github,
+        mainLink: props.profile.contacts.mainLink,
+      }
+      
     },
     onSubmit: values => {
       props.getDataFormValues(values)
@@ -53,7 +64,10 @@ export const ProfileDataForm = (props: ProfileDataFormPropsType) => {
         <b> Contacts :</b> {Object.keys(props.profile.contacts).map(key => {
           const data = props.profile?.contacts
           if (data) {
-            return <Contacts key={key} contactsTitle={key} contactsValue={data[key as keyof typeof data]!} isOwner={props.isOwner} />
+            return <div className={p.contacts}>
+              <b>{key} : <input type="text" {...formik.getFieldProps(`contacts[${key}]`)} /></b>
+            </div>
+            //Собрали значение в формик для объекта в объекте
           }
         })}
       </div>

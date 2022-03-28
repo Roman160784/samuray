@@ -30,7 +30,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ap
 
         case "PROFILE/SET-USERS-PROFILE":
             return { ...state,  profile: action.profile }
-
+            
         case "PROFILE/SET-USERS-STATUS":
             return { ...state, status: action.status }
 
@@ -116,6 +116,8 @@ export const setProfileDataTC = (profileData: ProfileDataResponseType) => async 
     if(data.resultCode === ResultCodesEnum.Success){
         if( userId !== null) {
             dispatch(setUsersPropfileThunkCreator(userId))
+        }else if (data.resultCode === ResultCodesEnum.Error){
+            
         }
     }
 }
