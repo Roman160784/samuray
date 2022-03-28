@@ -5,7 +5,9 @@ import ProfileStatusWithHooks from './ProfileStatus'
 import p from './ProfileInfo.module.css'
 import userPhoto from '../../../../assets/img/userPhoto.png'
 import { isPropertyAccessExpression } from 'typescript';
-import { ProfileDataForm } from './ProfileDataForm';
+import { dataFormType, ProfileDataForm } from './ProfileDataForm';
+import { useDispatch } from 'react-redux';
+import { setProfileDataTC } from '../../../../redux/Profile-reducer';
 
 
 type ProfileInfoPropstype = {
@@ -18,6 +20,7 @@ type ProfileInfoPropstype = {
 
 function ProfileInfo(props: ProfileInfoPropstype) {
   
+  const dispatch = useDispatch()
   const [editMode, setEditMode] = useState<boolean>(false)
 
   if (!props.profile) {
@@ -30,6 +33,10 @@ function ProfileInfo(props: ProfileInfoPropstype) {
     }
   }
 
+  const getDataFormValues = (values: dataFormType) => {
+    dispatch(setProfileDataTC(values))
+    setEditMode(false)
+  }
 
   const activateEditMode = () => {
     setEditMode(true)
@@ -46,7 +53,7 @@ function ProfileInfo(props: ProfileInfoPropstype) {
       />
       
       {editMode 
-      ?<ProfileDataForm profile={props.profile} isOwner={props.isOwner}/>
+      ?<ProfileDataForm profile={props.profile} isOwner={props.isOwner} getDataFormValues={getDataFormValues}/>
       : <ProfileData profile={props.profile} isOwner={props.isOwner} activateEditMode={activateEditMode}/> }
        
       

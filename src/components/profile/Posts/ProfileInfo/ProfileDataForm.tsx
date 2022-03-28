@@ -1,28 +1,34 @@
 import { ProfileType } from "../../../../redux/state"
 import { Contacts } from "./ProfileInfo"
 import { useFormik } from 'formik';
-import { useDispatch } from "react-redux";
-import { setProfileDataTC } from "../../../../redux/Profile-reducer";
+
 
 export type ProfileDataFormPropsType = {
   profile: ProfileType
   isOwner: boolean
+  getDataFormValues: (values: dataFormType) => void
+}
+
+export type dataFormType ={
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    aboutMe: string
 }
 
 export const ProfileDataForm = (props: ProfileDataFormPropsType) => {
 
-  const dispatch = useDispatch()
 
   const formik = useFormik({
     initialValues: {
       fullName: props.profile.fullName,
       lookingForAJob: props.profile.lookingForAJob,
       lookingForAJobDescription: props.profile.lookingForAJobDescription,
-      aboutMe: '',
+      aboutMe: props.profile.aboutMe,
 
     },
     onSubmit: values => {
-      dispatch(setProfileDataTC(values))
+      props.getDataFormValues(values)
       // alert(JSON.stringify(values, null, 2));
       // formik.resetForm()
     },
