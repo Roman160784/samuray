@@ -68,7 +68,7 @@ export type AuthType = {
     email: null | string
     login: null | string
     isAuth: boolean
-    captcha: null | string
+    captcha: string | null
 }
 
 

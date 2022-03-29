@@ -12,7 +12,7 @@ let initialState: AuthType = {
     email: null,
     login: null,
     isAuth: false,
-    captcha: null,
+    captcha: null
 }
 // const initState = {} as ProfilePageType
 export const authReducer = (state: AuthType = initialState, action: AppActionType): AuthType => {
@@ -57,8 +57,8 @@ export const setAuthUserDataThunkCreator: any = () => async (dispatch: Dispatch)
 }
 
 
-export const loginTC = (email: string, password: string, rememberME: boolean) => async (dispatch: any) => {
-    const data = await authAPI.login(email, password, rememberME)
+export const loginTC = (email: string, password: string, rememberME: boolean = false, captcha: string| null = null) => async (dispatch: any) => {
+    const data = await authAPI.login(email, password, rememberME, captcha)
     if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(setAuthUserDataThunkCreator())
     } 
