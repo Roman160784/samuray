@@ -9,12 +9,12 @@ export type ProfileDataFormPropsType = {
   getDataFormValues: (values: dataFormType) => void
 }
 
-export type dataFormType ={
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    aboutMe: string
-    contacts: ContactsType
+export type dataFormType = {
+  fullName: string
+  lookingForAJob: boolean
+  lookingForAJobDescription: string
+  aboutMe: string
+  contacts: ContactsType
 }
 
 export const ProfileDataForm = (props: ProfileDataFormPropsType) => {
@@ -36,7 +36,7 @@ export const ProfileDataForm = (props: ProfileDataFormPropsType) => {
         github: props.profile.contacts.github,
         mainLink: props.profile.contacts.mainLink,
       }
-      
+
     },
     onSubmit: values => {
       props.getDataFormValues(values)
@@ -49,16 +49,20 @@ export const ProfileDataForm = (props: ProfileDataFormPropsType) => {
     <form onSubmit={formik.handleSubmit}>
       <div> <button >Save Form</button> </div>
       <div>
-        <b>Full name </b> <div> <input type="text" {...formik.getFieldProps('fullName')} /> </div> 
+        <b>Full name </b>
+        <div> <input type="text" {...formik.getFieldProps('fullName')} /> </div>
       </div>
       <div>
-        <b>Loking for a job </b>  <div> <input type="checkbox" {...formik.getFieldProps('lookingForAJob')} /> </div> 
+        <b>Loking for a job </b>
+        <div> <input type="checkbox" {...formik.getFieldProps('lookingForAJob')} /> </div>
       </div>
       <div>
-        <b>My professional skils</b> <div> <textarea {...formik.getFieldProps('lookingForAJobDescription')}></textarea> </div> 
+        <b>My professional skils</b>
+        <div> <textarea {...formik.getFieldProps('lookingForAJobDescription')}></textarea> </div>
       </div>
       <div>
-        <b> About me </b> <div> <input type="text" {...formik.getFieldProps('aboutMe')} /> </div> 
+        <b> About me </b>
+        <div> <input type="text" {...formik.getFieldProps('aboutMe')} /> </div>
       </div>
       <div>
         <b> Contacts :</b> {Object.keys(props.profile.contacts).map(key => {
