@@ -1,6 +1,7 @@
 
 import { profile } from 'console';
 import { Dispatch } from 'redux';
+import { stopSubmit } from 'redux-form';
 import { profileAPI, ProfileDataResponseType, ResultCodesEnum} from '../Api/Api';
 import { PhotosType, ProfilePageType, ProfileType, RootStateType } from '../redux/state'
 import { ActionsDialogsType } from './Dialogs-reducer';
@@ -116,8 +117,6 @@ export const setProfileDataTC = (profileData: ProfileDataResponseType) => async 
     if(data.resultCode === ResultCodesEnum.Success){
         if( userId !== null) {
             dispatch(setUsersPropfileThunkCreator(userId))
-        }else if (data.resultCode === ResultCodesEnum.Error){
-            
         }
     }
 }
