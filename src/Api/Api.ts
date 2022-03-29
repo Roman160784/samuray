@@ -100,7 +100,7 @@ type setUserLoginResponseType = {
         login : string 
         email: string
     }
-    resultCode: ResultCodesEnum | ResultCodesWithCapchaEnum
+    resultCode: ResultCodesEnum 
     messages: string[] 
 } 
 type LoginResponseType = {
@@ -114,9 +114,6 @@ type LoginResponseType = {
 export enum ResultCodesEnum  {
 Success = 0,
 Error = 1,
-
+Captcha = 10,
 }
 
-export enum ResultCodesWithCapchaEnum {
-    CupchaIsRequired = 10,
-}
