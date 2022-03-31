@@ -1,12 +1,10 @@
 
-import { profile } from 'console';
 import { Dispatch } from 'redux';
-import { stopSubmit } from 'redux-form';
 import { profileAPI, ProfileDataResponseType, ResultCodesEnum} from '../Api/Api';
-import { PhotosType, ProfilePageType, ProfileType, RootStateType } from '../redux/state'
+import { PhotosType, ProfilePageType, ProfileType,} from '../redux/state'
 import { ActionsDialogsType } from './Dialogs-reducer';
-import { actionType, AppRootStateType } from './reduxStore';
-import { unFollow } from './User-reducer';
+import {  AppRootStateType } from './reduxStore';
+
 
 type AppActionType = ActionsProfileType | ActionsDialogsType;
 
@@ -85,8 +83,6 @@ export const removePostAC = (id: number) => {
 export const savePhotoAC = (img: PhotosType) => ({type: "PROFILE/SAVE-PHOTO", img} as const)
 
 
-
-
 export const setUsersPropfileThunkCreator = (userId: string) => async (dispatch: Dispatch) => {
     let data = await profileAPI.setUserLoginInProfile(userId)
     dispatch(setUsersPropfileAC(data))
@@ -98,10 +94,10 @@ export const getUsersStatusThunkCreator = (userId: string) => async (dispatch: D
 }
 
 export const updateUserStatusThunkCreator = (status: string) => async (dispatch: Dispatch) => {
-    let data = await profileAPI.updateUserStatus(status)
-    if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(setUserStausAC(status))
-    }
+        let data = await profileAPI.updateUserStatus(status)
+        if (data.resultCode === ResultCodesEnum.Success) {
+            dispatch(setUserStausAC(status))
+        }
 }
 
 export const savePhotoTC = (img: File) => async (dispatch: Dispatch) => {

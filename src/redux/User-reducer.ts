@@ -110,12 +110,10 @@ export const getUsersThunkCreater = (curentPage = 1, pageSize = 1) => async (dis
 
 
 export const followThunkCreater = (id: number) => async (dispatch: Dispatch<ActionsUsersType>) => {
-    // dispatch(followingInProcessAC(true))
     let data = await usersAPI.followUsers(id)
     if (data.resultCode == 0) {
         dispatch(follow(id))
     }
-    // dispatch(followingInProcessAC(false))
 }
 
 export const unFollowThunkCreater = (id: number) => async (dispatch: Dispatch<ActionsUsersType>) => {

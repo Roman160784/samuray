@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams,  } from "react-router-dom";
 import { AppRootStateType } from "../../redux/reduxStore";
 import { ProfileType } from "../../redux/state";
-import {  getUsersStatusThunkCreator, savePhotoTC, setUsersPropfileThunkCreator, updateUserStatusThunkCreator } from "../../redux/Profile-reducer";
+import { getUsersStatusThunkCreator, savePhotoTC, setUsersPropfileThunkCreator, updateUserStatusThunkCreator } from "../../redux/Profile-reducer";
 import {WithAuthRedirectComponent} from "../../hoc/WithAuthComonent"
 import { compose } from "redux";
 
@@ -64,7 +64,6 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType__>{
         
 
     render() {
-        console.log(this);
         
         return (
             <Profile {...this.props} 
